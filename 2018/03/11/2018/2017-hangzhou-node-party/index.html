@@ -1,38 +1,63 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="本文记录于 2017 杭州 丁香园 nodeParty 期间，由于是流水帐式记录，一直都偷懒没发。最近心态又有点改变，抽了一点时间来发布。    最近在工作中的任务对于 node 的任务越来越重了，正好看到新一期的 Node Party 开办了，于是当天就报名了，想看看大家 是怎么在用 Node.js 的。好了，废话不多说，我来从时间顺序来聊一下我参加这次会议听到的东西">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017 杭州 nodeParty 记录">
+<meta property="og:url" content="http://guowenfh.github.io/2018/03/11/2018/2017-hangzhou-node-party/index.html">
+<meta property="og:site_name" content="三省吾身丶丶">
+<meta property="og:description" content="本文记录于 2017 杭州 丁香园 nodeParty 期间，由于是流水帐式记录，一直都偷懒没发。最近心态又有点改变，抽了一点时间来发布。    最近在工作中的任务对于 node 的任务越来越重了，正好看到新一期的 Node Party 开办了，于是当天就报名了，想看看大家 是怎么在用 Node.js 的。好了，废话不多说，我来从时间顺序来聊一下我参加这次会议听到的东西">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-03-11T14:28:16.000Z">
+<meta property="article:modified_time" content="2020-03-12T04:04:13.274Z">
+<meta property="article:author" content="guowenfh">
+<meta property="article:tag" content="社区">
+<meta name="twitter:card" content="summary"><title>2017 杭州 nodeParty 记录 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2018/03/11/2018/2017-hangzhou-node-party/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
 
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">2017 杭州 nodeParty 记录</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-03-11</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><blockquote>
+<p>本文记录于 2017 杭州 丁香园 nodeParty 期间，由于是流水帐式记录，一直都偷懒没发。最近心态又有点改变，抽了一点时间来发布。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>最近在工作中的任务对于 node 的任务越来越重了，正好看到新一期的 Node Party 开办了，于是当天就报名了，想看看大家 是怎么在用 Node.js 的。<br>好了，废话不多说，我来从时间顺序来聊一下我参加这次会议听到的东西</p>
+</blockquote>
+<span id="more"></span>
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
-
-{% block page_class %}page-post-detail{% endblock %}
-
-
-{% block content %}
-
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
-
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
-    </div>
-  </div>
-
-{% endblock %}
-
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
-
-
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<p>首先是开场，我在一开始的时候，坐在最后一排，然后就听到 贺老和负责人在聊：<br>贺老说不需要准备 ppt，直接现场写代码。<br>结果说到我们今天有直播，不能用自己的电脑。<br>贺老就说不能总是这样啊。。本来现场写代码压力就大，还不用自己电脑，压力就更大了。<br>于是我果断搭话，说贺老你指的是在 360 分享 用 TS 写 benchmark 工具的那次么。<br>贺老笑了笑说是的。<br>没再多说，之后就是正式的分享了。</p>
+<h2 id="第一个主题：《通过-GraphQL-向-RN-透出实时报表》"><a href="#第一个主题：《通过-GraphQL-向-RN-透出实时报表》" class="headerlink" title="第一个主题：《通过 GraphQL 向 RN 透出实时报表》"></a>第一个主题：《通过 GraphQL 向 RN 透出实时报表》</h2><p>这个话题一开始在介绍了宋小菜的业务场景，提出了这样的场景下对于报表的各式需求，然后如何去进行考量技术选型。以及在选定了 GraphQL 之后，是怎么样一步一步的去改造，去利用到其中的特性，和一些配套的解决方案，去解决实际问题吧。虽然有提 RN ，但是实际上基本上没这部分的内容。</p>
+<p>GraphQL 在很早之前听过，在听完之后只能说是多了一些了解吧，如果没有真正对应的需求，可能也不会再去了解更多也说不定。只是知道了一样一种解决方案。</p>
+<h2 id="第二个主题：《Node-js多线程实践》"><a href="#第二个主题：《Node-js多线程实践》" class="headerlink" title="第二个主题：《Node.js多线程实践》"></a>第二个主题：《Node.js多线程实践》</h2><p>这个话题听不明白，我基本上对于操作系统以及线程进程是没有理解或者说太多的概念的。</p>
+<p>主要是说他写了一个 <a target="_blank" rel="noopener" href="https://github.com/Rokid/node-webworker">node-webworker</a> 的库，以及能解决一些什么问题</p>
+<h2 id="第三个主题：《STC-vs-PTC》"><a href="#第三个主题：《STC-vs-PTC》" class="headerlink" title="第三个主题：《STC vs PTC》"></a>第三个主题：《STC vs PTC》</h2><p>经过中场休息，贺老上台，感觉大家确实都变得有精神了很多。贺老这次没现场写代码了， 讲了 对于 js 中 尾递归优化的实现时，T39 不同厂商之间产生的分歧，以及两种实现上各自的问题。整个演讲非常流程，也很生动。这个话题的话，贺老应该很久之前在某一个会议上讲过，好像是 Qcon？忘记了，我只看了 PPT。<br>这个话题，主要还是介绍一些 T39 八卦吧，以及如何去演讲表达自己。</p>
+<p>##《Node.js在一家大数据服务创业公司的应用实践》</p>
+<p>这里首先讲了 关于一个内部样板项目的生成器。也就是大家说的 cli 工具。然后讲到了 nodejs 的项目管理，主要是 pm2 出除去命令行之外，直接用他暴露的 api 在 js 文件里面的使用吧，这样会更加方便于管理应用的生命周期。</p>
+<p>这里的内容，很多都是在真正业务实践中会遇到的问题吧，只可惜目前我对于 node 要做的事情还很少，所以理解不深，因为现在我们这里就是 ssh 到服务器上 pm2 restart 的。。-_-</p>
+<p>##《妹子程序员的自我修养》</p>
+<p>到了天哥的话题，这里主要说了一些社会上对于妹子程序员的一些刻板印象。虽然有很多也是事实，因为社会对于程序员也有刻板印象嘛。不过庆幸的是，我身边基本上还都没有这样的情况发生。<br>然后提问题的时候，也有很多的同学在问个人成长相关的事情，主要是应对 学习新知识的学习焦虑吧，天哥说到一定要喜欢技术才能真正的钻研到里面去。不然的话还是可以考虑比重的，比如偏管理方向多一点。<br>当然这里也提到一个问题，就是当我们自己去学习一个技术的时候，可能一个星期都没学会，但如果公司有一个具体的需求，需要用到这个技术，可能2天就搞定了。这个其实值得大家都思考一下。带着明确的目标（足够细化，足够可以被量化）去学习东西的感觉是真的不一样的。所以就算你对于技术的热情没有那么高，但是你一定需要让自己的某一个目标，去驱动自己学习</p>
+<h2 id="最后的是圆桌话题-《技术变现》"><a href="#最后的是圆桌话题-《技术变现》" class="headerlink" title="最后的是圆桌话题 《技术变现》"></a>最后的是圆桌话题 《技术变现》</h2><p>这个环节，主要就是听听大家聊天，然后说一些经验之谈吧。<br>里面提到了 知乎 Live 是收智商税，嘿嘿，然后贺老有解释说，其实他还是花了很多时间去准备的，里面也确实是真实案例还是很多干货的，赚钱是机缘巧合的事情。</p>
+<p>其实对于这个问题真是这样，大家也别太在意说买 live 是被收智商税什么的，其实只要对于你真实有用就可以了。不需要太多的去考虑别人怎么说,能带来价值的就是有用。<br>然后有说道做外包相关的事情，其实我在大学的时候也做过外包那个时候学习前端才几个月吧然后和一个后端的小伙伴两个人一直使用QQ语音聊天沟通，算是远程工作吧两个月下来一个人到时候有个几千块块钱吧，其实我觉得这个，对于我当时的一个学生来说已经很不错了。所以我觉得学生时候是完全可以去接接外包去尝试一下，知道具体开发程序是什么样子。工作之后的话，就还需要权衡了。</p>
+<hr>
+<p>后来就基本在和之前的主管聊天了，也是这次最大的收获，我们聊了互相工作的一些转变，然后也对于个人成长做了一些讨论。受益良多。</p>
+<p>最后总结一个点吧。</p>
+<p>还是需要多沟通，有了信息之后才能更好的去做一个决定，和完成好一件事情</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2018/03/11/2018/2017-hangzhou-node-party/">http://guowenfh.github.io/2018/03/11/2018/2017-hangzhou-node-party/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/%E7%A4%BE%E5%8C%BA/">社区</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2018/06/04/2018/learning-Promise/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">学习 Promise，掌握未来世界 JS 异步编程基础</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/03/05/2018/canvas-text-to-image-clarity/"><span class="paginator-prev__text">一次canvas中文字转化成图片后清晰度丢失的探索</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%B8%BB%E9%A2%98%EF%BC%9A%E3%80%8A%E9%80%9A%E8%BF%87-GraphQL-%E5%90%91-RN-%E9%80%8F%E5%87%BA%E5%AE%9E%E6%97%B6%E6%8A%A5%E8%A1%A8%E3%80%8B"><span class="toc-number">1.</span> <span class="toc-text">第一个主题：《通过 GraphQL 向 RN 透出实时报表》</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E4%B8%AA%E4%B8%BB%E9%A2%98%EF%BC%9A%E3%80%8ANode-js%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E8%B7%B5%E3%80%8B"><span class="toc-number">2.</span> <span class="toc-text">第二个主题：《Node.js多线程实践》</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E4%B8%AA%E4%B8%BB%E9%A2%98%EF%BC%9A%E3%80%8ASTC-vs-PTC%E3%80%8B"><span class="toc-number">3.</span> <span class="toc-text">第三个主题：《STC vs PTC》</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E7%9A%84%E6%98%AF%E5%9C%86%E6%A1%8C%E8%AF%9D%E9%A2%98-%E3%80%8A%E6%8A%80%E6%9C%AF%E5%8F%98%E7%8E%B0%E3%80%8B"><span class="toc-number">4.</span> <span class="toc-text">最后的是圆桌话题 《技术变现》</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

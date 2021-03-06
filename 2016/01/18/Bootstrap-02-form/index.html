@@ -1,38 +1,168 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="关于表单的应用自然不需要多说，只要您的的网站可以用户登录，那么不可能不用到表单！表单主要功能是用来与用户做交流的一个网页控件，JavaScript发明之初最大的作用也就是用来进行表单操作。所以表单是每一个前端开发者必须要熟练掌握的东西。  良好的表单设计能够让网页与用户更好的沟通。表单中常见的元素主要包括：文本输入框、下拉选择框、单选按钮、复选按钮、文本域和按钮等。其中每个控件所起的作用都各不相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bootstrap入门笔记之（二）表单">
+<meta property="og:url" content="http://guowenfh.github.io/2016/01/18/Bootstrap-02-form/index.html">
+<meta property="og:site_name" content="三省吾身丶丶">
+<meta property="og:description" content="关于表单的应用自然不需要多说，只要您的的网站可以用户登录，那么不可能不用到表单！表单主要功能是用来与用户做交流的一个网页控件，JavaScript发明之初最大的作用也就是用来进行表单操作。所以表单是每一个前端开发者必须要熟练掌握的东西。  良好的表单设计能够让网页与用户更好的沟通。表单中常见的元素主要包括：文本输入框、下拉选择框、单选按钮、复选按钮、文本域和按钮等。其中每个控件所起的作用都各不相">
+<meta property="og:locale">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewhzpflvuj20c6043glk.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewhzpj8kmj20dz01oq2t.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewhzpjlxdj20e3030t8n.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi0x6wg8j208r032mwz.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi0xhp8wj20d106edfw.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi0x857dj20kx08oq3s.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi0xmc7aj20ma0mimzp.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi0xbir3j20j70gtmy9.jpg">
+<meta property="article:published_time" content="2016-01-18T15:26:45.000Z">
+<meta property="article:modified_time" content="2020-03-12T04:04:13.283Z">
+<meta property="article:author" content="guowenfh">
+<meta property="article:tag" content="Bootstrap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewhzpflvuj20c6043glk.jpg"><title>Bootstrap入门笔记之（二）表单 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2016/01/18/Bootstrap-02-form/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
 
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Bootstrap入门笔记之（二）表单</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2016-01-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><blockquote>
+<p>关于表单的应用自然不需要多说，只要您的的网站可以用户登录，那么不可能不用到表单！表单主要功能是用来与用户做交流的一个网页控件，JavaScript发明之初最大的作用也就是用来进行表单操作。所以表单是每一个前端开发者必须要熟练掌握的东西。</p>
+</blockquote>
+<p>良好的表单设计能够让网页与用户更好的沟通。表单中常见的元素主要包括：<strong>文本输入框、下拉选择框、单选按钮、复选按钮、文本域和按钮等</strong>。其中每个控件所起的作用都各不相同，而且不同的浏览器对表单控件渲染的风格都各有不同。传统的HTML表单就不在这样进行讲解了，下面就开始Bootstrap表单的学习吧！</p>
+<h2 id="一-基础表单"><a href="#一-基础表单" class="headerlink" title="一. 基础表单"></a>一. 基础表单</h2><p>在Bootstrap对于基础表单没有做太多的定制效果，仅仅是对于一些元素的<strong>margin、padding和border</strong>进行了一些细化设置。<br>当然，也不会那么简单，在Bootstrap框架中，通过定制了一个类名<code>form-control</code>，也就是说，使用了类名<code>form-control</code>，将会实现一些设计上的定制效果。从源码中（2551行，嗯，善用搜索）可以得出结论如下：</p>
+<ol>
+<li>宽度变成了100%</li>
+<li>设置了一个浅灰色（<code>#ccc</code>）的边框</li>
+<li>具有4px的圆角</li>
+<li>设置阴影效果，并且元素得到焦点之时，阴影和边框效果会有所变化</li>
+<li>设置了placeholder(输入框的提示文字)的颜色为<code>#999</code></li>
+</ol>
+<p>这个类一般用于输入框，对于其他的类型使用，嗯，你可以试试自己尝试一下。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">role</span>=<span class="string">&quot;form&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span><span class="comment">&lt;!-- form-group这个类在在这里用于控制表单之间的间隔，之后会有另外介绍 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;exampleInputEmail1&quot;</span>&gt;</span>邮箱：<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">id</span>=<span class="string">&quot;exampleInputEmail1&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入您的邮箱地址&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;exampleInputPassword1&quot;</span>&gt;</span>密码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">id</span>=<span class="string">&quot;exampleInputPassword1&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入您的邮箱密码&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>一般来说效果是这样的：<br><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewhzpflvuj20c6043glk.jpg" alt="基础表单"></p>
+<h3 id="内联表单"><a href="#内联表单" class="headerlink" title="内联表单"></a>内联表单</h3><p>还是上面那一段代码：我们只需要给<strong>form</strong>加上下面<code>.form-inline</code>这个类就可以实现表单元素在一行排列：</p>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewhzpj8kmj20dz01oq2t.jpg" alt="内联表单"></p>
+<p>它的实现原理很简单，其实就是在添加了这个类后，将内部的表单元素设置为了内联块（inline-block）。</p>
+<p>我们继续改变屏幕大小会发现小到一定层度之后又变成了原来的样式，那是因为这个类是处于媒体查询中的！这样是为了更好的在移动设备上体验，Bootstrap本来就是一个响应式框架不是吗？</p>
+<p>如果你想更简洁一点还可以对于<code>label</code>添加一个<code>.sr-only</code>类，把label标签进行隐藏。（注意是隐藏，而不是人为删除，设置label标签有助于屏幕阅读器理解此处的含义）</p>
+<h3 id="水平表单"><a href="#水平表单" class="headerlink" title="水平表单"></a>水平表单</h3><p>Bootstrap框架默认的表单是<strong>垂直显示风格</strong>，除了上面的内联表达之外，很多时候我们需要的是<strong>水平表单风格</strong>。在Bootstrap框架中要实现水平表单效果，必须满足以下两个条件：</p>
+<ol>
+<li>在<code>&lt;form&gt;</code>元素是使用类名<code>.form-horizontal</code>，作用如下：</li>
+</ol>
+<ul>
+<li>设置表单控件padding和margin值。</li>
+<li>改变“form-group”的表现形式，类似于栅格系统的“row”。</li>
+</ul>
+<ol start="2">
+<li>配合Bootstrap框架的栅格系统。（栅格布局会在以后的章节中详细讲解）</li>
+</ol>
+<ul>
+<li>例如：使用<code>&lt;div class=&quot;col-sm-6&quot;&gt;&lt;/div&gt;</code>将我们的input进行包裹，具体情况到栅格布局的时候再说</li>
+</ul>
+<p>可以实现下面的效果，（同样处于媒体查询中）<br><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewhzpjlxdj20e3030t8n.jpg" alt="水平表单"></p>
+<h2 id="二-表单控件"><a href="#二-表单控件" class="headerlink" title="二. 表单控件"></a>二. 表单控件</h2><h3 id="输入框input"><a href="#输入框input" class="headerlink" title="输入框input"></a>输入框input</h3><p>单行文本框在html编写时，我们都需要设置<strong>type</strong>属性为<strong>text</strong>，在Bootstrap中也必须正确的添加type的类型，因为在这里是使用CSS的属性选择器如：<code>input[type=&quot;text&quot;]</code>来进行样式设置的！<br>为了让控件在各种表单风格中样式不出错，需要添加类名“form-control”，如：<code>&lt;input type=&quot;email&quot; class=&quot;form-control&quot; placeholder=&quot;请输入您的邮箱&quot;&gt;</code></p>
+<h3 id="下拉选择框select"><a href="#下拉选择框select" class="headerlink" title="下拉选择框select"></a>下拉选择框select</h3><p>Bootstrap框架中的下拉选择框使用和原始的一致，但是Bootstrap框架为这些元素提供统一的样式风格。如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">role</span>=<span class="string">&quot;form&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span>  <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span>&gt;</span>踢足球<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span>&gt;</span>游泳<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span>&gt;</span>慢跑<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">option</span>&gt;</span>跳舞<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<p>想要实现多行选择，只需要在<strong>select</strong>中设置multiple属性的值为multiple。<code>&lt;select multiple class=&quot;form-control&quot;&gt;</code></p>
+<p>需要注意的是，经过测试多行选择是固定高度的（82px），也就是说只有一个选项时，也占据那么高的高度，在选项多时，将出现滚动条</p>
+<h3 id="文本域textarea"><a href="#文本域textarea" class="headerlink" title="文本域textarea"></a>文本域textarea</h3><p>文本域和原始使用方法一样，设置<strong>rows可定义其高度</strong>，设置<strong>cols可以设置其宽度</strong>。但如果textarea元素中添加了类名<code>form-control</code>类名，则无需设置cols属性。因为Bootstrap框架中的<code>form-control</code>样式的表单控件宽度为100%或auto。<br>如：<code>&lt;textarea class=&quot;form-control&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;</code></p>
+<h3 id="复选框checkbox和单选按钮radio"><a href="#复选框checkbox和单选按钮radio" class="headerlink" title="复选框checkbox和单选按钮radio"></a>复选框checkbox和单选按钮radio</h3><p>Bootstrap对于这两个按钮进行了一些优化，要想达到最佳显示效果，有着如下说明：</p>
+<ol>
+<li>不管是<code>checkbox</code>还是<code>radio</code>都使用<code>label</code>包起来了。</li>
+<li><code>checkbox</code>按钮连同<code>label</code>标签放置在一个名为<code>.checkbox</code>的容器内，<code>radio</code>连同<code>label</code>标签放置在一个名为<code>.radio</code>的容器内。</li>
+<li>在Bootstrap框架中，主要借助<code>.checkbox</code>和<code>.radio</code>样式，来处理复选框、单选按钮与标签的对齐方式。</li>
+<li>只需要将<code>checkbox</code>换成<code>checkbox-inline</code>就可以了，你可以添加在label上也可以添加在外部的容器上。</li>
+</ol>
+<h3 id="表单控件大小"><a href="#表单控件大小" class="headerlink" title="表单控件大小"></a>表单控件大小</h3><p>在Bootstrap中除了使用传统的控制大小（height，padding等等）方式外，还特意定制了两个类名用来控制大小，如下：</p>
+<ol>
+<li><code>input-sm</code>：让控件比正常大小更小</li>
+<li><code>input-lg</code>：让控件比正常大小更大</li>
+</ol>
+<p>这两个类适用于表单中的<strong>input，textarea和select</strong>控件</p>
+<h3 id="表单控件状态"><a href="#表单控件状态" class="headerlink" title="表单控件状态"></a>表单控件状态</h3><h4 id="焦点状态"><a href="#焦点状态" class="headerlink" title="焦点状态"></a>焦点状态</h4><p>焦点状态是通过伪类<code>:focus</code>来实现。在Bootstrap框架中表单控件的焦点状态删除了<code>outline</code>的默认样式，重新添加阴影效果。.</p>
+<h4 id="禁用状态"><a href="#禁用状态" class="headerlink" title="禁用状态"></a>禁用状态</h4><p>Bootstrap实现禁用和普通的表单禁用状态的实现方法一样的，就是在相应的表单控件上添加属性<code>disabled</code>，只不过Bootstrap做了一些样式风格的处理：</p>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi0x6wg8j208r032mwz.jpg" alt="禁用状态"></p>
+<p>其次，除了单独给相应的表单控件添加disabled外，还可以直接添加到域中<code>&lt;fieldset disabled&gt;&lt;/fieldset&gt;</code>，在这种情况，整个域中的表单全部都将会被禁用，此外还有一个<strong>小bug</strong>：如果该域中存在<code>&lt;legend&gt;</code>(域标题)，在其内的表单控件，虽然有禁用的样式，但是实际上可以进行输入，点击等操作！</p>
+<h4 id="验证状态"><a href="#验证状态" class="headerlink" title="验证状态"></a>验证状态</h4><p>在前面我们说过，Bootstrap有着大量的对于特定的情景内容的颜色设置，表单当然也不例外！在制作表单时，不免要做表单验证。同样也需要提供验证状态样式，那么Bootstrap框架中就提供了这几种效果：</p>
+<ol>
+<li><code>.has-warning</code>：警告状态（黄色）</li>
+<li><code>.has-error</code>：错误状态（红色）</li>
+<li><code>.has-success</code>：成功状态（绿色）</li>
+</ol>
+<p>除此之外，Bootstrap还实现了在不同的状态提示不同的<strong>icon</strong>，如果你想让表单在对应的状态下显示这样的效果，只需要在对应的状态下添加类名<code>has-feedback</code>。请注意，此类名要与<code>has-error</code>、<code>has-warning</code>和<code>has-success</code>在一起，代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">role</span>=<span class="string">&quot;form&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-group has-success has-feedback&quot;</span>&gt;</span><span class="comment">&lt;!-- 最后一个class控制图标显示 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;control-label&quot;</span> <span class="attr">for</span>=<span class="string">&quot;inputSuccess1&quot;</span>&gt;</span>成功状态<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">id</span>=<span class="string">&quot;inputSuccess1&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;成功状态&quot;</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;glyphicon glyphicon-ok form-control-feedback&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="comment">&lt;!-- 图标显示！选取显示图标 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- ...... 还有不同的图标显示例如glyphicon-warning-sign glyphicon-remove等等 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在 Bootstrap 的小图标都是使用**@font-face**来制作，只要有一个容器，就可以通过不同的类名来控制显示的图标。具体内容后面再详细介绍。</p>
+<p>显示效果如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi0xhp8wj20d106edfw.jpg" alt="禁用状态"></p>
+<h4 id="表单提示信息"><a href="#表单提示信息" class="headerlink" title="表单提示信息"></a>表单提示信息</h4><p>在表单验证的过程，未免会要提供不同的提示信息。在Bootstrap框架中也提供了这样的效果。提供了一个<code>help-block</code>类，例如：<code>&lt;span class=&quot;help-block&quot;&gt;您输入的信息是错误的&lt;/span&gt;</code>只要将其插入到input之后，提示信息将以块状显示，并且显示在控件底部。</p>
+<h2 id="三-按钮"><a href="#三-按钮" class="headerlink" title="三. 按钮"></a>三. 按钮</h2><p>众所周知，我们创建的按钮通常通过下面这几种形式：:</p>
+<ul>
+<li><code>input[type=&quot;submit&quot;]</code>：提交按钮</li>
+<li><code>input[type=&quot;button&quot;]</code>：普通按钮</li>
+<li><code>input[type=&quot;reset&quot;]</code>：重置按钮</li>
+<li><code>&lt;button&gt;&lt;/button&gt;</code>：按钮元素，（默认行为是提交）</li>
+</ul>
+<p><strong>在Bootstrap框架中的按钮都是采用<code>&lt;button&gt;</code>来实现。</strong></p>
+<h3 id="1-情景按钮"><a href="#1-情景按钮" class="headerlink" title="1. 情景按钮"></a>1. 情景按钮</h3><p>也正如我们前面所说，Bootstrop对于按钮也做了不同情景下的类，用不同的颜色展示很好的描述了当前的状态。一下图片来自<a target="_blank" rel="noopener" href="http://www.imooc.com/">慕课网</a></p>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi0x857dj20kx08oq3s.jpg" alt="默认状态"><br><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi0xmc7aj20ma0mimzp.jpg" alt="多种状态"></p>
+<p>记住一点！Bootstrap中的按钮，<strong>第一前提是必须添加<code>btn</code>这个类</strong>，其他的各种类，都只能添加到其后。所以一个按钮应该是这个样子的：<code>&lt;button class=&quot;btn btn-info&quot; &gt;信息按钮&lt;/button&gt; </code>，若还有其他的样式，往<code>btn-info</code>后添加，充分利用css的层叠特性。</p>
+<h3 id="2-按钮大小"><a href="#2-按钮大小" class="headerlink" title="2. 按钮大小"></a>2. 按钮大小</h3><p>Bootstrap有着很对相似的类（学习完后总结一下吧颜色，大小等等），比如现在要说的，改变按钮的大小，当然你可以自定义，但是Bootstrap默认为我们提供了一些，添加到<code>btn</code>类后就行！</p>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi0xbir3j20j70gtmy9.jpg" alt="按钮大小"></p>
+<h3 id="3-块状按钮"><a href="#3-块状按钮" class="headerlink" title="3. 块状按钮"></a>3. 块状按钮</h3><p>Bootstrap框架中提供了一个类名<code>btn-block</code>。使用这个类名就可以让按钮<strong>充满整个容器</strong>，并且这个按钮不会有任何的padding和margin值。在实际当中，常把这种按钮称为块状按钮。同样添加到<code>btn</code>类后即可生效</p>
+<h3 id="4-活动与禁用状态"><a href="#4-活动与禁用状态" class="headerlink" title="4. 活动与禁用状态"></a>4. 活动与禁用状态</h3><p>Bootstrap框架针对按钮的状态做了一些特殊处理。主要分为两种：活动状态和禁用状态。</p>
+<h4 id="活动状态"><a href="#活动状态" class="headerlink" title="活动状态"></a>活动状态</h4><p>Bootstrap按钮的活动状态主要包括按钮的悬浮状态(<code>:hover</code>)，点击状态(<code>:active</code>)和焦点状态（<code>:focus</code>）几种。</p>
+<p>通过在源码中我们可以看到，Bootstrap对于每一种风格的按钮都做了单独的定制。需要进行修改的话可以参考源码！</p>
+<h4 id="禁用状态-1"><a href="#禁用状态-1" class="headerlink" title="禁用状态"></a>禁用状态</h4><p>在Bootstrap框架中，要禁用按钮有两种实现方式：</p>
+<ol>
+<li>在标签中添加<code>disabled</code>属性</li>
+<li>在元素标签中添加类名<code>.disabled</code></li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;//guowenfh.github.io/&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-danger disabled&quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span>&gt;</span>添加disabled类<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;//guowenfh.github.io/&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-danger &quot;</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">disabled</span>&gt;</span>添加disabled属性<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-{% block page_class %}page-post-detail{% endblock %}
+<p>这两个方式除了样式上的改变之外，还存在是否阻止默认行为上的区别。（此处有大坑，暂时不能跳，以后在详细了解吧。不同浏览器，对于实现阻止默认行为的方式不同，IE11：两个方式都阻止默认行为，IE10-通过属性可以阻止，FF、Chrome通过类可以阻止默认行为。。我已经醉了）</p>
+<p>从这里我们也可以看到，Bootstrap只需要在制作按钮的标签元素比如<code>&lt;div&gt;,&lt;span&gt;</code>等等，上添加类名<code>btn</code>就可以为其加上按钮风格，但是，<strong>并不建议这样使用，为了避免浏览器兼容性问题，个人强烈建议使用button或a标签来制作按钮。</strong></p>
+<h2 id="四-图像"><a href="#四-图像" class="headerlink" title="四. 图像"></a>四. 图像</h2><p>在Bootstrap框架中对于图像的样式风格提供以下几种风格：</p>
+<ol>
+<li><code>.img-responsive</code>：响应式图片，主要针对于响应式设计</li>
+<li><code>.img-rounded</code>：圆角图片</li>
+<li><code>.img-circle</code>：圆形图片</li>
+<li><code>.img-thumbnail</code>：缩略图片，相框效果</li>
+</ol>
+<p>直接把类名添加到img标签上就行了！</p>
+<p><strong>注意：</strong><br>设置图片大小时，由于样式没有对图片做大小上的样式限制，所以在实际使用的时候，需要通过其他的方式来处理图片大小。比如说控制图片容器大小。（注意不可以通过css样式直接修改img图片的大小，这样操作就不响应了）</p>
+<h3 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h3><p>这里说的图标就是Web制作中常看到的小icon图标，包括250多个来自 Glyphicon Halflings 的字体图标，Bootstrap框架中图标都是<strong>glyphicons.com</strong>这个商业网站提供的，并且<strong>免费授权</strong>给Bootstrap框架使用。</p>
+<p>可以在<a target="_blank" rel="noopener" href="https://v3.bootcss.com/components/#glyphicons">Glyphicons 字体图标</a>，看到全部图标的样式，您可以根据你的需求进行设置</p>
+<p>在网页中使用图标也非常的简单，在任何<strong>内联元素</strong>上应用所对应的样式即可：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;glyphicon glyphicon-cloud&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;glyphicon glyphicon-chevron-left&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>这里第一个类是<strong>所有字体图标所必需的</strong>，第二个类用来自定义显示的图标。</p>
+<p>从源码中我们可以看到<code>glyphicon</code>这个类,最主要的部分有着如下样式设置：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.glyphicon</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">&#x27;Glyphicons Halflings&#x27;</span>;</span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-{% block content %}
-
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
-
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
-    </div>
-  </div>
-
-{% endblock %}
-
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
-
-
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<p>从这里，也就不难发现为什么是必须的了，它控制了标签的显示方式，和引入了字体图标库；而第二个类，仅仅是调用对应字体的编码而已</p>
+<p>表单的部分呢，学到这里也就基本高一段落了，下面就要开始进行，Bootstrap的核心<strong>栅格系统</strong>的学习了，继续加油！</p>
+<p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.imooc.com/learn/141">慕课网：玩转Bootstrap</a></li>
+<li><a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/">Bootstrap中文官网：全局 CSS 样式</a></li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2016/01/18/Bootstrap-02-form/">http://guowenfh.github.io/2016/01/18/Bootstrap-02-form/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/Bootstrap/">Bootstrap</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2016/01/28/Bootstrap-03-Grid/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Bootstrap入门笔记之（三）栅格系统</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2016/01/18/Bootstrap-01-typesetting/"><span class="paginator-prev__text">Bootstrap入门笔记之（一）排版</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%9F%BA%E7%A1%80%E8%A1%A8%E5%8D%95"><span class="toc-number">1.</span> <span class="toc-text">一. 基础表单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E8%81%94%E8%A1%A8%E5%8D%95"><span class="toc-number">1.1.</span> <span class="toc-text">内联表单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%B4%E5%B9%B3%E8%A1%A8%E5%8D%95"><span class="toc-number">1.2.</span> <span class="toc-text">水平表单</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E8%A1%A8%E5%8D%95%E6%8E%A7%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">二. 表单控件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A1%86input"><span class="toc-number">2.1.</span> <span class="toc-text">输入框input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E6%8B%89%E9%80%89%E6%8B%A9%E6%A1%86select"><span class="toc-number">2.2.</span> <span class="toc-text">下拉选择框select</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%9F%9Ftextarea"><span class="toc-number">2.3.</span> <span class="toc-text">文本域textarea</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E9%80%89%E6%A1%86checkbox%E5%92%8C%E5%8D%95%E9%80%89%E6%8C%89%E9%92%AEradio"><span class="toc-number">2.4.</span> <span class="toc-text">复选框checkbox和单选按钮radio</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95%E6%8E%A7%E4%BB%B6%E5%A4%A7%E5%B0%8F"><span class="toc-number">2.5.</span> <span class="toc-text">表单控件大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95%E6%8E%A7%E4%BB%B6%E7%8A%B6%E6%80%81"><span class="toc-number">2.6.</span> <span class="toc-text">表单控件状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%84%A6%E7%82%B9%E7%8A%B6%E6%80%81"><span class="toc-number">2.6.1.</span> <span class="toc-text">焦点状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A6%81%E7%94%A8%E7%8A%B6%E6%80%81"><span class="toc-number">2.6.2.</span> <span class="toc-text">禁用状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%8A%B6%E6%80%81"><span class="toc-number">2.6.3.</span> <span class="toc-text">验证状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF"><span class="toc-number">2.6.4.</span> <span class="toc-text">表单提示信息</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E6%8C%89%E9%92%AE"><span class="toc-number">3.</span> <span class="toc-text">三. 按钮</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%83%85%E6%99%AF%E6%8C%89%E9%92%AE"><span class="toc-number">3.1.</span> <span class="toc-text">1. 情景按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8C%89%E9%92%AE%E5%A4%A7%E5%B0%8F"><span class="toc-number">3.2.</span> <span class="toc-text">2. 按钮大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9D%97%E7%8A%B6%E6%8C%89%E9%92%AE"><span class="toc-number">3.3.</span> <span class="toc-text">3. 块状按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%B4%BB%E5%8A%A8%E4%B8%8E%E7%A6%81%E7%94%A8%E7%8A%B6%E6%80%81"><span class="toc-number">3.4.</span> <span class="toc-text">4. 活动与禁用状态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B4%BB%E5%8A%A8%E7%8A%B6%E6%80%81"><span class="toc-number">3.4.1.</span> <span class="toc-text">活动状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A6%81%E7%94%A8%E7%8A%B6%E6%80%81-1"><span class="toc-number">3.4.2.</span> <span class="toc-text">禁用状态</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B-%E5%9B%BE%E5%83%8F"><span class="toc-number">4.</span> <span class="toc-text">四. 图像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E6%A0%87"><span class="toc-number">4.1.</span> <span class="toc-text">图标</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

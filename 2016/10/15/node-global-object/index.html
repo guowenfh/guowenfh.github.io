@@ -1,38 +1,144 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="在上一篇博客中，我们一起对于 node 的模块机制有了一点点的了解，当时我们就知道了在 node 中的全局对象是 global 而不是浏览器中的 window 它们有一部分属性方法是相同的，比如：clearInterval &#x2F; clearTimeout &#x2F; setInterval &#x2F; setTimeout &#x2F; console。他们的用法和在浏览器中的用法是一样的，接下来我们就来看看那些在 nod">
+<meta property="og:type" content="article">
+<meta property="og:title" content="process 对象与 Buffer 类">
+<meta property="og:url" content="http://guowenfh.github.io/2016/10/15/node-global-object/index.html">
+<meta property="og:site_name" content="三省吾身丶丶">
+<meta property="og:description" content="在上一篇博客中，我们一起对于 node 的模块机制有了一点点的了解，当时我们就知道了在 node 中的全局对象是 global 而不是浏览器中的 window 它们有一部分属性方法是相同的，比如：clearInterval &#x2F; clearTimeout &#x2F; setInterval &#x2F; setTimeout &#x2F; console。他们的用法和在浏览器中的用法是一样的，接下来我们就来看看那些在 nod">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-10-15T03:40:29.000Z">
+<meta property="article:modified_time" content="2020-03-12T04:04:13.291Z">
+<meta property="article:author" content="guowenfh">
+<meta property="article:tag" content="nodejs">
+<meta name="twitter:card" content="summary"><title>process 对象与 Buffer 类 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2016/10/15/node-global-object/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
 
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">process 对象与 Buffer 类</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2016-10-15</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><blockquote>
+<p>在上一篇博客中，我们一起对于 node 的模块机制有了一点点的了解，当时我们就知道了在 node 中的全局对象是 <code>global</code> 而不是浏览器中的 <code>window</code> 它们有一部分属性方法是相同的，<br>比如：<code>clearInterval</code> / <code>clearTimeout</code> / <code>setInterval</code> / <code>setTimeout</code> / <code>console</code>。他们的用法和在浏览器中的用法是一样的，接下来我们就来看看那些在 node 中所特有全局属性和方法。</p>
+</blockquote>
+<p>我们先来稍微跑个题，看看与上一个篇博客的中介绍的 模块系统相关 的两个属性，还是可以模块的路径有关：</p>
+<ul>
+<li><code>__filename</code> : 返回 <strong>当前模块文件</strong>解析后的绝对路径</li>
+<li><code>__dirname</code> : 返回 <strong>当前模块文件所在目录</strong> 解析后的绝对路径</li>
+</ul>
+<p><strong>注意：它们可以直接使用，但是实际上并非全局的，而是在模块作用域下的</strong></p>
+<p>直接在文件内输入，运行即可输出：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(__filename);</span><br><span class="line"><span class="built_in">console</span>.log(__dirname);</span><br></pre></td></tr></table></figure>
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<h2 id="process-对象"><a href="#process-对象" class="headerlink" title="process 对象"></a><code>process</code> 对象</h2><h3 id="process-对象的属性和方法"><a href="#process-对象的属性和方法" class="headerlink" title="process 对象的属性和方法"></a><code>process</code> 对象的属性和方法</h3><p>process对象是一个全局对象，可以在任何地方都能访问到他，通过这个对象提供的属性和方法，使我们可以对当前运行的程序的进程进行访问和控制</p>
+<ul>
+<li><code>process.argv</code> :一个包含命令行参数的数组。第一个元素会是 ‘node’， 第二个元素将是 .Js 文件的名称。接下来的元素依次是命令行传入的参数。</li>
+<li><code>process.execPath</code> : 开启当前进程的绝对路径</li>
+<li><code>process.env</code>  : 返回用户环境信息的对象</li>
+<li><code>process.version</code>  : 返回node版本信息</li>
+<li><code>process.versions</code>  : 返回node以及node依赖包版本信息</li>
+<li><code>process.pid</code>  : 当前进程的pid</li>
+<li><code>process.title</code>  : 当前进程的显示名称(Getter/Setter)</li>
+<li><code>process.arch</code>  : 返回当前CPU处理器架构 arm/ia32/x64</li>
+<li><code>process.platform</code>  : 返回当前操作系统平台</li>
+<li><code>process.cwd()</code> :  返回当前进程的工作目录</li>
+<li><code>process.chdir(directory)</code> :  改变进程的当前进程的工作目录，若操作失败则抛出异常。</li>
+<li><code>process.memoryUsage()</code> : 返回node进程的内存使用情况，单位是byte</li>
+<li><code>process.exit(code)</code> : 退出</li>
+<li><code>process.kill(pid)</code> :  向进程发送信息</li>
+<li>标准输入/输出流（IO）：stdin 和stdout提供了操作输入数据和输出数据的方法，我们也通常称为IO操作<ul>
+<li><code>stdin</code>：标准输入<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/632680.htm">http://baike.baidu.com/view/632680.htm</a></li>
+<li><code>stdout</code>标准输出<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/632676.htm">http://baike.baidu.com/view/632676.htm</a></li>
+</ul>
+</li>
+</ul>
+<p>这里主要是对于标准输入/输出流（IO）的理解，放上一个中文维基百科的解释：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A8%99%E6%BA%96%E4%B8%B2%E6%B5%81">标准输入/输出流</a>，在这里关于 <code>stdout</code>就简单举例 <code>console.log</code>实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log = <span class="function"><span class="keyword">function</span>(<span class="params">d</span>) </span>&#123;</span><br><span class="line">  process.stdout.write(d + <span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-{% block page_class %}page-post-detail{% endblock %}
+<p>再看一个<code>stdin</code>的简单示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">process.stdout.write(<span class="string">&#x27;请输入内容：&#x27;</span>);</span><br><span class="line"><span class="comment">//默认情况下，输入流是关闭的，要监听处理输入流数据，首先要开启输入流</span></span><br><span class="line">process.stdin.resume();</span><br><span class="line"><span class="comment">//用于监听用户的输入数据12</span></span><br><span class="line">process.stdin.on(<span class="string">&#x27;data&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">&#x27;用户输入了：&#x27;</span> + chunk);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在 <code>shell</code> 执行该文件后，输入内容并回车，会把你输入的内容打印出来</p>
+<h2 id="Buffer-类"><a href="#Buffer-类" class="headerlink" title="Buffer 类"></a>Buffer 类</h2><p>什么 buffer 类？</p>
+<blockquote>
+<p>Buffer 类是一个全局变量类型，用于操作二进制数据流的类。我们在操作文件或者网络数据的时候，其实操作的就是二进制数据流，Buffer 类就是 Node 为了我们更好的操 作二进制数据而创建的类</p>
+</blockquote>
+<ul>
+<li><code>new Buffer(size)</code>: Number 类型 配一个新的 buffer 大小是 <code>size</code> 的8位字节.</li>
+<li><code>new Buffer(array)</code>: Array 类型分配一个新的 buffer 使用一个8位字节 <code>array</code> 数组.</li>
+<li><code>new Buffer(str, [encoding])</code>:分配一个新的 buffer ，其中包含着给定的 <code>str</code> 字符串. <code>encoding</code> 编码方式默认是：<code>&#39;utf8&#39;</code>.<ul>
+<li><code>str</code> : String类型 - 需要存入buffer的string字符串.</li>
+<li><code>encoding</code> : String类型 - 使用什么编码方式，参数可选.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Buffer-方法学习"><a href="#Buffer-方法学习" class="headerlink" title="Buffer 方法学习"></a>Buffer 方法学习</h3><ol>
+<li><code>buf.length</code>:这个buffer的bytes大小。注意这未必是这buffer里面内容的大小。length 的依据是buffer对象所分配的内存数值，它不会随着这个buffer对象内容的改变而改变。</li>
+<li><code>buf.write(string, [offset], [length], [encoding])</code> : 根据参数 offset 偏移量和指定的encoding编码方式，length 长度是将要写入的字符串的bytes大小，将参数 string 数据写入buffer。<ul>
+<li><code>string</code> : String类型 - 将要被写入 buffer 的数据</li>
+<li><code>offset</code> : Number类型, 可选参数, 默认: 0</li>
+<li><code>length</code> : Number类型, 可选参数, 默认: buffer.length - offset</li>
+<li><code>encoding</code> : String类型, 可选参数, 默认: ‘utf8’</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;buffer&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Buffer(str));</span><br><span class="line"><span class="keyword">var</span> buf = <span class="keyword">new</span> Buffer(<span class="number">6</span>);</span><br><span class="line">buf.write(str,<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line"><span class="built_in">console</span>.log(buf);</span><br><span class="line"><span class="comment">// &lt;Buffer 62 75 66 66 65 72&gt;</span></span><br><span class="line"><span class="comment">// &lt;Buffer 62 62 75 66 01 00&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里我们指定了 offset 和 length ，分别为1和3，所以可以看到两次在输出时，62，75，66，这部分是相同的，并且第二次输出它的位置偏移了1个位置。</p>
+<ol start="3">
+<li><code>buf.toString([encoding], [start], [end])</code>：根据 encoding参数（默认是’utf8’）返回一个解码的 string 类型。还会根据传入的参数 start (默认是0)和 end (默认是 buffer.length)作为取值范围。<ul>
+<li><code>encoding</code>: String类型, 可选参数, 默认: ‘utf8’</li>
+<li><code>start</code>: Number类型, 可选参数, 默认: 0</li>
+<li><code>end</code>: Number类型, 可选参数, 默认: buffer.length</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str1 = <span class="string">&#x27;buffer&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> bf1  = <span class="keyword">new</span> Buffer(str1);</span><br><span class="line"><span class="built_in">console</span>.log(bf1.toString());</span><br><span class="line"><span class="built_in">console</span>.log(bf1.toString(<span class="string">&#x27;utf8&#x27;</span>,<span class="number">1</span>,<span class="number">4</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> str2 = <span class="string">&#x27;二进制&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> bf2  = <span class="keyword">new</span> Buffer(str2);</span><br><span class="line"><span class="built_in">console</span>.log(bf2);</span><br><span class="line"><span class="built_in">console</span>.log(bf2.toString(<span class="string">&#x27;utf8&#x27;</span>,<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// buffer</span></span><br><span class="line"><span class="comment">// uff</span></span><br><span class="line"><span class="comment">// &lt;Buffer e4 ba 8c e8 bf 9b e5 88 b6&gt;</span></span><br><span class="line"><span class="comment">// ��进制</span></span><br></pre></td></tr></table></figure>
+<p>在这里通过例子和输出，就可以发现 <code>toString()</code> 方法看到在截取时 <strong>取左不取右</strong>，所以第一例子输出了 <code>uff</code>，<br>第二例子则可以说明，中文使用3个字节来存储，所以在偏移量为一时读取到的 <code>ba 8c</code>被输出为乱码，当偏移量为3时，正常。</p>
+<ol start="4">
+<li><code>buf.toJSON()</code>：返回一个 JSON表示的Buffer实例。JSON.stringify 将会默认调用来字符串序列化这个Buffer实例。如：<code>&#123; type: &#39;Buffer&#39;, data: [ 98, 117, 102, 102, 101, 114 ] &#125;</code></li>
+<li><code>buf.slice([start], [end])</code>:返回一个新的buffer，这个 buffer 将会和老的 buffer 引用相同的内存地址，只是偏移和裁剪了索引，方法类似于数组。 负的索引是从 buffer 尾部开始计算的。</li>
+<li><code>buf.copy(targetBuffer, [targetStart], [sourceStart], [sourceEnd])</code>:进行 buffer 的拷贝，源和目标可以是重叠的。 targetStart 目标开始偏移 和sourceStart源开始偏移 默认都是 0. sourceEnd 源结束位置偏移默认是源的长度  buffer.length.<br>如果传递的值是undefined/NaN 或者是 out of bounds 超越边界的，就将设置为他们的默认值。（译者：这个默认值下面有的例子有说明）<ul>
+<li><code>targetBuffer</code>: Buffer 类型对象 - 将要进行拷贝的Buffer</li>
+<li><code>targetStart</code>: Number类型, 可选参数, 默认: 0</li>
+<li><code>sourceStart</code>: Number类型, 可选参数, 默认: 0</li>
+<li><code>sourceEnd</code>: Number类型, 可选参数, 默认: buffer.length</li>
+</ul>
+</li>
+</ol>
+<h3 id="类-静态方法"><a href="#类-静态方法" class="headerlink" title="类/静态方法"></a>类/静态方法</h3><ol>
+<li><code>Buffer.isEncoding(encoding)</code>:用来测试给定的编码字符串,如果给定的编码 encoding 是有效的，返回 true，否则返回 false :<code>Buffer.isEncoding(&#39;utf8&#39;)</code></li>
+<li><code>Buffer.isBuffer(obj)</code>:测试这个 obj 是否是一个 Buffer.</li>
+<li><code>Buffer.byteLength(string, [encoding])</code>:将会返回这个字符串真实 byte 长度。 encoding 编码默认是： ‘utf8’. 这个和 String.prototype.length 是不一样的，因为那个方法返回这个字符串中有几个字符的数量。</li>
+<li><code>Buffer.concat(list, [totalLength])</code>: 返回一个保存着将传入 buffer 数组中所有 buffer 对象拼接在一起的 buffer 对象。其实就是将数组中所有的 buffer 实例通过复制拼接在一起<ul>
+<li><code>list </code>: {Array}数组类型，Buffer 数组，用于被连接。</li>
+<li><code>totalLength </code>: {Number}类型 上述 Buffer 数组的所有Buffer的总大小。（数组里 Buffer 实例的大小总和）</li>
+</ul>
+</li>
+</ol>
+<p>这里我们再回头来看看，在上半部分中的介绍<code>process</code> 对象，说的标准输入输出流的时候，我们有这样一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">process.stdout.write(<span class="string">&#x27;请输入内容：&#x27;</span>);</span><br><span class="line"><span class="comment">//默认情况下，输入流是关闭的，要监听处理输入流数据，首先要开启输入流</span></span><br><span class="line">process.stdin.resume();</span><br><span class="line"><span class="comment">//用于监听用户的输入数据12</span></span><br><span class="line">process.stdin.on(<span class="string">&#x27;data&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">&#x27;用户输入了：&#x27;</span> + chunk);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
+<p>我们运行这一段代码，在命令行中输入：process，可以看到有下面这样的结果：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">请输入内容：<span class="built_in">process</span></span><br><span class="line">用户输入了：<span class="built_in">process</span></span><br></pre></td></tr></table></figure>
 
-{% block content %}
-
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
-
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
-    </div>
-  </div>
-
-{% endblock %}
-
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
-
-
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<p>在这里看来，我们接收到的用户输入 <code>chunk</code> ，就是一个字符串，实际上它是一个buffer对象，我们重写 <code>porcess.stdin</code> 方法，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process.stdin.on(<span class="string">&#x27;data&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(chunk);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>输入同样的内容打印出来的是 <code>&lt;Buffer 70 72 6f 63 65 73 73 0a&gt;</code> ,可以知道在标准输入输出流中，实际上也是进行二进制的数据传输。<br>在第一个示例中 <code>console.log(&#39;用户输入了：&#39; + chunk);</code> 因为 <code>chunk</code>与字符串相链接，所以 它实际上自动调用了 <code>toString()</code> 方法。</p>
+<p>这是对于 process 对象与 Buffer 类的简单学习，理解较为粗浅，如有错误之处请指出，谢谢！</p>
+<p>本文地址:<a href="https://guowenfh.github.io/2016/10/15/node-global-object/">//guowenfh.github.io/2016/10/15/node-global-object/</a></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2016/10/15/node-global-object/">http://guowenfh.github.io/2016/10/15/node-global-object/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/nodejs/">nodejs</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2016/10/15/node-file-system/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">node 文件系统</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2016/10/15/node-module-system/"><span class="paginator-prev__text">Node.js 模块系统</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#process-%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">process 对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#process-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">process 对象的属性和方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buffer-%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">Buffer 类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Buffer-%E6%96%B9%E6%B3%95%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.1.</span> <span class="toc-text">Buffer 方法学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">类&#x2F;静态方法</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

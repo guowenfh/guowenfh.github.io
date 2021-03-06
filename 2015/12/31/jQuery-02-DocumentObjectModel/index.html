@@ -1,38 +1,479 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="基础 DOM 和 和 CSS一. 设置元素及内容我们通过前面所学习的各种选择器、过滤器来得到我们想要操作的元素。这个时候，我们就可以对这些元素进行 DOM 的操作。那么，最常用的操作就是对元素内容的获取和修改。html()和 text()方法:    方法名 描述 区分    html()  获取元素中 HTML 内容 连同标签一起提取   html(value)  设置元素中 HTML 内容 清">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery入门笔记之（二）文档对象模型">
+<meta property="og:url" content="http://guowenfh.github.io/2015/12/31/jQuery-02-DocumentObjectModel/index.html">
+<meta property="og:site_name" content="三省吾身丶丶">
+<meta property="og:description" content="基础 DOM 和 和 CSS一. 设置元素及内容我们通过前面所学习的各种选择器、过滤器来得到我们想要操作的元素。这个时候，我们就可以对这些元素进行 DOM 的操作。那么，最常用的操作就是对元素内容的获取和修改。html()和 text()方法:    方法名 描述 区分    html()  获取元素中 HTML 内容 连同标签一起提取   html(value)  设置元素中 HTML 内容 清">
+<meta property="og:locale">
+<meta property="article:published_time" content="2015-12-31T03:39:11.000Z">
+<meta property="article:modified_time" content="2020-03-12T04:04:13.288Z">
+<meta property="article:author" content="guowenfh">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary"><title>jQuery入门笔记之（二）文档对象模型 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2015/12/31/jQuery-02-DocumentObjectModel/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">jQuery入门笔记之（二）文档对象模型</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2015-12-31</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><h2 id="基础-DOM-和-和-CSS"><a href="#基础-DOM-和-和-CSS" class="headerlink" title="基础 DOM 和 和 CSS"></a>基础 DOM 和 和 CSS</h2><h3 id="一-设置元素及内容"><a href="#一-设置元素及内容" class="headerlink" title="一. 设置元素及内容"></a>一. 设置元素及内容</h3><p>我们通过前面所学习的各种选择器、过滤器来得到我们想要操作的元素。这个时候，我们就可以对这些元素进行 DOM 的操作。<br>那么，最常用的操作就是对元素内容的获取和修改。<code>html()</code>和 <code>text()</code>方法:</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+<th>区分</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>html() </code></td>
+<td>获取元素中 HTML 内容</td>
+<td>连同标签一起提取</td>
+</tr>
+<tr>
+<td><code>html(value) </code></td>
+<td>设置元素中 HTML 内容</td>
+<td>清空原数据，设置html内容</td>
+</tr>
+<tr>
+<td><code>text() </code></td>
+<td>获取元素中文本内容</td>
+<td>自动清理html标签</td>
+</tr>
+<tr>
+<td><code>text(value) </code></td>
+<td>设置元素中文本内容</td>
+<td>自动转义html标签以文本形式呈现</td>
+</tr>
+<tr>
+<td><code>val() </code></td>
+<td>获取表单中的文本内容</td>
+<td>value属性的值</td>
+</tr>
+<tr>
+<td><code>val(value) </code></td>
+<td>设置表单中的文本内容</td>
+<td>设置value的值(有特殊用法)</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong>当我们使用<code> html()</code>或 <code>text()</code>设置元素里的内容时，会清空原来的数据。而我们期望能够追加数据的话，需要先获取原本的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).html($(<span class="string">&#x27;#box&#x27;</span>).html() + <span class="string">&#x27;&lt;em&gt;guowenfh.github.io&lt;/em&gt;&#x27;</span>); <span class="comment">//追加数据</span></span><br><span class="line"><span class="comment">//当然它还支持使用函数来进行更复杂的追加</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>val()</code>的特殊用法：</strong><br>如果想设置多个选项的选定状态，比如下拉列表、单选复选框等等，可以通过数组传递操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;input&quot;</span>).val([<span class="string">&quot;check1&quot;</span>,<span class="string">&quot;check2&quot;</span>, <span class="string">&quot;radio1&quot;</span>]); <span class="comment">//value 值是这些的将被选定</span></span><br></pre></td></tr></table></figure>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<h3 id="二-元素属性操作"><a href="#二-元素属性操作" class="headerlink" title="二. 元素属性操作"></a>二. 元素属性操作</h3><p>除了对元素内容进行设置和获取，通过jQuery也可以对元素本身的属性进行操作，包括获取属性的属性值、设置属性的属性值，并且可以删除掉属性。<br><code>attr()</code>和<code>removeAttr()</code>：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>attr(key)</code></td>
+<td>获取某个元素 key 属性的属性值</td>
+</tr>
+<tr>
+<td><code>attr(key, value)</code></td>
+<td>设置某个元素 key 属性的属性值</td>
+</tr>
+<tr>
+<td><code>attr(&#123;key1:value2, key2:value2...&#125;)</code></td>
+<td>设置某个元素多个 key 属性的属性值</td>
+</tr>
+<tr>
+<td><code>attr(key, function (index, value)&#123;&#125;)</code></td>
+<td>通过 fn 来设置设置某个元素 key属性</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong></p>
+<ol>
+<li>jQuery中很多方法都可以使用 <code>function() &#123;&#125;</code>来返回出字符串，比如 <code>html()</code>、<code>text()</code>、<code>val()</code>和上一章刚学过的 <code>is()</code>、<code>filter()</code>方法。<br>这些方法里的<code>function() &#123;&#125;</code>，可以不传参数。可以只传一个参数 <code>index</code>，表示当前元素的索引(从0开始)。也可以传递两个参数 <code>index</code>、<code>value</code>，第二个参数表示属性原本的值。<br>(当然并不是所有方法都适合，有兴趣可以自己逐个尝试)。</li>
+<li>删除指定的属性，这个方法就不可以使用匿名函数，传递<code>index</code>和<code>value</code>均无效。<code>$(&#39;div&#39;).removeAttr(&#39;title&#39;); //删除指定的属性</code></li>
+<li>当然因为<code>id</code>和<code>class</code>也是元素的属性，自然也可以使用attr进行设置，但是建议不这样使用，因为会导致整个页面结构的混乱，有专门的属性对它们进行设置。</li>
+</ol>
+<h3 id="三-元素样式操作"><a href="#三-元素样式操作" class="headerlink" title="三. 元素样式操作"></a>三. 元素样式操作</h3><p>元素样式操作包括了直接设置 CSS 样式、增加 CSS 类别、类别切换、删除类别这几种操作方法。使用频率极高！</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>css(name) </code></td>
+<td>获取某个元素行内的 CSS 样式</td>
+</tr>
+<tr>
+<td><code>css([name1, name2, name3]) </code></td>
+<td>获取某个元素行内多个 CSS 样式</td>
+</tr>
+<tr>
+<td><code>css(name, value) </code></td>
+<td>设置某个元素行内的 CSS 样式</td>
+</tr>
+<tr>
+<td><code>css(name, function (index, value) ) </code></td>
+<td>设置某个元素行内的 CSS 样式</td>
+</tr>
+<tr>
+<td><code>css(&#123;name1 : value1, name2 : value2&#125;) </code></td>
+<td>设置某个元素行内多个 CSS 样式，键值对</td>
+</tr>
+<tr>
+<td><code>addClass(class) </code></td>
+<td>给某个元素添加一个 CSS 类</td>
+</tr>
+<tr>
+<td><code>addClass(class1 class2 class3...) </code></td>
+<td>给某个元素添加多个 CSS 类</td>
+</tr>
+<tr>
+<td><code>removeClass(class) </code></td>
+<td>删除某个元素的一个 CSS 类</td>
+</tr>
+<tr>
+<td><code>removeClass(class1 class2 class3...) </code></td>
+<td>删除某个元素的多个 CSS 类</td>
+</tr>
+<tr>
+<td><code>toggleClass(class) </code></td>
+<td>来回切换默认样式和指定样式</td>
+</tr>
+<tr>
+<td><code>toggleClass(class1 class2 class3...) </code></td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>toggleClass(class, switch) </code></td>
+<td>来回切换样式的时候设置切换频率</td>
+</tr>
+<tr>
+<td><code>toggleClass(function () &#123;&#125;) </code></td>
+<td>通过匿名函数设置切换的规则</td>
+</tr>
+<tr>
+<td><code>toggleClass(function () &#123;&#125;, switch) </code></td>
+<td>在匿名函数设置时也可以设置频率</td>
+</tr>
+<tr>
+<td><code>toggleClass(function (i, c, s) &#123;&#125;, switch) </code></td>
+<td>在匿名函数设置时传递三个参数</td>
+</tr>
+</tbody></table>
+<p><strong>理解：</strong></p>
+<p>在获取多个 CSS 样式时，获取到的是一个对象数组，如果用原生JS进行解析需要使用<code>for in</code>遍历。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> box = $(<span class="string">&#x27;div&#x27;</span>).css([<span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;height&#x27;</span>, <span class="string">&#x27;width&#x27;</span>]); <span class="comment">//得到多个 CSS 样式的数组对象</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> box) &#123; <span class="comment">//逐个遍历出来</span></span><br><span class="line">    alert(i + <span class="string">&#x27;:&#x27;</span> + box[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-{% block page_class %}page-post-detail{% endblock %}
+<p>在jQuery显然不需要那么麻烦，因为它提供了一个遍历工具专门来处理这种对象数组，<code>$.each()</code>方法，这个方法可以轻松的遍历对象数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 遍历对象数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param  <span class="type">&#123;String&#125;</span> </span>index 索引，鍵，属性名</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param  <span class="type">&#123;String&#125;</span> </span>value  属性值，值（相当于arr[i]）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//遍历原生JS对象数组时，value为元素DOM。</span></span><br><span class="line">$.each(box, <span class="function"><span class="keyword">function</span>(<span class="params">index, value</span>) </span>&#123;</span><br><span class="line">    alert(index+<span class="string">&quot;:&quot;</span>+value);<span class="comment">//效果和上面的一样</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 
-{% block content %}
+<p>如果想设置某个元素的 CSS 样式的值，但这个值需要计算我们可以传递一个匿名函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;div&#x27;</span>).css(<span class="string">&#x27;width&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">index, value</span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> (<span class="built_in">parseInt</span>(value) - <span class="number">50</span>) + <span class="string">&#x27;px&#x27;</span>;<span class="comment">//局部操作，不影响全局，避免冲突。</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<p>在使用<code>.toggleClass()</code>使用时，可以使用传入匿名函数的方法，实现由默认到几个class之间的切换。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注意这里必须要先删除原有的样式，不然只是被覆盖了，而不是替换。</span></span><br><span class="line">$(<span class="string">&#x27;div&#x27;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="built_in">this</span>).toggleClass(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ($(<span class="built_in">this</span>).hasClass(<span class="string">&#x27;red&#x27;</span>)) &#123;</span><br><span class="line">            $(<span class="built_in">this</span>).removeClass(<span class="string">&#x27;red&#x27;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;blue&#x27;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $(<span class="built_in">this</span>).removeClass(<span class="string">&#x27;blue&#x27;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
-    </div>
-  </div>
+<p>对于<code>.toggleClass()</code>传入匿名函数的方法，还可以可以传递 <code>index</code>索引、<code>class</code>类两个参数以及频率布尔值，可以得到当前的索引、class类名和频率布尔值。</p>
+<h3 id="四-CSS方法"><a href="#四-CSS方法" class="headerlink" title="四. CSS方法"></a>四. CSS方法</h3><h4 id="（一）width-方法"><a href="#（一）width-方法" class="headerlink" title="（一）width()方法"></a>（一）width()方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>width()</code></td>
+<td>获取某个元素的宽度(number)</td>
+</tr>
+<tr>
+<td><code>width(value)</code></td>
+<td>设置某个元素的宽度(无单位时，默认px)</td>
+</tr>
+<tr>
+<td><code>width(function (index, width) &#123;&#125;)</code></td>
+<td>通过匿名函数设置某个元素的宽度</td>
+</tr>
+</tbody></table>
+<p>虽然可以不加单位，但是建议加上，使代码更加清晰。<br>index 是索引，value 是原本值。</p>
+<h4 id="（二）height-方法"><a href="#（二）height-方法" class="headerlink" title="（二）height()方法"></a>（二）height()方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>height()</code></td>
+<td>获取某个元素的高度</td>
+</tr>
+<tr>
+<td><code>height(value)</code></td>
+<td>设置某个元素的高度</td>
+</tr>
+<tr>
+<td><code>height(function (index, height) &#123;&#125;)</code></td>
+<td>通过匿名函数设置某个元素的高度</td>
+</tr>
+</tbody></table>
+<p>上述两个方法不包括内外边距和边框</p>
+<h4 id="（三）内外边距和边框尺寸方法"><a href="#（三）内外边距和边框尺寸方法" class="headerlink" title="（三）内外边距和边框尺寸方法"></a>（三）内外边距和边框尺寸方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>innerWidth()</code></td>
+<td>获取元素宽度，包含内边距 padding</td>
+</tr>
+<tr>
+<td><code>innerHeight()</code></td>
+<td>获取元素高度，包含内边距 padding</td>
+</tr>
+<tr>
+<td><code>outerWidth()</code></td>
+<td>获取元素宽度，包含边框 border 和内边距 padding</td>
+</tr>
+<tr>
+<td><code>outerHeight()</code></td>
+<td>获取元素高度，包含边框 border 和内边距 padding</td>
+</tr>
+<tr>
+<td><code>outerWidth(ture)</code></td>
+<td>同上，且包含外边距(注意里面的true)</td>
+</tr>
+<tr>
+<td><code>outerHeight(true)</code></td>
+<td>同上，且包含外边距</td>
+</tr>
+</tbody></table>
+<h4 id="（四）元素偏移方法"><a href="#（四）元素偏移方法" class="headerlink" title="（四）元素偏移方法"></a>（四）元素偏移方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>offset()</code></td>
+<td>获取某个元素相对于视口的偏移位置(无论定位与否)</td>
+</tr>
+<tr>
+<td><code>position()</code></td>
+<td>获取某个元素相对于父元素的偏移位置</td>
+</tr>
+<tr>
+<td><code>scrollTop()</code></td>
+<td>获取垂直滚动条的位置</td>
+</tr>
+<tr>
+<td><code>scrollTop(value)</code></td>
+<td>设置垂直滚动条的位置</td>
+</tr>
+<tr>
+<td><code>scrollLeft()</code></td>
+<td>获取水平滚动条的值</td>
+</tr>
+<tr>
+<td><code>scrollLeft(value)</code></td>
+<td>设置水平滚动条的值</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong><br>前两个方法，获取得到的是一个对象，如：<code>&#123;left:12,top:32&#125;</code>，所以需要获取其中的一个值的时候，还需要进行选取，例如：<code>$(div).offset.left</code>。获取相对与视口的偏移。</p>
+<p>在获取滚动条的值时需要注意的是，对象为window且需要用$包装转化成jQ对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).scrollTop(); <span class="comment">//获取当前滚动条的位置</span></span><br><span class="line">$(<span class="built_in">window</span>).scrollTop(<span class="number">300</span>); <span class="comment">//设置当前滚动条的位置</span></span><br></pre></td></tr></table></figure>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<h2 id="DOM-节点操作"><a href="#DOM-节点操作" class="headerlink" title="DOM 节点操作"></a>DOM 节点操作</h2><p>DOM中有一个非常重要的功能，就是节点模型，也就是DOM中的“M”。页面中的元素结构就是通过这种节点模型来互相对应着的，我们只需要通过这些节点关系，可以创建、插入、替换、克隆、删除等等一些列的元素操作。</p>
+<h3 id="一-创建节点"><a href="#一-创建节点" class="headerlink" title="一. 创建节点"></a>一. 创建节点</h3><p>为了使页面更加智能化，有时我们想动态的在 html 结构页面添加一个元素标签，那么在插入之前首先要做的动作就是：创建节点。<br>在jQuery中创建节点异常简单。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> box = $(<span class="string">&#x27;&lt;div id=&quot;box&quot;&gt;节点&lt;/div&gt;&#x27;</span>); <span class="comment">//创建一个节点</span></span><br><span class="line">$(<span class="string">&#x27;body&#x27;</span>).append(box); <span class="comment">//将节点插入到&lt;body&gt;元素内部</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="二．-插入节点"><a href="#二．-插入节点" class="headerlink" title="二． 插入节点"></a>二． 插入节点</h3><p>在创建节点的过程中，其实我们已经演示怎么通过.append()方法来插入一个节点。但仅仅这个功能远远不能满足我们的需求，除了这个方法，jQuery提供了其他几个方法来插入节点。</p>
+<h4 id="内部插入节点方法"><a href="#内部插入节点方法" class="headerlink" title="内部插入节点方法"></a>内部插入节点方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>append(content)</code></td>
+<td>向指定元素内部后面插入节点content</td>
+</tr>
+<tr>
+<td><code>append(function (index, html) &#123;&#125;)</code></td>
+<td>使用匿名函数向指定元素内部后面插入节点</td>
+</tr>
+<tr>
+<td><code>appendTo(content)</code></td>
+<td>将指定元素移入到指定元素content 内部后面</td>
+</tr>
+<tr>
+<td><code>prepend(content)</code></td>
+<td>向指定元素content 内部的前面插入节点</td>
+</tr>
+<tr>
+<td><code>prepend(function (index, html) &#123;&#125;)</code></td>
+<td>使用匿名函数向指定元素内部的前面插入节点</td>
+</tr>
+<tr>
+<td><code>prependTo(content)</code></td>
+<td>将指定元素移入到指定元素 content 内部前面</td>
+</tr>
+</tbody></table>
+<p>需要注意的是<code>appendTo(content)</code>与<code>prependTo(content)</code>在使用方法上与其他两个略微有些不同，<code>$(&quot;&lt;em&gt;new&lt;/em&gt;&quot;).appendTo(&quot;div&quot;);</code>，它代表的是创建的节点传入div内部。</p>
+<p>匿名函数方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;div&#x27;</span>).append(<span class="function"><span class="keyword">function</span> (<span class="params">index, html</span>) </span>&#123;</span><br><span class="line"> <span class="comment">//使用匿名函数插入节点index是获取到的div的索引，html 是原节点</span></span><br><span class="line">    <span class="keyword">if</span>(index==<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&lt;strong&gt;节点&lt;/strong&gt;&#x27;</span>;<span class="comment">//在获取到的第二个div内部添加节点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="外部插入节点方法"><a href="#外部插入节点方法" class="headerlink" title="外部插入节点方法"></a>外部插入节点方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>after(content)</code></td>
+<td>向指定元素的外部后面插入节点 content</td>
+</tr>
+<tr>
+<td><code>after(function (index, html) &#123;&#125;)</code></td>
+<td>使用匿名函数向指定元素的外部后面插入节点</td>
+</tr>
+<tr>
+<td><code>before(content)</code></td>
+<td>向指定元素的外部前面插入节点 content</td>
+</tr>
+<tr>
+<td><code>before(function (index, html) &#123;&#125;)</code></td>
+<td>使用匿名函数向指定元素的外部前面插入节点</td>
+</tr>
+<tr>
+<td><code>insertAfter(content)</code></td>
+<td>将指定节点移到指定元素 content 外部的后面</td>
+</tr>
+<tr>
+<td><code>insertBefore(content)</code></td>
+<td>将指定节点移到指定元素 content 外部的前面</td>
+</tr>
+</tbody></table>
+<p>与上面相同<code>insertAfter(content)</code> 与<code>insertBefore(content)</code>也与其它两个是相反的。</p>
+<h3 id="三．包裹节点"><a href="#三．包裹节点" class="headerlink" title="三．包裹节点"></a>三．包裹节点</h3><p>jQuery 提供了一系列方法用于包裹节点，那包裹节点是什么意思呢？其实就是使用字符串代码将指定元素的代码包含着的意思。</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>wrap(html)</code></td>
+<td>向指定元素包裹一层 html 代码</td>
+</tr>
+<tr>
+<td><code>wrap(element)</code></td>
+<td>向指定元素包裹一层 DOM 对象节点</td>
+</tr>
+<tr>
+<td><code>wrap(function (index) &#123;&#125;)</code></td>
+<td>使用匿名函数向指定元素包裹一层自定义内容</td>
+</tr>
+<tr>
+<td><code>unwrap()</code></td>
+<td>移除一层指定元素包裹的内容（多层需移除多次）</td>
+</tr>
+<tr>
+<td><code>wrapAll(html)</code></td>
+<td>用 html 将所有元素包裹到一起</td>
+</tr>
+<tr>
+<td><code>wrapAll(element)</code></td>
+<td>用 DOM 对象将所有元素包裹在一起</td>
+</tr>
+<tr>
+<td><code>wrapInner(html)</code></td>
+<td>向指定元素的子内容包裹一层 html</td>
+</tr>
+<tr>
+<td><code>wrapInner(element)</code></td>
+<td>向指定元素的子内容包裹一层 DOM 对象节点</td>
+</tr>
+<tr>
+<td><code>wrapInner(function (index) &#123;&#125;)</code></td>
+<td>用匿名函数向指定元素的子内容包裹一层</td>
+</tr>
+</tbody></table>
+<p>wrap的多种用法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;div&#x27;</span>).wrap(<span class="string">&#x27;&lt;strong class=&quot;ing&quot;&gt;&lt;/strong&gt;&#x27;</span>); <span class="comment">//在 div 外层包裹一层 strong</span></span><br><span class="line">$(<span class="string">&#x27;div&#x27;</span>).wrap(<span class="string">&#x27;&lt;strong&gt;123&lt;/strong&gt;&#x27;</span>); <span class="comment">//包裹的元素可以带内容</span></span><br><span class="line">$(<span class="string">&#x27;div&#x27;</span>).wrap(<span class="string">&#x27;&lt;strong&gt;&lt;em&gt;&lt;/em&gt;&lt;/strong&gt;&#x27;</span>); <span class="comment">//包裹多个元素</span></span><br><span class="line">$(<span class="string">&#x27;div&#x27;</span>).wrap($(<span class="string">&#x27;strong&#x27;</span>).get(<span class="number">0</span>)); <span class="comment">//也可以包裹一个原生 DOM</span></span><br><span class="line">$(<span class="string">&#x27;div&#x27;</span>).wrap(<span class="built_in">document</span>.createElement(<span class="string">&#x27;strong&#x27;</span>)); <span class="comment">//临时的原生 DOM</span></span><br><span class="line">$(<span class="string">&#x27;div&#x27;</span>).wrap(<span class="function"><span class="keyword">function</span> (<span class="params">index</span>) </span>&#123; <span class="comment">//匿名函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;strong&gt;&lt;/strong&gt;&#x27;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<p><strong>注意：</strong> <code>.wrap()</code>和<code>.wrapAll()</code>的区别在前者把每个元素当成一个独立体，分别包含一层外层；后者将所有元素作为一个整体作为一个独立体，只包含一层外层。这两种都是在外层包含，而<code>.wrapInner()</code>在内层包含。</p>
+<h3 id="四-节点操作"><a href="#四-节点操作" class="headerlink" title="四. 节点操作"></a>四. 节点操作</h3><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+<th>参数解析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>$(&#39;div&#39;).clone(true); </code></td>
+<td>复制一个节点</td>
+<td>true时表示同时复制事件行为，空或false都表示只复制元素及内容</td>
+</tr>
+<tr>
+<td><code>$(&#39;div&#39;).remove(&quot;#box&quot;);</code></td>
+<td>删除一个id=box的div元素</td>
+<td>无参数时，表示直接删除元素</td>
+</tr>
+<tr>
+<td><code>$(&#39;div&#39;).detach();</code></td>
+<td>保留事件行为的删除</td>
+<td>同上</td>
+</tr>
+<tr>
+<td><code>$(&#39;div&#39;).empty();</code></td>
+<td>清空节点里的内容</td>
+<td>无参数</td>
+</tr>
+<tr>
+<td><code>$(selector).replaceWith(content);</code></td>
+<td>将 $(selector) 替换成 content 元素</td>
+<td>HTML字符串，DOM元素，或者jQuery对象</td>
+</tr>
+<tr>
+<td><code>$(content).replaceAll(selector); </code></td>
+<td>同上</td>
+<td>参数selector为被替换的元素，content为替换的内容。</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong></p>
+<ol>
+<li><code>.remove()</code>和<code>.detach()</code>都是删除节点，而删除后本身方法可以返回当前被删除的节点对象，但区别在于前者在恢复时不保留事件行为，后者则保留。</li>
+<li>节点被替换后，所包含的事件行为就全部消失了。</li>
+<li>注意<code>replaceWith()</code>和<code>replaceAll()</code>方法替换的操作的<strong>内容和被替换元素所在的位置不同</strong></li>
+</ol>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2015/12/31/jQuery-02-DocumentObjectModel/">http://guowenfh.github.io/2015/12/31/jQuery-02-DocumentObjectModel/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/jQuery/">jQuery</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2015/12/31/jQuery-03-DetailedEvent/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">jQuery入门笔记之（三）事件详解</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2015/12/31/jQuery-01-Sizzle/"><span class="paginator-prev__text">jQuery入门笔记之（一）选择器引擎</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80-DOM-%E5%92%8C-%E5%92%8C-CSS"><span class="toc-number">1.</span> <span class="toc-text">基础 DOM 和 和 CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E8%AE%BE%E7%BD%AE%E5%85%83%E7%B4%A0%E5%8F%8A%E5%86%85%E5%AE%B9"><span class="toc-number">1.1.</span> <span class="toc-text">一. 设置元素及内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E5%85%83%E7%B4%A0%E5%B1%9E%E6%80%A7%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.</span> <span class="toc-text">二. 元素属性操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E5%85%83%E7%B4%A0%E6%A0%B7%E5%BC%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.</span> <span class="toc-text">三. 元素样式操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-CSS%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">四. CSS方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89width-%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.1.</span> <span class="toc-text">（一）width()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89height-%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.2.</span> <span class="toc-text">（二）height()方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E5%86%85%E5%A4%96%E8%BE%B9%E8%B7%9D%E5%92%8C%E8%BE%B9%E6%A1%86%E5%B0%BA%E5%AF%B8%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.3.</span> <span class="toc-text">（三）内外边距和边框尺寸方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E5%85%83%E7%B4%A0%E5%81%8F%E7%A7%BB%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.4.</span> <span class="toc-text">（四）元素偏移方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">DOM 节点操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text">一. 创建节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%EF%BC%8E-%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">二． 插入节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E9%83%A8%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.1.</span> <span class="toc-text">内部插入节点方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%96%E9%83%A8%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.2.</span> <span class="toc-text">外部插入节点方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%EF%BC%8E%E5%8C%85%E8%A3%B9%E8%8A%82%E7%82%B9"><span class="toc-number">2.3.</span> <span class="toc-text">三．包裹节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-%E8%8A%82%E7%82%B9%E6%93%8D%E4%BD%9C"><span class="toc-number">2.4.</span> <span class="toc-text">四. 节点操作</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

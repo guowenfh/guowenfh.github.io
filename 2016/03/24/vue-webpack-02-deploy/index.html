@@ -1,38 +1,86 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="这是一系列文章，此系列所有的练习都存在了我的github仓库中vue-webpack 在本人有了新的理解与认识之后,会对文章有不定时的更正与更新。下面是目前完成的列表：  webpack入坑之旅（一）不是开始的开始 webpack入坑之旅（二）loader入门 webpack入坑之旅（三）webpack.config入门 webpack入坑之旅（四）扬帆起航 webpack入坑之旅（五）加载vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack入坑之旅（二）loader入门">
+<meta property="og:url" content="http://guowenfh.github.io/2016/03/24/vue-webpack-02-deploy/index.html">
+<meta property="og:site_name" content="三省吾身丶丶">
+<meta property="og:description" content="这是一系列文章，此系列所有的练习都存在了我的github仓库中vue-webpack 在本人有了新的理解与认识之后,会对文章有不定时的更正与更新。下面是目前完成的列表：  webpack入坑之旅（一）不是开始的开始 webpack入坑之旅（二）loader入门 webpack入坑之旅（三）webpack.config入门 webpack入坑之旅（四）扬帆起航 webpack入坑之旅（五）加载vue">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-03-24T09:28:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T04:04:13.294Z">
+<meta property="article:author" content="guowenfh">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary"><title>webpack入坑之旅（二）loader入门 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2016/03/24/vue-webpack-02-deploy/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
 
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">webpack入坑之旅（二）loader入门</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2016-03-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><p>这是一系列文章，此系列所有的练习都存在了我的github仓库中<a target="_blank" rel="noopener" href="https://github.com/guowenfh/vue-webpack">vue-webpack</a> 在本人有了新的理解与认识之后,会对文章有不定时的更正与更新。下面是目前完成的列表：</p>
+<ul>
+<li><a href="//guowenfh.github.io/2016/03/24/vue-webpack-01-base/">webpack入坑之旅（一）不是开始的开始</a></li>
+<li><a href="//guowenfh.github.io/2016/03/24/vue-webpack-02-deploy/">webpack入坑之旅（二）loader入门</a></li>
+<li><a href="//guowenfh.github.io/2016/03/24/vue-webpack-03-config/">webpack入坑之旅（三）webpack.config入门</a></li>
+<li><a href="//guowenfh.github.io/2016/03/24/vue-webpack-04-custom/">webpack入坑之旅（四）扬帆起航</a></li>
+<li><a href="//guowenfh.github.io/2016/03/25/vue-webpack-05-vue/">webpack入坑之旅（五）加载vue单文件组件</a></li>
+<li><a href="//guowenfh.github.io/2016/03/28/vue-webpack-06-router/">webpack入坑之旅（六）配合vue-router实现SPA</a></li>
+</ul>
+<h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>在上一篇博客中我们已经成功的把简单的事情变得复杂了，把我们的只有几行代码的两个文件<code>first.js</code>、<code>entry.js</code>使用webpack进行文件打包生成了<code>bundle.js</code>。</p>
+<p><code>Webpack</code> 能做的就是这样，只能处理 JavaScript 模块。</p>
+<p>当然它如果能做的仅仅是这样，那它也就不可能这么火了=_=。所以它可以通过引入其他的<code>loader</code>，进而可以处理其它类型的文件。</p>
+<h2 id="loader介绍"><a href="#loader介绍" class="headerlink" title="loader介绍"></a>loader介绍</h2><p><code>Loader</code>可以理解为是模块和资源的转换器，它本身是一个函数，接受源文件作为参数，返回转换的结果。这样，我们就可以通过require来加载任何类型的模块或文件，比如<code>VUE</code>、<code>JSX</code>、<code>SASS</code> 或图片。</p>
+<p>先来看看 loader 有哪些特性？(网上复制的，不喜欢可以跳过。<a target="_blank" rel="noopener" href="https://webpack.docschina.org/concepts/loaders/">loaders-地址</a>)</p>
+<ul>
+<li><code>Loader</code>可以通过管道方式链式调用，每个<code>loader</code>可以把资源转换成任意格式并传递给下一个<code>loader</code>，但是最后一个<code>loader</code>必须返回JavaScript。</li>
+<li><code>Loader</code>可以同步或异步执行。</li>
+<li><code>Loader</code>运行在node.js环境中，所以可以做任何可能的事情。</li>
+<li><code>Loader</code>可以接受参数，以此来传递配置项给<code>loader</code>。</li>
+<li><code>Loader</code>可以通过文件扩展名（或正则表达式）绑定给不同类型的文件。</li>
+<li><code>Loader</code>可以通过npm发布和安装。</li>
+<li>除了通过<code>package.json</code>的<code>main</code>指定，通常的模块也可以导出一个<code>loader</code>来使用。</li>
+<li><code>Loader</code>可以访问配置。</li>
+<li>插件可以让<code>loader</code>拥有更多特性。</li>
+<li><code>Loader</code>可以分发出附加的任意文件。</li>
+</ul>
+<h2 id="loader使用"><a href="#loader使用" class="headerlink" title="loader使用"></a>loader使用</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>根据上面说的<code>loader</code>的知识，就这样编译是肯定不行的，所以我们安装用来读取css文件的<code>css-loader</code>，再用 <code>style-loader</code> 把它插入到页面中。</p>
+<p>在命令行中输入：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install css-loader style-loader --save-dev</span><br></pre></td></tr></table></figure>
+<p>在<code>package.json</code>中，主要是<code>devDependencies</code>这个字段有了改变：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;css-loader&quot;: &quot;^0.23.1&quot;,</span><br><span class="line">    &quot;style-loader&quot;: &quot;^0.13.0&quot;,</span><br><span class="line">    &quot;webpack&quot;: &quot;^1.12.2&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然你可以用一个更加方便的方式进行安装，可以直接在<code>package.json</code>中，添加相应的依赖（如上面的代码），之后的命令行中运行<code>npm intall</code>，它会自动帮我们安装相应的依赖。</p>
+<p>安装完毕。</p>
+<h3 id="加载-CSS-文件"><a href="#加载-CSS-文件" class="headerlink" title="加载 CSS 文件"></a>加载 CSS 文件</h3><p>还是上一篇博客中的文件，来添加一个css文件。<code>style.css</code>,在里面添加</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改我们的<code>entry.js</code>，原文件不变，添加<code>require(&quot;!style-loader!css-loader!./style.css&quot;);</code>,用来引入我们的css文件。</p>
+<p>我们继续编译:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx webpack entry.js --output-filename=./bundle.js --mode=development</span><br></pre></td></tr></table></figure>
+<p>完成后，刷新我们的页面，背景颜色是不是已经变成了红色了呢？</p>
+<h3 id="扩展名自动绑定loader"><a href="#扩展名自动绑定loader" class="headerlink" title="扩展名自动绑定loader"></a>扩展名自动绑定loader</h3><p>这就是我们的<code>loader</code>的使用方式了。如果每次 <code>require</code> CSS 文件的时候都要写 <code>loader</code> 前缀<code>!style-loader!css-loader!</code>这样的东西，显然是一件很麻烦的事情。我们需要它可以根据模块类型（扩展名）来自动绑定需要的 <code>loader</code>。</p>
+<p>来看看更简便的方式，将 <code>entry.js</code> 中的 <code>require(&quot;!style-loader!css-loader!./style.css&quot;) </code>修改为<code>require(&quot;./style.css&quot;)</code>，可以改变一个背景颜色让你更明显的查看到变化！然后执行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx webpack entry.js --output-filename=./bundle.js --mode=development --module-bind <span class="string">&quot;css=!style-loader!css-loader&quot;</span></span><br></pre></td></tr></table></figure>
+<p>。。</p>
+<p>。。。</p>
+<p>没成功对吧!<br>因为<code>!</code>在命令行中具有特殊的含义，所以我们需要对它进行转义操作。再来试试：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx webpack entry.js --output-filename=./bundle.js --mode=development --module-bind <span class="string">&quot;css=style-loader\!css-loader&quot;</span></span><br></pre></td></tr></table></figure>
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
-
-{% block page_class %}page-post-detail{% endblock %}
-
-
-{% block content %}
-
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
-
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
-    </div>
-  </div>
-
-{% endblock %}
-
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
-
-
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<p>成功的话，应该能再次看到背景的变化。</p>
+<p>虽然这样可以将多个css文件进行编译打包，但是总感觉很是繁琐，我不想每次都运行那么一长串的命令怎么办？继续向下走吧。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2016/03/24/vue-webpack-02-deploy/">http://guowenfh.github.io/2016/03/24/vue-webpack-02-deploy/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/webpack/">webpack</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2016/03/24/vue-webpack-03-config/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">webpack入坑之旅（三）webpack.config入门</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2016/03/24/vue-webpack-01-base/"><span class="paginator-prev__text">webpack入坑之旅（一）不是开始的开始</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%AD%90"><span class="toc-number">1.</span> <span class="toc-text">引子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#loader%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">loader介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#loader%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">loader使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">3.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD-CSS-%E6%96%87%E4%BB%B6"><span class="toc-number">3.2.</span> <span class="toc-text">加载 CSS 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E5%90%8D%E8%87%AA%E5%8A%A8%E7%BB%91%E5%AE%9Aloader"><span class="toc-number">3.3.</span> <span class="toc-text">扩展名自动绑定loader</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

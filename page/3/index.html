@@ -1,23 +1,85 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="芝兰生于深林，不以无人而不芳。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="三省吾身丶丶">
+<meta property="og:url" content="http://guowenfh.github.io/page/3/index.html">
+<meta property="og:site_name" content="三省吾身丶丶">
+<meta property="og:description" content="芝兰生于深林，不以无人而不芳。">
+<meta property="og:locale">
+<meta property="article:author" content="guowenfh">
+<meta name="twitter:card" content="summary"><title>三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/page/3/index.html"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
 
-{% block title %}{{ config.title }}{% if theme.index_with_subtitle and config.subtitle %} - {{config.subtitle }}{% endif %}{% endblock %}
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/03/05/2018/canvas-text-to-image-clarity/">一次canvas中文字转化成图片后清晰度丢失的探索</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-03-05</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><blockquote>
+<p>本文最初记录在 2017 年 D2 期间。知乎问题为：参加第12届D2前端技术论坛，你有什么收获？<br>主要是想说一下百度的小姐姐分享的话题 《打造前端复杂应》。</p>
+</blockquote>
+<p>最近正好接手了这样一个类似的项目，（百度 h5 百度脑图）不过整体全是基于 canvas 的，而且也没有事件广播，没有数据驱动，没有模型，全是直接 jquery 直接操作 DOM 的。整体感觉很混乱。现在一个人维护，改起来，感觉很忧伤。</p>
+<p>不过听完分享之后，不管是事件广播，还是直接数据的双向绑定，都让我多了很多思路去改造。目前第一步就是先加入了 webpack、ES6、React、PubSub ，先把之前的 jquery 逐渐干掉吧。</p>
+<hr>
+<p>不过小姐姐提到百度脑图 和 百度 H5 分别使用 SVG 以及 原生 DOM 来实现的，这样当然没什么问题，不过也提到为什么没用 canvas 的原因，主要是 事件绑定，元素选择相关的等等一些方面的考虑。</p>
+<p>但是实际上，根据我项目的使用来说，直接使用 canvas 也是可以的，基本能解决掉提出来的顾虑，当然主要是有这个强大的开源 canvas 操作库：</p>
+<p><a target="_blank" rel="noopener" href="http://fabricjs.com/">fabric.js: Javascript Canvas Library, SVG-to-Canvas (&amp; canvas-to-SVG) Parser </a></p>
+<p>事件，动画，选中，变换，loadJOSN()，toJSON() 。强大之处，不太好用几句话说清楚，部分功能如下图，建议官网体验:</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fp2cew4ofqj30uw0uu0xs.jpg"></p></div><div class="post-readmore"><a class="post-readmore__link" href="/2018/03/05/2018/canvas-text-to-image-clarity/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/10/24/2017/learn-canvas-01/">从零学习 canvas (一)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><blockquote>
+<p>由于上一篇描述的原因。有图像处理的需求，于是我就开始学习 canvas 啦，和以前的一样，这一篇也是一边学一边写，敲出来的。有不正确的地方，欢迎指出。<br>canvas 本身的 api 描述是比较简单，但是衍生出来的东西，操作，图像处理，动画，性能，还是非常的多的。所以对于 canvas 的学习不出意外的话，将会是一个系列。这就是第一篇了。下面就开始吧</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;canvas&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background:blue;&quot;</span>&gt;</span>浏览器不支持canvas<span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
+<p>在不支持 canvas 的浏览器中，显示标签中的内容。<br>绘图区域 默认是 300 x 150。<br>canvas 中的宽高是实际的宽高，css 中的宽高会等比缩放。<br>在开始绘图之前需要先，获取绘图环境。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#canvas&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span>(canvas.getContext)&#123;</span><br><span class="line">    <span class="keyword">const</span> context = canvas.getContext(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">    <span class="comment">// .... 绘制</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="post-readmore"><a class="post-readmore__link" href="/2017/10/24/2017/learn-canvas-01/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/10/21/2017/electron-multiple-session/">浅谈 electron 中的 session 管理（隔离）</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><blockquote>
+<p>已经有很长一段时间没有产出博客了。<br>一. 是因为花了很多时间去专研业务，能够做到目前的基本业务流程理清，大致了然于胸（导致了一个问题：有人找我解决问题，我可能会先问一句，你的需求是什么？）<br>二. 确实是自己这一段时间确实懈怠了，每天上班回去就不想敲代码了，看看剧，看看小说，刷刷微博。虽然在组内有过一些分享，整理过一些东西，但是却没有将其在博客产出了。<br>这样的情况，让我明显的感觉到自己的成长速度相对于第一年成长的速度，慢了几个等级。这让我有一种危机感，于是克服这种懈怠，跳出舒适区，继续强健自己。重新回归吧。<br>最后。还是引用这个博客的描述：”兴趣遍地都是，专注和坚持才是真正稀缺的。”</p>
+</blockquote>
+<p>不多说了，开始吧。</p>
+<h2 id="基础介绍"><a href="#基础介绍" class="headerlink" title="基础介绍"></a>基础介绍</h2><blockquote>
+<p>由于公司的项目内部调整，有幸接触 2 个星期的 electron 开发。（然后我又被拥抱变化了。。）实现了一个多账号的切换，并且同时对于多账号的聊天窗口做一个浏览器 tab 的集成的需求，这里对于接触到的知识点，做一个总结。以免完全忘记(忽略代码规范，我自己都看不下去)</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://wizardforcel.gitbooks.io/electron-doc/content/faq/electron-faq.html">electron-中文文档</a></p></div><div class="post-readmore"><a class="post-readmore__link" href="/2017/10/21/2017/electron-multiple-session/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/05/31/2017/flexLayout/">FlexBox 布局详解</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-05-31</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><blockquote>
+<p>很久没有写博客了，这里把之前学习 flex 布局的一篇笔记整理了一下。发布到博客上。赶一个五月的末班车吧。还是得坚持啊!!</p>
+</blockquote>
+<p>flex 弹性布局<br>FlexBox 可控制子元素:</p>
+<ul>
+<li>水平或垂直排成一行</li>
+<li>控制子元素的对齐方式</li>
+<li>控制子元素的高度／宽度</li>
+<li>控制子元素的显示顺序</li>
+<li>控制子元素是否折行</li>
+</ul>
+<p>** <code>display:flex;</code> 创建  Flexbox 元素 **<br>在 flex 布局中必须理解的概念就是区分主轴和辅轴(侧轴):<br><img src="https://ws1.sinaimg.cn/large/82d12951gy1fg4x85jz1oj21420ei0ty.jpg"></p></div><div class="post-readmore"><a class="post-readmore__link" href="/2017/05/31/2017/flexLayout/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/04/21/2017/html5-label-category/">HTML5常用标签分类</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-04-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><blockquote>
+<p>文章是很早之前的笔记，做了一些属性上的补充，现发布到博客中来</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.h5jun.com/post/html5-element-flowchart.html?utm_source=tuicool&utm_medium=referral">十年踪迹的博客：HTML5 元素选择流程图</a><br><img src="https://p3.ssl.qhimg.com/t01d712cd34f492117d.png" class="full-image" art="如何选择标签"/></p></div><div class="post-readmore"><a class="post-readmore__link" href="/2017/04/21/2017/html5-label-category/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/03/01/2017/es6-base-features-note/">ES6 简单特性学习记录</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-03-01</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><h2 id="变量定义的新方式：let-const"><a href="#变量定义的新方式：let-const" class="headerlink" title="变量定义的新方式：let/ const"></a>变量定义的新方式：<code>let</code>/ <code>const</code></h2><p><strong><code>let</code> 特性：</strong></p>
+<ol>
+<li>不允许重复声明</li>
+<li>没有变量提升（预解析）</li>
+<li>块级作用域（一对 <code>&#123;&#125;</code> 包括的区域称为一个代码块，<code>let</code> 声明的变量只在该代码块起作用）</li>
+</ol>
+<p>例子1 ：简单的打印数据</p>
+<p>使用 <code>var</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span> ; i++ )&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span><span class="built_in">console</span>.log(i)) <span class="comment">// 执行10次，全都打印 10</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
+<p>使用 <code>let</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span> ; i++ )&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span><span class="built_in">console</span>.log(i)) <span class="comment">// 执行10次，打印 0 - 9</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
-
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+<p>之前我们要实现这样的打印，必须使用闭包：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">j</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span><span class="built_in">console</span>.log(j)) <span class="comment">// 执行10次，打印 0 - 9</span></span><br><span class="line">    &#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="post-readmore"><a class="post-readmore__link" href="/2017/03/01/2017/es6-base-features-note/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article></section><nav class="paginator"><div class="paginator-inner"><a class="extend prev" rel="prev" href="/page/2/"><i class="fas fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/"><i class="fas fa-angle-right"></i></a></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

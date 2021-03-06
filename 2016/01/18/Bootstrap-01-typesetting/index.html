@@ -1,38 +1,177 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="1. 标题在Bootstrap中使用标题的方式和常规html一样：从&lt;h1&gt;到&lt;h6&gt;分别从大到小安排标题元素，只不过在Bootstrap中重新设置了其默认样式，从源码中可以看到有如下共性： 字体颜色与字体样式继承自父元素，字体粗细为500，且行高全部设为1.1（也就是font-size的1.1倍） 123456&amp;#123;    font-family: inherit;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bootstrap入门笔记之（一）排版">
+<meta property="og:url" content="http://guowenfh.github.io/2016/01/18/Bootstrap-01-typesetting/index.html">
+<meta property="og:site_name" content="三省吾身丶丶">
+<meta property="og:description" content="1. 标题在Bootstrap中使用标题的方式和常规html一样：从&lt;h1&gt;到&lt;h6&gt;分别从大到小安排标题元素，只不过在Bootstrap中重新设置了其默认样式，从源码中可以看到有如下共性： 字体颜色与字体样式继承自父元素，字体粗细为500，且行高全部设为1.1（也就是font-size的1.1倍） 123456&amp;#123;    font-family: inherit;">
+<meta property="og:locale">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi1y8bjyj20l5029wf2.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi1ye0cej20gc03fmxw.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi1yb2gcj20by05tjs4.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi1ycevpj20fe03mjrr.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi1y68ufj206q05h3yl.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi1y4xzcj20ke0e4mx8.jpg">
+<meta property="article:published_time" content="2016-01-18T05:40:46.000Z">
+<meta property="article:modified_time" content="2020-03-12T04:04:13.283Z">
+<meta property="article:author" content="guowenfh">
+<meta property="article:tag" content="Bootstrap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewi1y8bjyj20l5029wf2.jpg"><title>Bootstrap入门笔记之（一）排版 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2016/01/18/Bootstrap-01-typesetting/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Bootstrap入门笔记之（一）排版</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2016-01-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><h2 id="1-标题"><a href="#1-标题" class="headerlink" title="1. 标题"></a>1. 标题</h2><p>在Bootstrap中使用标题的方式和常规html一样：从<code>&lt;h1&gt;</code>到<code>&lt;h6&gt;</code>分别从大到小安排标题元素，只不过在Bootstrap中重新设置了其默认样式，从源码中可以看到有如下共性：</p>
+<p>字体颜色与字体样式继承自父元素，字体粗细为500，且行高全部设为1.1（也就是font-size的1.1倍）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attribute">font-family</span>: inherit;</span><br><span class="line">    <span class="attribute">font-weight</span>: <span class="number">500</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">1.1</span>;</span><br><span class="line">    <span class="attribute">color</span>: inherit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
-
-{% block page_class %}page-post-detail{% endblock %}
-
-
-{% block content %}
-
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
-
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
-    </div>
-  </div>
-
-{% endblock %}
-
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+<p>在不同大小的标题中有着如下区别：</p>
+<ol>
+<li>在Bootstrap中对于不同级别标题字体大小设置为：<strong>h1=36px，h2=30px，h3=24px，h4=18px，h5=14px和h6=12px。</strong></li>
+<li>重新设置了<strong>margin-top</strong>和<strong>margin-bottom</strong>的值，<strong>h1~h3</strong>重置后的值都是<strong>20px</strong>；<strong>h4~h6</strong>重置后的值都是<strong>10px</strong>。</li>
+</ol>
+<p>除此之外在Bootstrap中为了<strong>让非标题元素和标题使用相同的样式</strong>，还特意定义了**.h1~.h6**六个类名。如下所示：</p>
+<p>在Bootstrap中，下面的代码，显示效果相同。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--Bootstrap中的标题--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Bootstrap标题一<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>Bootstrap标题二<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Bootstrap标题三<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>Bootstrap标题四<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h5</span>&gt;</span>Bootstrap标题五<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span>Bootstrap标题六<span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--Bootstrap中让非标题元素和标题使用相同的样式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;h1&quot;</span>&gt;</span>Bootstrap标题一<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;h2&quot;</span>&gt;</span>Bootstrap标题二<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;h3&quot;</span>&gt;</span>Bootstrap标题三<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;h4&quot;</span>&gt;</span>Bootstrap标题四<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;h5&quot;</span>&gt;</span>Bootstrap标题五<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;h6&quot;</span>&gt;</span>Bootstrap标题六<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<p>因为在实际应用中，我们可能经常会遇到除了主标题外，之后紧跟着一个副标题的情况。Bootstrap人性化的为我们设置了这样一个效果。使用方式也特别简单，如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Bootstrap标题一<span class="tag">&lt;<span class="name">small</span>&gt;</span>我是副标题<span class="tag">&lt;/<span class="name">small</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当然毋庸置疑的是，从<code>&lt;h1&gt;</code>到<code>&lt;h6&gt;</code>都可以使用该设置。副标题<code>&lt;small&gt;</code>有着自己一些独特的样式：</p>
+<ol>
+<li>行高全部都设置为了1，而且字体粗细变成了常规效果（不加粗），同时颜色被设置为灰色（<code>#999</code>）。</li>
+<li>在h1<del>h3内的<code>&lt;small&gt;</code>标签文本，其大小都设置为当前字号的65%；而在h4</del>h6内的字号都设置为当前字号的75%；</li>
+</ol>
+<h2 id="2-正文文本"><a href="#2-正文文本" class="headerlink" title="2. 正文文本"></a>2. 正文文本</h2><p>Bootstrap中的文本全局样式如下：</p>
+<ol>
+<li>字体大小为14px</li>
+<li>行高为1.42867143（约等于20px）</li>
+<li>字体颜色为<code>#333</code></li>
+<li>p标签外部有着10个像素的下外边距<code>margin-bottom:10px;</code></li>
+</ol>
+<p>当然，你是可以自行设置重置样式的。^_^</p>
+<h2 id="3-强调"><a href="#3-强调" class="headerlink" title="3. 强调"></a>3. 强调</h2><h3 id="字体风格相关"><a href="#字体风格相关" class="headerlink" title="字体风格相关"></a>字体风格相关</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;lead&quot;</span>&gt;</span>lead<span class="tag">&lt;/<span class="name">p</span>&gt;</span><span class="comment">&lt;!-- 字体变大，行高变大，下外边距变大 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">i</span>&gt;</span>i<span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="comment">&lt;!--无特殊意义， 斜体 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">small</span>&gt;</span>small<span class="tag">&lt;/<span class="name">small</span>&gt;</span><span class="comment">&lt;!-- 小号字体--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>strong<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="comment">&lt;!-- 语气强烈的强调，粗体 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span>em<span class="tag">&lt;/<span class="name">em</span>&gt;</span><span class="comment">&lt;!-- 强调，斜体 --&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="强调相关的类"><a href="#强调相关的类" class="headerlink" title="强调相关的类"></a>强调相关的类</h3><p>在Bootstrap中定义了一系列的这样的类，用于不同的情景，出去text外，还有bg（背景颜色）等等。使用方法类似，只是前面的文本进行了一些改变！所以。<strong>记住这6个单词吧</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text-muted&quot;</span>&gt;</span>提示，使用浅灰色（#999）<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text-primary&quot;</span>&gt;</span>主要，使用蓝色（#428bca）<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text-success&quot;</span>&gt;</span>成功，使用浅绿色(#3c763d)<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text-info&quot;</span>&gt;</span>通知信息，使用浅蓝色（#31708f）<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text-warning&quot;</span>&gt;</span>警告，使用黄色（#8a6d3b）<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text-danger&quot;</span>&gt;</span>危险，使用褐色（#a94442）<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-文本对齐风格"><a href="#4-文本对齐风格" class="headerlink" title="4. 文本对齐风格"></a>4. 文本对齐风格</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text-left&quot;</span>&gt;</span>我居左<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text-center&quot;</span>&gt;</span>我居中<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text-right&quot;</span>&gt;</span>我居右<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text-justify&quot;</span>&gt;</span>我两端对齐<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在Bootstrap中，为了简化操作，方便使用，使用了上面这四个类分别对应我们在CSS中常常使用<strong>text-align</strong>来实现文本的对齐风格的设置。</p>
+<h2 id="5-列表"><a href="#5-列表" class="headerlink" title="5. 列表"></a>5. 列表</h2><p>在Bootstrap中对于列表的设置与原生的html基本一致，需要注意的有：</p>
+<ol>
+<li>在列表之间有10px的下外边距</li>
+<li>在嵌套列表中，不含有下边距</li>
+</ol>
+<p>Bootstrap当然不会就这么简单做一点点修改，它定义了一些关于列表的类给我们使用。</p>
+<h3 id="去点列表-list-unstyled"><a href="#去点列表-list-unstyled" class="headerlink" title="去点列表.list-unstyled"></a>去点列表<code>.list-unstyled</code></h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.list-unstyled</span> &#123;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从源码中，我们可以看到这样的信息，它除了将项目编号去除之外，还将默认的左边距也清除掉了。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;list-unstyled&quot;</span>&gt;</span></span><br><span class="line">    项目列表</span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;list-unstyled&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>带有项目编号<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>带有项目编号<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在这样一段代码中，三个列表项会整齐的<strong>排列在一起</strong>，且都没有<strong>项目符号</strong></p>
+<h3 id="内联列表-list-inline"><a href="#内联列表-list-inline" class="headerlink" title="内联列表.list-inline"></a>内联列表<code>.list-inline</code></h3><p>除了去点列表之外，Bootstrap还可以通过添加类名“.list-inline”来实现内联列表，简单点说就是<strong>把垂直列表换成水平列表，而且去掉项目符号（编号），保持水平显示。</strong>也可以说内联列表就是为制作水平导航而生。</p>
+<h3 id="水平定义列表-dl-horizontal"><a href="#水平定义列表-dl-horizontal" class="headerlink" title="水平定义列表.dl-horizontal"></a>水平定义列表<code>.dl-horizontal</code></h3><p>现有代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dl</span> <span class="attr">class</span>=<span class="string">&quot;dl-horizontal&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span>标题一：<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>描述内容，我很喜欢前端，也很喜欢响应式布局，它能在个不同大小的屏幕下提供很好的体验，我现在是初学者，但是我会越来强的<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span>标题二：标题二：标题二：标题二：<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>描述内容<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在浏览器全屏显示中可以看到效果如下：</p>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi1y8bjyj20l5029wf2.jpg" alt="自定义水平列表大屏"></p>
+<p>我们来把屏幕大小进行改变，在遇到一个临界值时（小屏），水平定义列表将回复到原始的状态，如下改变：</p>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi1ye0cej20gc03fmxw.jpg" alt="自定义水平列表小屏"></p>
+<p>这是为什么呢？我们去看看源码吧！<br>原来在这里添加了一个媒体查询，只有<strong>屏幕大于768px</strong>的时候，添加类名<code>.dl-horizontal</code>才具有水平定义列表效果。其实现主要方式：</p>
+<ol>
+<li><strong>将dt设置了一个左浮动，并且设置了一个宽度为160px</strong></li>
+<li><strong>将dd设置一个margin-left的值为180px，达到水平的效果</strong></li>
+<li><strong>当标题宽度超过160px时，将会显示三个省略号</strong></li>
+</ol>
+<p>现在再看看上面的效果是不是和这里的描述都是一样的呢？答案当然是肯定的 ^ ^</p>
+<h2 id="6-代码"><a href="#6-代码" class="headerlink" title="6. 代码"></a>6. 代码</h2><p>在Bootstrap主要提供了三种代码风格：</p>
+<ol>
+<li>使用<code>&lt;code&gt;&lt;/code&gt;</code>来显示单行内联代码——针对于<strong>单个单词或单个句子</strong>的代码</li>
+<li>使用<code>&lt;pre&gt;&lt;/pre&gt;</code>来显示多行块代码——针对于<strong>多行代码</strong>（也就是成块的代码）</li>
+<li>使用<code>&lt;kbd&gt;&lt;/kbd&gt;</code>来显示用户输入代码——表示<strong>用户要通过键盘输入的内容</strong></li>
+</ol>
+<p>直接来看效果吧!</p>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi1yb2gcj20by05tjs4.jpg" alt="code风格"></p>
+<p>代码如下：（需要注意的是，**不管使用哪种代码风格，在代码中碰到小于号（<code>&lt;</code>）和大于号（<code>&gt;</code>）都需要使用转义字符来替代）</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">code风格：</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Bootstrap的代码风格有三种：<span class="tag">&lt;<span class="name">code</span>&gt;</span><span class="symbol">&amp;lt;</span>code<span class="symbol">&amp;gt;</span><span class="tag">&lt;/<span class="name">code</span>&gt;</span>、<span class="tag">&lt;<span class="name">code</span>&gt;</span><span class="symbol">&amp;lt;</span>pre<span class="symbol">&amp;gt;</span><span class="tag">&lt;/<span class="name">code</span>&gt;</span>和<span class="tag">&lt;<span class="name">code</span>&gt;</span><span class="symbol">&amp;lt;</span>kbd<span class="symbol">&amp;gt;</span><span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">pre风格：</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">pre</span>&gt;</span></span><br><span class="line"><span class="symbol">&amp;lt;</span>ul<span class="symbol">&amp;gt;</span></span><br><span class="line">    <span class="symbol">&amp;lt;</span>li<span class="symbol">&amp;gt;</span>...<span class="symbol">&amp;lt;</span>/li<span class="symbol">&amp;gt;</span></span><br><span class="line"><span class="symbol">&amp;lt;</span>/ul<span class="symbol">&amp;gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">kbd风格：</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>请输入<span class="tag">&lt;<span class="name">kbd</span>&gt;</span>ctrl+c<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span>来复制代码，然后使用<span class="tag">&lt;<span class="name">kbd</span>&gt;</span>ctrl+v<span class="tag">&lt;/<span class="name">kbd</span>&gt;</span>来粘贴代码<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;pre&gt;</code>元素一般用于显示大块的代码，并保证原有格式不变。但有时候代码太多，而且不想让其占有太大的页面篇幅，就想控制代码块的大小。Bootstrap也考虑到这一点，你只需要在<strong>pre标签</strong>上添加类名<code>.pre-scrollable</code>，就可以控制代码块区域<strong>最大高度为340px</strong>，一旦超出这个高度，就会在<strong>Y轴（纵向）出现滚动条。</strong></p>
+<p>当然，你也可以进行自定义配置，例如：只需要在自定义的css中，对于该类添加一个<code>word-wrap: normal;</code>，这样的话，在代码块边框横向宽度小于内部代码横向长度时，就会出现横向滚动条。</p>
+<h2 id="7-表格"><a href="#7-表格" class="headerlink" title="7. 表格"></a>7. 表格</h2><p>表格是Bootstrap的一个基础组件之一，Bootstrap为表格提供了<strong>1种基础样式</strong>和<strong>4种附加样式</strong>以及<strong>1个支持响应式的表格</strong>。</p>
+<p>对应上面所说的，Bootstrap为表格不同的样式风格提供了不同的类名，主要包括：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><code>.table</code></th>
+<th align="center">基础表格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>.table-striped</code></td>
+<td align="center">斑马线表格</td>
+</tr>
+<tr>
+<td align="center"><code>.table-bordered</code></td>
+<td align="center">带边框的表格</td>
+</tr>
+<tr>
+<td align="center"><code>.table-hover</code></td>
+<td align="center">鼠标悬停高亮的表格</td>
+</tr>
+<tr>
+<td align="center"><code>.table-condensed</code></td>
+<td align="center">紧凑型表格</td>
+</tr>
+<tr>
+<td align="center"><code>.table-responsive</code></td>
+<td align="center">响应式表格</td>
+</tr>
+</tbody></table>
+<p><code>.table</code>主要有三个作用：</p>
+<ul>
+<li> 给表格设置了margin-bottom:20px以及设置单元内距</li>
+<li> 在thead底部设置了一个2px的浅灰实线</li>
+<li> 每个单元格顶部设置了一个1px的浅灰实线</li>
+</ul>
+<p>具体大家可以在源码中查看，后几种附加的样式在这里也不多说，但是下面说一些<strong>注意事项：</strong></p>
+<ol>
+<li>后几种表格附加样式，必须在基础样式<code>.table</code>之后，例如<code>&lt;table class=&quot;table table-bordered table-hover&quot;&gt;</code></li>
+<li>响应式表格：其原理是在表格<strong>外部添加容器</strong>把普通表格<strong>包裹</strong>起来，下面进行详细说明：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;table-responsive&quot;</span>&gt;</span><span class="comment">&lt;!-- 关键！容器包裹后实现响应式 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">&quot;table table-bordered&quot;</span>&gt;</span><span class="comment">&lt;!-- 设置表格样式，带边框的表格 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">thead</span>&gt;</span><span class="comment">&lt;!-- 一个表格应该有表头，若直接写tr&gt;td这样的结构，浏览器会自动创建一个tbody包裹 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">tbody</span>&gt;</span><span class="comment">&lt;!--与上同理，即使你不创建，浏览器也会自动添加tbody包裹你的代码  --&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>下面是宽屏的效果（和普通的表格无区别）：</p>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi1ycevpj20fe03mjrr.jpg" alt="表格行的类"></p>
+<p>此处是窄屏的效果（可以看到滚动条的出现）：<br><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi1y68ufj206q05h3yl.jpg" alt="表格行的类"></p>
+<h3 id="表格行的类，表格情景"><a href="#表格行的类，表格情景" class="headerlink" title="表格行的类，表格情景"></a>表格行的类，表格情景</h3><p>在上面已经说到了在Bootstrap中，为不同的情景做了不一样的颜色，用于不同的信息展示。只是在类名上做了一些小小的改变。下面就可以看到：（图片来自<a target="_blank" rel="noopener" href="http://www.imooc.com/">慕课网</a>）</p>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewi1y4xzcj20ke0e4mx8.jpg" alt="表格行的类"></p>
+<p>只需要在**<code>&lt;tr&gt;</code><strong>标签添加上这些类就可以使用了。<br>除此之外，通过源码可以看到，在这些颜色设置之外，Bootstrap还单独设置了</strong>hover效果（悬浮状态）<strong>的</strong>颜色加深**效果（它对于不同的情况单独进行了颜色设置）。<br>实现也特别简单，只需要像<code>&lt;table class=&quot;table-hover&quot;&gt;</code>这样，在<code>&lt;table&gt;</code>标签加上一个<code>table-hover</code>的类。（在未对<code>&lt;tr&gt;</code>进行情景颜色设置时，该类依然有效果，只是效果不一样，上面已经说到了，因为它的单独设置，具体请到源码中查看）</p>
+<p>也正因为这样，如果你想自定义颜色的话，<strong>除了修改<code>tr</code>元素的颜色样式外，在<code>.table-hover</code>表格中也要做相应的调整!</strong></p>
+<p>排版的内容到这里就告一段落了，下面进行表单的学习！加油！</p>
+<p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.imooc.com/learn/141">慕课网：玩转Bootstrap</a></li>
+<li><a target="_blank" rel="noopener" href="https://v3.bootcss.com/css/">Bootstrap中文官网：全局 CSS 样式</a></li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2016/01/18/Bootstrap-01-typesetting/">http://guowenfh.github.io/2016/01/18/Bootstrap-01-typesetting/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/Bootstrap/">Bootstrap</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2016/01/18/Bootstrap-02-form/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Bootstrap入门笔记之（二）表单</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2016/01/17/Bootstrap-00-summary/"><span class="paginator-prev__text">Bootstrap 入门笔记之（零）简介</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A0%87%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">1. 标题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%AD%A3%E6%96%87%E6%96%87%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">2. 正文文本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BC%BA%E8%B0%83"><span class="toc-number">3.</span> <span class="toc-text">3. 强调</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%BD%93%E9%A3%8E%E6%A0%BC%E7%9B%B8%E5%85%B3"><span class="toc-number">3.1.</span> <span class="toc-text">字体风格相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E8%B0%83%E7%9B%B8%E5%85%B3%E7%9A%84%E7%B1%BB"><span class="toc-number">3.2.</span> <span class="toc-text">强调相关的类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%96%87%E6%9C%AC%E5%AF%B9%E9%BD%90%E9%A3%8E%E6%A0%BC"><span class="toc-number">4.</span> <span class="toc-text">4. 文本对齐风格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%88%97%E8%A1%A8"><span class="toc-number">5.</span> <span class="toc-text">5. 列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E7%82%B9%E5%88%97%E8%A1%A8-list-unstyled"><span class="toc-number">5.1.</span> <span class="toc-text">去点列表.list-unstyled</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E8%81%94%E5%88%97%E8%A1%A8-list-inline"><span class="toc-number">5.2.</span> <span class="toc-text">内联列表.list-inline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%B4%E5%B9%B3%E5%AE%9A%E4%B9%89%E5%88%97%E8%A1%A8-dl-horizontal"><span class="toc-number">5.3.</span> <span class="toc-text">水平定义列表.dl-horizontal</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%BB%A3%E7%A0%81"><span class="toc-number">6.</span> <span class="toc-text">6. 代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E8%A1%A8%E6%A0%BC"><span class="toc-number">7.</span> <span class="toc-text">7. 表格</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC%E8%A1%8C%E7%9A%84%E7%B1%BB%EF%BC%8C%E8%A1%A8%E6%A0%BC%E6%83%85%E6%99%AF"><span class="toc-number">7.1.</span> <span class="toc-text">表格行的类，表格情景</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

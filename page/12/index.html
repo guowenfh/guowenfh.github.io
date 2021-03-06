@@ -1,23 +1,674 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="芝兰生于深林，不以无人而不芳。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="三省吾身丶丶">
+<meta property="og:url" content="http://guowenfh.github.io/page/12/index.html">
+<meta property="og:site_name" content="三省吾身丶丶">
+<meta property="og:description" content="芝兰生于深林，不以无人而不芳。">
+<meta property="og:locale">
+<meta property="article:author" content="guowenfh">
+<meta name="twitter:card" content="summary"><title>三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/page/12/index.html"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
 
-{% block title %}{{ config.title }}{% if theme.index_with_subtitle and config.subtitle %} - {{config.subtitle }}{% endif %}{% endblock %}
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2015/12/14/Regexp-basisCombat/">正则表达式-基础实战篇</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2015-12-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><blockquote>
+<p>在理论基础篇之后呢,应该就对正则表达式有了一些了解.比如说如何去创建一个正则表达式以及其中的匹配规则等等.那么就开始正则表达式的实战吧!<br>建议把所有的实例在console窗口敲一遍.例子中展现的只是一部分,配合《正则表达式-理论基础篇》<a target="_blank" rel="noopener" href="http://segmentfault.com/a/1190000003977848">SF地址</a>、<a href="https://guowenfh.github.io/2015/12/01/Regexp-basis/">原址</a>使用效果更佳哦!</p>
+</blockquote>
+<h2 id="一个手机号码匹配的进化历程"><a href="#一个手机号码匹配的进化历程" class="headerlink" title="一个手机号码匹配的进化历程"></a>一个手机号码匹配的进化历程</h2><blockquote>
+<p>实例代码依托于:<code>RegExpObj.test(String)</code>，其含义是测试正则表达式与指定字符串是否匹配。成功匹配返回<code>true</code></p>
+</blockquote>
+<h3 id="第一阶段-字符直接量-匹配自身"><a href="#第一阶段-字符直接量-匹配自身" class="headerlink" title="第一阶段-字符直接量:匹配自身"></a>第一阶段-字符直接量:匹配自身</h3><blockquote>
+<p>先假设一个手机号码为13762571094.</p>
+</blockquote>
+<ul>
+<li><strong>最初形态</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/<span class="number">13762571094</span>/.test(<span class="string">&quot;13783281094&quot;</span>);<span class="comment">//false</span></span><br><span class="line">/<span class="number">13762571094</span>/.test(<span class="string">&quot;13762571094&quot;</span>);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">/<span class="number">13762571094</span>/.test(<span class="string">&quot;ui13762571094dd&quot;</span>);<span class="comment">//true</span></span><br><span class="line"><span class="comment">//正则表达式在匹配时,只要输出匹配内容就返回true,不考虑前面的ui和后面的dd</span></span><br><span class="line"><span class="comment">//最后这种情况显然不是我们想要的.那么就进入下一阶段的实践吧.</span></span><br></pre></td></tr></table></figure>
 
-{% block page_class %}
-  {% if is_home() %}page-home{% endif -%}
-{% endblock %}
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
+<h3 id="第二阶段-锚点-指定匹配位置"><a href="#第二阶段-锚点-指定匹配位置" class="headerlink" title="第二阶段-锚点:指定匹配位置"></a>第二阶段-锚点:指定匹配位置</h3><ul>
+<li><code>^</code>匹配起始位置</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/^http:<span class="regexp">/.test(&quot;http:/</span><span class="regexp">/www.163.com&quot;);/</span><span class="regexp">/true</span></span><br><span class="line"><span class="regexp">/</span>^http:<span class="regexp">/.test(&quot;ahttp:/</span><span class="regexp">/www.163.com&quot;);/</span><span class="regexp">/false</span></span><br><span class="line"><span class="regexp">/</span>^http:<span class="regexp">/.test(&quot;/</span><span class="regexp">/www.163.com&quot;);/</span><span class="regexp">/false</span></span><br></pre></td></tr></table></figure>
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
+<ul>
+<li><code>$</code>匹配结尾位置</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/.jpg$/.test(<span class="string">&quot;1.jpg&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/.jpg$/.test(<span class="string">&quot;1.jpg png&quot;</span>);<span class="comment">//false</span></span><br><span class="line">/.jpg$/.test(<span class="string">&quot;1.png&quot;</span>);<span class="comment">//false</span></span><br><span class="line">/.jpg$/.test(<span class="string">&quot;regexp.png&quot;</span>);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+<ul>
+<li><code>\b</code>:匹配单词边界</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/\bis\b/.test(<span class="string">&quot;this&quot;</span>);<span class="comment">//false</span></span><br><span class="line">/\bis\b/.test(<span class="string">&quot;that is reg&quot;</span>);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在了解锚点之后我们的正则就有了<strong>第一次进化</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/^<span class="number">13762571094</span>$/.test(<span class="string">&quot;13762571094&quot;</span>);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">/^<span class="number">13762571094</span>$/.test(<span class="string">&quot;ui13762571094dd&quot;</span>);<span class="comment">//false</span></span><br><span class="line"><span class="comment">//此时这个程序就能正确识别头尾的字符了.下面我们看看</span></span><br><span class="line">/^<span class="number">13762571094</span>$/.test(<span class="string">&quot;13712345674&quot;</span>);<span class="comment">//false</span></span><br><span class="line"><span class="comment">/*在试过了多个号码后发现,这个正则只能识别这个标准的手机号码.</span></span><br><span class="line"><span class="comment">这显然不是我们想要的,而不是识别一个手机号码的格式.</span></span><br><span class="line"><span class="comment">在下一阶段我们将实现一个手机号码的匹配.*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="第三阶段-字符类-匹配一类字符中的一个"><a href="#第三阶段-字符类-匹配一类字符中的一个" class="headerlink" title="第三阶段-字符类:匹配一类字符中的一个"></a>第三阶段-字符类:匹配一类字符中的一个</h3><ul>
+<li><code>[abc]</code>:a或b或c。<code>[0-9]</code>:一个数字</li>
+<li><code>[^0-9]</code>:非数字的一个字符。<code>[a-z]</code>:一个字母</li>
+<li><code>.</code>    :任一字符(换行符除外)</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">0</span>-<span class="number">9</span>]/.test(<span class="string">&quot;123&quot;</span>)<span class="comment">//true</span></span><br><span class="line">/[<span class="number">0</span>-<span class="number">9</span>]/.test(<span class="string">&quot;asd&quot;</span>)<span class="comment">//false</span></span><br><span class="line">/[^<span class="number">0</span>-<span class="number">9</span>]/.test(<span class="string">&quot;asd&quot;</span>)<span class="comment">//true</span></span><br><span class="line">/[a-z]/.test(<span class="string">&quot;asd&quot;</span>)<span class="comment">//true</span></span><br><span class="line">/./.test(<span class="string">&quot;allen&quot;</span>)<span class="comment">//true</span></span><br><span class="line">/./.test(<span class="string">&quot;12&quot;</span>)<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>了解了字符类后,我们就可以进行**第二次进化(50%)**。此时就能匹配一个手机号码啦！</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/^<span class="number">1</span>[<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>]$/.test(<span class="string">&quot;13762571094&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/^<span class="number">1</span>[<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>][<span class="number">0</span>-<span class="number">9</span>]$/.test(<span class="string">&quot;13712345678&quot;</span>);<span class="comment">//true</span></span><br><span class="line"><span class="comment">//是不是感觉代码太长了呢?[0-9]足足5个字符呢,为了省力,当然不会就这样算了.继续向下看吧</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="元字符-具有特殊意义的字符"><a href="#元字符-具有特殊意义的字符" class="headerlink" title="元字符-具有特殊意义的字符"></a>元字符-具有特殊意义的字符</h4><blockquote>
+<p>其实我们已经在前面使用过它啦</p>
+</blockquote>
+<ul>
+<li><code>^</code>、<code>$</code>、<code>\b</code>。</li>
+<li><code>\d</code>:<code>[0-9]</code>。<code>\D</code>:<code>[^\d]</code></li>
+<li><code>\s</code>:空白符。<code>\S</code>:<code>[^\s]</code></li>
+<li><code>\w</code>:<code>[A-Za-z0-9_]</code>。<code>\W</code>:<code>[^\w]</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/\d/.test(<span class="string">&quot;123&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/\d/.test(<span class="string">&quot;1dsf&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/\D/.test(<span class="string">&quot;1dsf&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/\D/.test(<span class="string">&quot;123&quot;</span>);<span class="comment">//false</span></span><br><span class="line"><span class="comment">//自己再多去实验一些例子吧</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>了解了元字符后我们就可以进行**第二次进化(100%)**了。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/^<span class="number">1</span>\d\d\d\d\d\d\d\d\d\d$/.test(<span class="string">&quot;13762571094&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/^<span class="number">1</span>\d\d\d\d\d\d\d\d\d\d$/.test(<span class="string">&quot;13712345678&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/^<span class="number">1</span>\d\d\d\d\d\d\d\d\d\d$/.test(<span class="string">&quot;1376257109x&quot;</span>);<span class="comment">//false</span></span><br><span class="line"><span class="comment">//是不是感觉代码比刚刚短了很多了呢?但这还是不够,什么事情都阻止不了我想偷懒的心,继续学习吧.</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="第四阶段-量词-出现的次数"><a href="#第四阶段-量词-出现的次数" class="headerlink" title="第四阶段-量词:出现的次数"></a>第四阶段-量词:出现的次数</h3><ul>
+<li><code>&#123;n,m&#125;</code>:n到m次。<code>?</code>：<code>&#123;0,1&#125;</code></li>
+<li><code>+</code>:<code>&#123;1,&#125;</code>。<code>*</code>:<code>&#123;0,&#125;</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/\d*<span class="regexp">/.test(&quot;abc&quot;);/</span><span class="regexp">/true</span></span><br><span class="line"><span class="regexp">/</span>\d+<span class="regexp">/.test(&quot;abc&quot;);/</span><span class="regexp">/false</span></span><br><span class="line"><span class="regexp">/</span>\d+<span class="regexp">/.test(&quot;1abc&quot;);/</span><span class="regexp">/true</span></span><br><span class="line"><span class="regexp">/</span>^https?:<span class="regexp">/.test(&quot;http:/</span><span class="regexp">/www.163.com&quot;);/</span><span class="regexp">/true</span></span><br><span class="line"><span class="regexp">/</span>^https?:<span class="regexp">/.test(&quot;/</span><span class="regexp">/www.163.com&quot;);/</span><span class="regexp">/true</span></span><br><span class="line"><span class="regexp">/</span>^https?:<span class="regexp">/.test(&quot;httpss:/</span><span class="regexp">/www.163.com&quot;);/</span><span class="regexp">/false</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>此时我们的匹配手机号码的正则表达式就到了<strong>最后阶段</strong>了</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/^<span class="number">1</span>\d&#123;<span class="number">10</span>&#125;$/.test(<span class="string">&quot;1376257109x&quot;</span>);<span class="comment">//false</span></span><br><span class="line">/^<span class="number">1</span>\d&#123;<span class="number">10</span>&#125;$/.test(<span class="string">&quot;13762571094&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/^<span class="number">1</span>\d&#123;<span class="number">10</span>&#125;$/.test(<span class="string">&quot;13712345678&quot;</span>);<span class="comment">//true</span></span><br><span class="line"><span class="comment">//到这里手机号码就匹配完成了!</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="需要注意的点"><a href="#需要注意的点" class="headerlink" title="需要注意的点"></a>需要注意的点</h3><ul>
+<li>这里匹配的情况是最简单的情况，并没有特别完美，比如限制开头第二位数字的范围：188，158通过，而123,191，不通过等等。</li>
+<li>可利用多选分支，例如：<code>/^1[3|5][0-9]&#123;9&#125;$|^18\d&#123;9&#125;$/</code>。不过现在虚拟运营商的加入，号码段变多了，所以直接用最简单的方法，也没事。</li>
+</ul>
+<h2 id="邮箱的匹配"><a href="#邮箱的匹配" class="headerlink" title="邮箱的匹配"></a>邮箱的匹配</h2><p><code>/thi(c|n)k/</code>===<code>thi[cn]k</code></p>
+<p><code>\.(png|jpg|jpeg|gif)$</code>:检测一个文件是不是图片文件.</p>
+<h3 id="多选分支-网易邮箱的匹配"><a href="#多选分支-网易邮箱的匹配" class="headerlink" title="多选分支:网易邮箱的匹配"></a>多选分支:网易邮箱的匹配</h3><h4 id="元字符的问题"><a href="#元字符的问题" class="headerlink" title="元字符的问题"></a>元字符的问题</h4><p><code>/^http:/\/\/</code>..<code>/@163\.com$/</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/http:\/\<span class="comment">//.test(&quot;http://www.163.com&quot;);//true</span></span><br><span class="line">/@<span class="number">163.</span>com$/.test(<span class="string">&quot;abc@163.com&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/@<span class="number">163.</span>com$/.test(<span class="string">&quot;abc@163acom&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/@<span class="number">163</span>\.com$/.test(<span class="string">&quot;abc@163.com&quot;</span>);<span class="comment">//true</span></span><br><span class="line">/@<span class="number">163</span>\.com$/.test(<span class="string">&quot;abc@163acom&quot;</span>);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用多选分支。"><a href="#使用多选分支。" class="headerlink" title="使用多选分支。"></a>使用多选分支。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/(\w+)@(<span class="number">163</span>|<span class="number">126</span>|<span class="number">188</span>)\.com$/.test(<span class="string">&quot;guo啊圣诞节了@163acom&quot;</span>)<span class="comment">//false</span></span><br><span class="line">/(\w+)@(<span class="number">163</span>|<span class="number">126</span>|<span class="number">188</span>)\.com$/.test(<span class="string">&quot;guodong111@163acom&quot;</span>)<span class="comment">//false</span></span><br><span class="line">/(\w+)@(<span class="number">163</span>|<span class="number">126</span>|<span class="number">188</span>)\.com$/.test(<span class="string">&quot;guodong111@163.com&quot;</span>)<span class="comment">//true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="分组-邮箱的匹配"><a href="#分组-邮箱的匹配" class="headerlink" title="分组-邮箱的匹配"></a>分组-邮箱的匹配</h3><p>这里需要思考几个问题.</p>
+<ol>
+<li>在@前能出现哪些东西？这里使用<code>(\w+\.)*</code>来匹配出现<code>.</code>的情况，表示出现0次或多次因为<code>.</code>后不能紧跟@，所以后面紧跟<code>\w+</code>匹配普通的字母数字情况。</li>
+<li>@后出现的邮箱后缀并不固定所以使用<code>\w+</code>来匹配。</li>
+<li>最后考虑域名结尾的级联情况所以用<code>(\.\w+)+</code></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/^(\w+\.)*\w+@\w+(\.\w+)+$/.test(<span class="string">&quot;guo啊圣诞节了@163acom&quot;</span>)<span class="comment">//false</span></span><br><span class="line">/^(\w+\.)*\w+@\w+(\.\w+)+$/.test(<span class="string">&quot;guodong111@163acom&quot;</span>)<span class="comment">//false</span></span><br><span class="line">/^(\w+\.)*\w+@\w+(\.\w+)+$/.test(<span class="string">&quot;guodong111@163.com&quot;</span>)<span class="comment">//true</span></span><br><span class="line">/^(\w+\.)*\w+@\w+(\.\w+)+$/.test(<span class="string">&quot;guodong111@yea.com.cn&quot;</span>)<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h2><ul>
+<li>保存匹配到的字符串,日后再用</li>
+<li><code>()</code>:捕获<code>/(\w+)@(163|126|188)\.com$/</code></li>
+<li>(?:):不捕获<code>/(\w+)@(?:163|126|188)\.com$/</code></li>
+<li>使用:</li>
+<li>$1,$2,…</li>
+<li>api参数或返回值</li>
+</ul>
+<h3 id="获取匹配的字符串-String-match-regexp"><a href="#获取匹配的字符串-String-match-regexp" class="headerlink" title="获取匹配的字符串:String.match(regexp)"></a>获取匹配的字符串:<code>String.match(regexp)</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;http://blog.163.com/album?id=1#comment&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/^(https?:)\/\/([^\/]+)(\/[^\?]*)?(\?[^#]*)?(#.*)?$/</span>;</span><br><span class="line"><span class="comment">// var reg = /^(https?:)\/\/([^\/]+)([^\?]*)([^#]*)(.*)$///与上面的正则效果相同.;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = url.match(reg);</span><br><span class="line"></span><br><span class="line"><span class="comment">//arr[0]为原字符串.&quot;http://blog.163.com/album?id=1#comment&quot;</span></span><br><span class="line"><span class="comment">//对应括号所匹配的字符</span></span><br><span class="line"><span class="keyword">var</span> protocol= arr[<span class="number">1</span>]<span class="comment">//&quot;http:&quot;</span></span><br><span class="line"><span class="keyword">var</span> host= arr[<span class="number">2</span>]<span class="comment">//&quot;blog.163.com&quot;</span></span><br><span class="line"><span class="keyword">var</span> pathname= arr[<span class="number">3</span>]<span class="comment">//&quot;/album&quot;</span></span><br><span class="line"><span class="keyword">var</span> search= arr[<span class="number">4</span>]<span class="comment">//&quot;?id=1&quot;</span></span><br><span class="line"><span class="keyword">var</span> hash= arr[<span class="number">5</span>]<span class="comment">//&quot;#comment&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="替换一个子串-str-replace-regexp-substr-replacement"><a href="#替换一个子串-str-replace-regexp-substr-replacement" class="headerlink" title="替换一个子串:str.replace(regexp/substr,replacement)"></a>替换一个子串:<code>str.replace(regexp/substr,replacement)</code></h3><ul>
+<li>第二个参数是字符时</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;the price of tomato is 5, the price of apple is 10.&quot;</span></span><br><span class="line">str.replace(<span class="regexp">/(\d+)/</span>,<span class="string">&quot;$1.00&quot;</span>)</span><br><span class="line"><span class="string">&quot;the price of tomato is 5.00, the price of apple is 10.&quot;</span></span><br><span class="line"><span class="comment">//使用全局模式</span></span><br><span class="line">str.replace(<span class="regexp">/(\d+)/g</span>,<span class="string">&quot;$1.00&quot;</span>)</span><br><span class="line"><span class="string">&quot;the price of tomato is 5.00, the price of apple is 10.00.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第二个参数是函数时</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> html = <span class="string">&#x27;&lt;label&gt;网址:&lt;/label&gt;&lt;input placeholder=&quot;以http://起始&quot;&gt;&#x27;</span>;</span><br><span class="line">html = html.replace(<span class="regexp">/[&lt;&gt;]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">m0</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">switch</span>(m0)&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;&lt;&#x27;</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&#x27;&amp;lt;&#x27;</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">&#x27;&gt;&#x27;</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">&#x27;&amp;gt;&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//处理后输出结果为：</span></span><br><span class="line"><span class="built_in">console</span>.log(html);<span class="comment">//&amp;lt;label&amp;gt;网址:&amp;lt;/label&amp;gt;&amp;lt;input placeholder=&quot;以http://起始&quot;&amp;gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="更强大的检索-regexpObj-exec-str"><a href="#更强大的检索-regexpObj-exec-str" class="headerlink" title="更强大的检索 - regexpObj.exec(str)"></a>更强大的检索 - <code>regexpObj.exec(str)</code></h3><ul>
+<li>更详尽的结果:index</li>
+<li>过程的状态:lastIndex</li>
+<li>一般用不到，就不详细说明了，有兴趣的自己去了解一下。</li>
+</ul>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2015/12/01/Regexp-basis/">正则表达式-理论基础篇</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2015-12-01</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><ul>
+<li><p>什么是正则表达式?<br>可以称作规则一个描述字符模式的对象，正则表达式中的字母和数字，都是按照字面含义进行匹配的。<strong>强大的字符串匹配工具</strong></p>
+</li>
+<li><p>如何建立一个正则表达式？</p>
+</li>
+</ul>
+<ol>
+<li>使用RegExp()构造函数来创建RegExp对象</li>
+<li>特殊的直接量语法来创建，定义为包含在一对斜杠（/）之间的字符</li>
+</ol>
+<p>例：<code>var reg = /s$/;</code>  , <code>var reg = new RegExp(s$);</code><br>两者效果完全相同，用来匹配所有以字母“s”结尾的字符串。</p>
+<h2 id="“文本模式”的正则表达式语法"><a href="#“文本模式”的正则表达式语法" class="headerlink" title="“文本模式”的正则表达式语法"></a>“文本模式”的正则表达式语法</h2><h3 id="1-直接量字符"><a href="#1-直接量字符" class="headerlink" title="1.直接量字符"></a>1.直接量字符</h3><blockquote>
+<p>非字母的字符匹配，这些字符需要通过反斜线（\）作前缀进行转义.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字 符</th>
+<th>匹 配</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字母和数字字符</td>
+<td>自身</td>
+</tr>
+<tr>
+<td><code>\o</code></td>
+<td>NUL字符</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>制表符</td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td>换行符</td>
+</tr>
+<tr>
+<td><code>\v</code></td>
+<td>垂直制表符</td>
+</tr>
+<tr>
+<td><code>\f</code></td>
+<td>换页符</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>回车符</td>
+</tr>
+<tr>
+<td><code>\xnn</code></td>
+<td>由十六进制数nn指定的拉丁字符,例:<code>\x0A</code>等价于<code>\n</code></td>
+</tr>
+<tr>
+<td><code>\uxxxx</code></td>
+<td>由十六进制数xxxx指定的unicode字符,例:<code>\u0009</code>等价于<code>\t</code></td>
+</tr>
+<tr>
+<td><code>\cX</code></td>
+<td>控制字符^X,例:<code>\cJ</code>等价于换行符<code>\n</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li>具有特殊含义的标点符号:</li>
+</ul>
+<p><code>^</code>, <code>$</code>, <code>.</code>, <code>*</code>, <code>+</code>, <code>?</code>, <code>=</code>, <code>!</code>, <code>:</code>, <code>|</code>, <code>\</code>, <code>/</code>,<code>(</code>,<code>)</code>,<code>[</code>,<code>]</code>,<code>&#123;</code>, <code>&#125;</code> </p>
+<p>想在正则表达式中使用这些字符的直接量进行匹配，则必须使用前缀”&quot;，其他标点符号(比如@和引号)无特殊含义，在正则表达式中按照字面含义进行匹配。</p>
+<h3 id="2-字符类"><a href="#2-字符类" class="headerlink" title="2.字符类."></a>2.字符类.</h3><p>方括号,或,范围</p>
+<blockquote>
+<p>将直接量字符单独放进方括号内就组成了字符类。一个字符类可以匹配它包含的任意字符。<strong>字符类可以使用连字符来表示字符范围。</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字 符</th>
+<th>含 义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[...]</code></td>
+<td>方括号内的任意字符</td>
+</tr>
+<tr>
+<td><code>[^...]</code></td>
+<td>不在方括号内的任意字符</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>除换行符合其他unicode行终止符之外的任意字符</td>
+</tr>
+<tr>
+<td><code>\w</code></td>
+<td>任何ASCII符组成的的单词,等同<code>[a-zA-Z0-9]</code></td>
+</tr>
+<tr>
+<td><code>\W</code></td>
+<td>任何不是ASCII符组成的的单词,等同<code>[^a-zA-Z0-9]</code></td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>任何unicode空白字符</td>
+</tr>
+<tr>
+<td><code>\S</code></td>
+<td>任何非unicode空白符的字符,注意<code>\W</code>与<code>\s</code>不同</td>
+</tr>
+<tr>
+<td><code>\d</code></td>
+<td>任何ASCII数字等价于<code>[0-9]</code></td>
+</tr>
+<tr>
+<td><code>\D</code></td>
+<td>除了ASCII数字之外的任何字符,等价于<code>[^0-9]</code></td>
+</tr>
+<tr>
+<td><code>[\b]</code></td>
+<td>退格直接量(特例)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>例:</li>
+<li><code>/[a,b,c]/</code>:表示和字母”a”,”b”,”c”中的任意一个都匹配</li>
+<li><code>/[a-z]/</code>:匹配拉丁字母表中的小写字母</li>
+<li><code>/[/s/d]/</code>:匹配任意空白符或数字</li>
+</ul>
+<h3 id="3-重复"><a href="#3-重复" class="headerlink" title="3. 重复"></a>3. 重复</h3><blockquote>
+<p>用以指定字符重复的标记</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字 符</th>
+<th>含 义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&#123;n,m&#125;</code></td>
+<td>匹配前一项至少n次,但不能超过m次</td>
+</tr>
+<tr>
+<td><code>&#123;n,&#125;</code></td>
+<td>匹配前一项n次或者更多次</td>
+</tr>
+<tr>
+<td><code>&#123;n&#125;</code></td>
+<td>匹配前一项n次</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>匹配前一项0次或者1次(也就是前一项是可选的,等价于{0,1})</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>匹配前一项1次或者多次(等价于{1,})</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>匹配前一项0次或者多次,等价于{0,}</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>例:</p>
+</li>
+<li><p><code>/\d&#123;2,4&#125;/</code>:匹配2-4个数字。</p>
+</li>
+<li><p><code>/\w&#123;3&#125;\d?/</code>:精确匹配三个单词和一个可选的数字。</p>
+</li>
+<li><p><code>/\s+java\s+/</code>:匹配前后有1个或多个空格的字符串”java”</p>
+</li>
+<li><p><code>/[^(]*/</code>:匹配0个或多个非左括号的字符(这里实际上能与<code>&quot;(&quot;</code>匹配)</p>
+</li>
+<li><p><strong>在使用<code>&quot;*&quot;</code>,和<code>&quot;?&quot;</code>时要注意,由于这些字符能匹配0个字符,因此它们允许什么都不匹配</strong>，例:</p>
+</li>
+<li><p><code>/a*/</code>能匹配字符串”bbbb”，因其含有0个a。</p>
+</li>
+<li><p><strong>上表中列出的匹配字符为”贪婪的”匹配</strong>，它总是尽可能多地匹配,且允许后续的正则表达式继续匹配。</p>
+</li>
+<li><p>非贪婪匹配,只需在待匹配的字符后跟随一个问号即可,<code>&quot;?&quot;</code>,<code>+?</code>,<code>*?</code>或<code>&#123;1,5&#125;?</code>。例:</p>
+</li>
+<li><p><code>/a+/</code>:匹配”aaa”时,三个字符都被匹配,</p>
+</li>
+<li><p><code>/a+?/</code>:匹配”aaa”时,因其尽可能少的匹配,只能匹配第一个a</p>
+</li>
+</ul>
+<h3 id="4-选择-分组和引用"><a href="#4-选择-分组和引用" class="headerlink" title="4.选择-分组和引用"></a>4.选择-分组和引用</h3><blockquote>
+<p>包括：指定选择项，自表达式分组，和引用前一子表达式的特殊字符</p>
+</blockquote>
+<ul>
+<li>选择项的尝试匹配次序是从左到右，直到发现匹配项，若左边成功匹配就忽略右边的项。</li>
+<li>正则表达式中圆括号的作用：</li>
+</ul>
+<ol>
+<li>把单独的项组成子表达式，以便于可以像处理独立单元一样，用<code>\|</code>,<code>*</code>,<code>+</code>或者<code>?</code>等等来对单元内的项进行处理</li>
+<li>在完整的模式中定义子模式</li>
+<li>允许在同一正则表达式的后部,引用前面的子表达式</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>字 符</th>
+<th>含 义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>“&#124;”</td>
+<td>“&#124;”选择,匹配的是该符号左边的子表达式或右边的子表达式</td>
+</tr>
+<tr>
+<td><code>(...)</code></td>
+<td>组合,将几个项组合成为一个单元,这个单元可通过”&#124;”,<code>*</code>,<code>+</code>或者<code>?</code>等符号,加以修饰,而且可以记住和这个相匹配的字符串以供以后的引用使用</td>
+</tr>
+<tr>
+<td><code>(?:..)</code></td>
+<td>只组合,把项组合到一个单元,但不记忆与该组相匹配的字符</td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td>和第n个分组第一次匹配的字符相匹配,组是圆括号中的子表达式(也有可能嵌套的),组索引是从左到右的左括号数,”(?:形式的分组不编码”</td>
+</tr>
+</tbody></table>
+<ul>
+<li>例:</li>
+<li><code>/ab|cd|ef/</code>:可以匹配”ab”,也可以匹配”cd”,还可以匹配”ef”.</li>
+<li><code>/\d&#123;3&#125;|[a-z]&#123;4&#125;/</code>:可以匹配3个数字,或者4个小写字母.</li>
+<li><code>(/[a-z]+(\d+)/)</code>:匹配一个或多个小写字母后跟随了一位或多位数字,使用括号包裹后,可以从检索到的匹配中抽取数字了.</li>
+</ul>
+<h3 id="5-指定匹配位置"><a href="#5-指定匹配位置" class="headerlink" title="5.指定匹配位置"></a>5.指定匹配位置</h3><blockquote>
+<p>我们称这些元素为正则表达式的锚,它们将模式定位在搜索字符串的特定位置上.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字 符</th>
+<th>含 义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>^</code></td>
+<td>匹配字符串的开头,在多行检索中,匹配一行的开头</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>匹配字符串的结尾,在多行检索中,匹配一行的结尾</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>匹配一个单词边界,简言之,就是位于字符\w和\W之间的位置,或位于字符\w和字符串的开头或结尾之间的位置(需要注意:[\b]匹配的是退格符)</td>
+</tr>
+<tr>
+<td><code>\B</code></td>
+<td>匹配非单词边界的位置</td>
+</tr>
+</tbody></table>
+<ul>
+<li>例:</li>
+<li><code>/^JavaScript$/</code>:匹配”JavaScript”单词</li>
+<li><code>/\B[Ss]cript/</code>:与”JavaScript”和”/postscript”匹配,但不与”script”与”Script”.</li>
+</ul>
+<h3 id="6-修饰符"><a href="#6-修饰符" class="headerlink" title="6.修饰符"></a>6.修饰符</h3><blockquote>
+<p>说明高级匹配的规则,放在”/“符号之外,第二条斜线后</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字 符</th>
+<th>含 义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>i</code></td>
+<td>执行不区分大小写的匹配</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>执行一个全局匹配,简言之,就是要找到所有的匹配,而不是在找到一个之后就停止</td>
+</tr>
+<tr>
+<td><code>m</code></td>
+<td>多行匹配模式,^匹配一行的开头和字符串的开头,$匹配行的结束和字符串的结束</td>
+</tr>
+</tbody></table>
+<ul>
+<li>例:</li>
+<li><code>/java$/im</code>:可以匹配”java”也可以匹配”Java\nis fun”</li>
+</ul>
+<h2 id="用于模式匹配的string方法"><a href="#用于模式匹配的string方法" class="headerlink" title="用于模式匹配的string方法"></a>用于模式匹配的string方法</h2><blockquote>
+<p>正则表达式的作用就是用来解析字符串</p>
+</blockquote>
+<h3 id="1-search"><a href="#1-search" class="headerlink" title="1. search():"></a>1. <code>search()</code>:</h3><ul>
+<li>查找字符串,接受一个参数为正则表达式,返回返回一个与之匹配的子串的起始位置,若未找到返回-1.</li>
+<li>例: <code>JavaScript.search(/script/i);//返回4</code></li>
+<li><code>search()</code>方法不支持全局属性检索,所以会忽略修饰符g</li>
+</ul>
+<h3 id="2-replace"><a href="#2-replace" class="headerlink" title="2. replace():"></a>2. <code>replace()</code>:</h3><ul>
+<li>用以执行检索与替换操作,接受两个参数,第一个参数是一个正则,第二个是要进行替换的字符串</li>
+<li>若第一个参数是字符串,<code>replace()</code>则会直接搜索这个字符串</li>
+<li>若替换字符串中出现了**$加数字**,那么<code>replace()</code>将用与指定的子表达式相匹配的文本来替换这两个字符.</li>
+</ul>
+<p><strong>例:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">text.replace(<span class="regexp">/javascript/gi</span>,<span class="string">&quot;JavaScript&quot;</span>);<span class="comment">//将所有不区分大小写的javascript都替换成,大小写正确的JavaScript.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//一段引用文本起始于引号,结束与引号.</span></span><br><span class="line"><span class="comment">//中间的内容区域,不能包含引号</span></span><br><span class="line"><span class="keyword">var</span> quote = <span class="regexp">/&quot;([^&quot;]*)&quot;/g</span>;</span><br><span class="line"><span class="comment">//引用中文半角引号替换英文引号,同时要保持引号之间的内容(储存在$1中)没有被修改.</span></span><br><span class="line">text.replace(quote,<span class="string">&#x27;“$1”&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-match"><a href="#3-match" class="headerlink" title="3. match()"></a>3. <code>match()</code></h3><ul>
+<li>接受唯一一个参数,就是正则表达式,返回的是一个由匹配结果组成的数组.例:</li>
+<li><code>&quot;1 plus 2 equals 3&quot;.match(/\d+/g);//返回[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;]</code></li>
+<li>若在这个正则表达式中没有设置修饰符g,<code>match()</code>就不会进行全局检索,它只检索第一个匹配。但即使match()执行的不是全局检索，它也返回一个数组。在这种情况下，数组的第一个元素就是匹配的字符串，余下的元素则是正则表达式中用圆括号括起来的子表达式。</li>
+<li>因此，如果macth()返回一个数组a，那么a[0]存放的是完整的匹配，a[1]存放的是与第一个圆括号括起来的表达式相匹配的子串，以此类推。为了和方法replace()保持以后，a[n]存放的是$n的内容。</li>
+<li>例:解析一个url</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="regexp">/(\w+):\/\/([\w.]+)\/(\S*)/</span>;</span><br><span class="line"><span class="keyword">var</span> text = <span class="string">&quot;Visit my blog at http://www.example.com/~david&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = text.match(url);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (result != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> fullurl = result[<span class="number">0</span>]; <span class="comment">//包含 &quot;http://www.example.com/&quot;</span></span><br><span class="line">    <span class="keyword">var</span> protocol = result[<span class="number">1</span>]; <span class="comment">//包含 &quot;http&quot;</span></span><br><span class="line">    <span class="keyword">var</span> host = result[<span class="number">2</span>]; <span class="comment">//包含 &quot;www.example.com&quot;</span></span><br><span class="line">    <span class="keyword">var</span> path = result[<span class="number">3</span>]; <span class="comment">//包含~david</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-split"><a href="#4-split" class="headerlink" title="4. split()"></a>4. <code>split()</code></h3><ul>
+<li>用以将调用它的字符串拆分为子串组成的数组,使用分隔符是<code>split()</code>的参数</li>
+<li>参数为字符串</li>
+<li><code>&quot;123,456,789&quot;.split(&quot;,&quot;);//返回[&quot;123&quot;,&quot;456&quot;,&quot;789&quot;]</code></li>
+<li>参数为正则</li>
+<li><code>&quot;1,2, 3,4 ,5&quot;.split(/\s*,\s*/)//返回[&quot;1&quot;,&quot;2&quot;,&quot; 3&quot;,&quot;4 &quot;,&quot;5&quot;]</code></li>
+<li>指定分隔符”,”,允许两边可以留有任意多的空白符</li>
+</ul>
+<h2 id="RegExp对象"><a href="#RegExp对象" class="headerlink" title="RegExp对象"></a>RegExp对象</h2><ul>
+<li>RegExp对象用以创建新的RegExp对象,可接受两个参数,第二个可选.</li>
+<li>RegExp对象的第一个参数为正则表达式的主体部分,也就是<code>/...../</code>之间的文本,无论是字符串直接量,还是正则表达式都使用”&quot;作为转义字符的前缀.</li>
+<li>第二个可选参数为指定正则表达式的修饰符,<code>i</code>,<code>g</code>,<code>m</code>或者他们的组合.参考:文本模式的则表达式-修饰符<br>例:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">&quot;\\d&#123;5&#125;&quot;</span>,<span class="string">&quot;g&quot;</span>);<span class="comment">//匹配全局模式下的5个数字</span></span><br><span class="line">alert(reg.test(<span class="string">&quot;1J2a35786&quot;</span>));<span class="comment">//true</span></span><br><span class="line">alert(reg.test(<span class="string">&quot;1J2a356&quot;</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="RegExp属性"><a href="#RegExp属性" class="headerlink" title="RegExp属性"></a>RegExp属性</h3><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>source</td>
+<td>只读字符串</td>
+<td>包含正则表达式的文本</td>
+</tr>
+<tr>
+<td>global</td>
+<td>只读布尔值</td>
+<td>用以说明正则表达式是否带有修饰<code>g</code></td>
+</tr>
+<tr>
+<td>ignoreCase</td>
+<td>只读布尔值</td>
+<td>用以说明正则表达式是否带有修饰<code>i</code></td>
+</tr>
+<tr>
+<td>multiline</td>
+<td>只读布尔值</td>
+<td>用以说明正则表达式是否带有修饰<code>m</code></td>
+</tr>
+<tr>
+<td>lastIndex</td>
+<td>可读性的整数</td>
+<td>若匹配模式中含有<code>g</code>,这个属性储存在整个字符串中下一次检索的开始位置</td>
+</tr>
+</tbody></table>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2015/11/30/javascript-type/">JavaScript类型识别</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2015-11-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><h2 id="类型系统"><a href="#类型系统" class="headerlink" title="类型系统"></a>类型系统</h2><p>关于 JS 类型的几点说明</p>
+<ul>
+<li>JavaScript 是动态类型 ＋ 弱类型的语言</li>
+<li>JavaScript 的变量。属性在运行期决定类型</li>
+<li>JavaScript 存在隐式类型转换</li>
+<li>JavaScript 有一系列识别类型的反射方法</li>
+</ul>
+<blockquote>
+<p>javascript 类型系统可以分为标准类型和对象类型，进一步标准类型又可以分为原始类型和引用类型，而对象类型又可以分为内置对象类型、普通对象类型、自定义对象类型。</p>
+</blockquote>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1feuqvmu3hgj20ie0dw75f.jpg" alt="JS数据类型">.</p>
+<h3 id="类型转化表"><a href="#类型转化表" class="headerlink" title="类型转化表"></a>类型转化表</h3><table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Boolean</th>
+<th>Number</th>
+<th>String</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>undefined</td>
+<td>false</td>
+<td>NaN</td>
+<td>“undefined”</td>
+</tr>
+<tr>
+<td>null</td>
+<td>false</td>
+<td>0</td>
+<td>“null”</td>
+</tr>
+<tr>
+<td>true</td>
+<td>true</td>
+<td>1</td>
+<td>“true”</td>
+</tr>
+<tr>
+<td>false</td>
+<td>false</td>
+<td>0</td>
+<td>“false”</td>
+</tr>
+<tr>
+<td>“”</td>
+<td>false</td>
+<td>0</td>
+<td>“”</td>
+</tr>
+<tr>
+<td>‘123’</td>
+<td>true</td>
+<td>123</td>
+<td>‘123’</td>
+</tr>
+<tr>
+<td>‘1a’</td>
+<td>true</td>
+<td>NaN</td>
+<td>‘1a’</td>
+</tr>
+<tr>
+<td>0</td>
+<td>false</td>
+<td>0</td>
+<td>“0”</td>
+</tr>
+<tr>
+<td>1</td>
+<td>true</td>
+<td>1</td>
+<td>“1”</td>
+</tr>
+<tr>
+<td>Infinity</td>
+<td>true</td>
+<td>Infinity</td>
+<td>“Infinity”</td>
+</tr>
+<tr>
+<td>NaN</td>
+<td>false</td>
+<td>NaN</td>
+<td>‘NaN’</td>
+</tr>
+<tr>
+<td>{}</td>
+<td>true</td>
+<td>NaN</td>
+<td>“[object Object]”</td>
+</tr>
+</tbody></table>
+<h2 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h2><ul>
+<li><code>typeof</code></li>
+<li><code>Object.prototype.toString</code></li>
+<li><code>constructor</code></li>
+<li><code>instanceof</code></li>
+</ul>
+<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a><code>typeof</code></h3><ol>
+<li>可以识别标准类型(<code>null</code>除外)</li>
+<li>不可识别具体的对象类型(<code>Function</code>除外)</li>
+</ol>
+<p>例:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 可以识别标准类型(`null`除外)</span></span><br><span class="line"><span class="keyword">typeof</span>(<span class="number">1</span>);<span class="comment">//&quot;number&quot;</span></span><br><span class="line"><span class="keyword">typeof</span>(<span class="string">&quot;&quot;</span>);<span class="comment">//&quot;string&quot;</span></span><br><span class="line"><span class="keyword">typeof</span>(<span class="literal">undefined</span>);<span class="comment">//&quot;undefined&quot;</span></span><br><span class="line"><span class="keyword">typeof</span>(<span class="literal">true</span>);<span class="comment">//&quot;boolean&quot;</span></span><br><span class="line"><span class="keyword">typeof</span>(<span class="literal">null</span>);<span class="comment">//&quot;object&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 不可识别具体的对象类型(`Function`除外)</span></span><br><span class="line"><span class="keyword">typeof</span>([]);<span class="comment">//&quot;object&quot;</span></span><br><span class="line"><span class="keyword">typeof</span>(&#123;&#125;);<span class="comment">//&quot;object&quot;</span></span><br><span class="line"><span class="keyword">typeof</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;);<span class="comment">//&quot;function&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a><code>instanceof</code></h3><ol>
+<li>能够判别内置对象类型</li>
+<li>不能判别原始类型</li>
+<li>能够判别自定义类型</li>
+</ol>
+<p>例:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 能够判别内置对象类型</span></span><br><span class="line">[] <span class="keyword">instanceof</span> <span class="built_in">Array</span>;<span class="comment">//true</span></span><br><span class="line">/\d/ <span class="keyword">instanceof</span> <span class="built_in">RegExp</span>;<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 不能判别原始类型</span></span><br><span class="line"><span class="number">1</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span>;<span class="comment">//false</span></span><br><span class="line"><span class="string">&quot;xiaohong&quot;</span> <span class="keyword">instanceof</span> <span class="built_in">String</span>;<span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3. 能够判别自定义类型</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.x = x;</span><br><span class="line">	<span class="built_in">this</span>.y = y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> Point(<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">c <span class="keyword">instanceof</span> Point;<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Object-prototype-toString-call-方法"><a href="#Object-prototype-toString-call-方法" class="headerlink" title="Object.prototype.toString.call()方法"></a><code>Object.prototype.toString.call()</code>方法</h3><ol>
+<li>可以识别标准类型,及内置对象类型</li>
+<li>不能识别自定义类型</li>
+</ol>
+<p>例:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 可以识别标准类型,及内置对象类型</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">21</span>);<span class="comment">//&quot;[object Number]&quot;</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call([]);<span class="comment">//&quot;[object Array]&quot;</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="regexp">/[A-Z]/</span>);<span class="comment">//&quot;[object RegExp]&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 不能识别自定义类型</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.x = x;</span><br><span class="line">	<span class="built_in">this</span>.y = y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> Point(<span class="number">2</span>,<span class="number">3</span>);<span class="comment">//c instanceof Point;//true</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(c);<span class="comment">//&quot;[object Object]&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>为了方便使用,使用函数封装如下:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">typeProto</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(obj).slice(<span class="number">8</span>,-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">typeProto(<span class="string">&quot;guo&quot;</span>);<span class="comment">//&quot;String&quot;</span></span><br><span class="line">typeProto(&#123;&#125;);<span class="comment">//&quot;Object&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a><code>constructor</code></h3><blockquote>
+<p><code>constructor</code>指向构造这个对象的构造函数本身..</p>
+</blockquote>
+<ol>
+<li>可识别原始类型</li>
+<li>可识别内置对象类型</li>
+<li>可识别自定义类型</li>
+</ol>
+<p>例:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 可识别原始类型</span></span><br><span class="line"><span class="string">&quot;guo&quot;</span>.constructor === <span class="built_in">String</span>;<span class="comment">//true</span></span><br><span class="line">(<span class="number">1</span>).constructor === <span class="built_in">Number</span>;<span class="comment">//true</span></span><br><span class="line"><span class="literal">true</span>.constructor === <span class="built_in">Boolean</span>;<span class="comment">//true</span></span><br><span class="line">(&#123;&#125;).constructor === <span class="built_in">Object</span>;<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2. 可识别内置对象类型</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>().constructor === <span class="built_in">Date</span>;<span class="comment">//true</span></span><br><span class="line">[].constructor === <span class="built_in">Array</span>;<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//3. 可识别自定义类型</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.x = x;</span><br><span class="line">	<span class="built_in">this</span>.y = y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> People(<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line">c.constructor===People;<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为了方便使用,使用函数封装如下:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getConstructorName</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> obj &amp;&amp; obj.constructor &amp;&amp; obj.constructor.toString().match(<span class="regexp">/function\s*([^(]*)/</span>)[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getConstructorName(<span class="keyword">new</span> <span class="built_in">Date</span>());<span class="comment">//&quot;Date&quot;</span></span><br><span class="line">getConstructorName(<span class="literal">null</span>);<span class="comment">//null</span></span><br><span class="line">getConstructorName(<span class="number">12</span>);<span class="comment">//&quot;Number&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="类型判断对比表"><a href="#类型判断对比表" class="headerlink" title="类型判断对比表"></a>类型判断对比表</h2><ul>
+<li>其中红色的单元格表示该判断方式不支持的类型。</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/82d12951gy1feuqvmmxcpj20z80mkwkg.jpg" alt="类型判断对比表"></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2015/11/30/Youth/">Youth (青春)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2015-11-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>Youth -Samuel Ullman</p>
+<blockquote>
+<p>Samuel Ullman（塞缪尔.厄尔曼）</p>
+</blockquote>
+<p>Youth is not a time of life,it is a state of mind;<br>青春不是年华，而是心境；</p>
+<p>it is not a matter of rosy cheeks, red lips and supple knees;<br>青春不是桃面、丹唇、柔膝，</p>
+<p>it is a matter of the will, a quality of the imagination, a vigor of the emotions;<br>而是深沉的意志、宏伟的想象、炽热的感情；</p>
+<p>it is the freshness of the deep springs of life.<br>青春是生命的深泉在涌流。</p>
+<p>Youth means a tempera mental predominance of courage over timidity,<br>青春气贯长虹，勇锐盖过怯弱，</p>
+<p>of the appetite for adventure over the love of ease.<br>进取压倒苟安，如此锐气，</p>
+<p>This often exists in a man of 60 more than a boy of 20.<br>二十后生有之,六旬男子则更多见.</p>
+<p>Nobody grows old merely by a number of years. We grow old by deserting our ideals.<br>年年有加，并非垂老；理想丢弃，方堕暮年。</p>
+<p>Years may wrinkle the skin, but to give up enthusiasm wrinkles the soul.<br>岁月悠悠，衰微只及肌肤；热忱抛却，颓唐必至灵魂。</p>
+<p>Worry, fear, self-distrust bows the heart and turns the spring back to dust.<br>烦忧、惶恐、丧失自信，定使心灵扭曲，意气如灰。</p>
+<p>Whether 60 or 16, there is in every human being`s heart the lure of wonder,<br>无论年届花甲，抑或二八芳龄，心中皆有生命之欢乐，奇迹之诱惑，</p>
+<p>the unfailing childlike appetite of what`s next and the joy of the game of living.<br>孩童般天真久盛不衰。</p>
+<p>In the center of your heart and my heart there is a wireless station,<br>人人心中皆有一台天线，</p>
+<p>so long as it receives messages of beauty, hope, cheer, courage and power from men and from the Infinite,<br>只要你从天上人间接受美好、希望、欢乐、勇气和力量的信号，</p>
+<p>so long are you young.<br>你就青春永驻，风华常存。</p>
+<p>When the aerials are down, and your spirit is covered with snows of cynicism and the ice of pessimism,<br>一旦天线倒塌，锐气被冰雪覆盖，玩世不恭、自暴自弃油然而生，</p>
+<p>then you are grown old, even at 20,<br>即使年芳二十,实已垂老矣;</p>
+<p>but as long as your aerials are up,to catch waves of optimism, there is hope you may die young at 80.<br>然则只要竖起天线，捕捉乐观的信号，你就有望在八十岁高龄告别尘寰时仍觉得年轻。</p>
+</div></div></article></section><nav class="paginator"><div class="paginator-inner"><a class="extend prev" rel="prev" href="/page/11/"><i class="fas fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

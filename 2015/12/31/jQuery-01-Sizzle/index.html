@@ -1,38 +1,515 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="本来是单独整理了一个CSS选择器的，但是在jQuery中基本都有对应的，所以就不发了。 jQuery选择器，若未作特别说明，获取的都是元素集合。  一. 常规选择器（一）简单选择器模仿的是CSS选择器，只不过在使用jQuery选择器时，我们首先必须使用“$()”函数来包装我们的 CSS 规则。而CSS 规则作为参数传递到jQuery对象内部后，再返回包含页面中对应元素的 jQuery 对象。随后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery入门笔记之（一）选择器引擎">
+<meta property="og:url" content="http://guowenfh.github.io/2015/12/31/jQuery-01-Sizzle/index.html">
+<meta property="og:site_name" content="三省吾身丶丶">
+<meta property="og:description" content="本来是单独整理了一个CSS选择器的，但是在jQuery中基本都有对应的，所以就不发了。 jQuery选择器，若未作特别说明，获取的都是元素集合。  一. 常规选择器（一）简单选择器模仿的是CSS选择器，只不过在使用jQuery选择器时，我们首先必须使用“$()”函数来包装我们的 CSS 规则。而CSS 规则作为参数传递到jQuery对象内部后，再返回包含页面中对应元素的 jQuery 对象。随后">
+<meta property="og:locale">
+<meta property="article:published_time" content="2015-12-31T03:26:15.000Z">
+<meta property="article:modified_time" content="2020-03-12T04:04:13.288Z">
+<meta property="article:author" content="guowenfh">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary"><title>jQuery入门笔记之（一）选择器引擎 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2015/12/31/jQuery-01-Sizzle/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">jQuery入门笔记之（一）选择器引擎</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2015-12-31</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><blockquote>
+<p>本来是单独整理了一个CSS选择器的，但是在jQuery中基本都有对应的，所以就不发了。</p>
+<p>jQuery选择器，若未作特别说明，获取的都是元素集合。</p>
+</blockquote>
+<h2 id="一-常规选择器"><a href="#一-常规选择器" class="headerlink" title="一. 常规选择器"></a>一. 常规选择器</h2><h3 id="（一）简单选择器"><a href="#（一）简单选择器" class="headerlink" title="（一）简单选择器"></a>（一）简单选择器</h3><p>模仿的是CSS选择器，只不过在使用jQuery选择器时，我们首先必须使用“$()”函数来包装我们的 CSS 规则。<br>而CSS 规则作为参数传递到jQuery对象内部后，再返回包含页面中对应元素的 jQuery 对象。随后可以进行节点操作，例如：<code>$(&#39;#box&#39;).css(&#39;color&#39;, &#39;red&#39;); </code>。</p>
+<p>那么除了 ID 选择器之外，还有两种基本的选择器，分别为：元素标签名和类(class)：</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>CSS 模式</th>
+<th>jQuery 模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>元素名</td>
+<td><code>div&#123;&#125;</code></td>
+<td><code> $(&#39;div&#39;)</code></td>
+<td>获取所有div元素的 DOM 对象</td>
+</tr>
+<tr>
+<td>ID</td>
+<td><code>#box &#123;&#125;</code></td>
+<td><code>$(&#39;#box&#39;)</code></td>
+<td>获取一个 ID 为 box 元素的 DOM 对象</td>
+</tr>
+<tr>
+<td>类(class)</td>
+<td><code>.box&#123;&#125;</code></td>
+<td><code>$(&#39;.box&#39;)</code></td>
+<td>获取所有class为box的所有DOM对象</td>
+</tr>
+</tbody></table>
+<p>我们可以采用jQuery核心自带的一个属性length来查看返回的元素个数。(<code>size()</code>方法已经弃用)</p>
+<p>在实践过程中发现使用多个id时，css居然都会高亮，jQuery没有这个问题。（标准写明一个页面只能有一个id）</p>
+<p>jQuery选择器的写法与CSS选择器十分类似，只不过他们的功能不同。CSS 找到元素后添加的是单一的样式，而jQuery则添加的是动作行为。重要的是<strong>jQuery兼容性更好</strong>，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#box &gt; p &#123; <span class="comment">//CSS 子选择器，IE6 不支持</span></span><br><span class="line">color:red;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">&#x27;#box &gt; p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>); <span class="comment">//jQuery 子选择器，兼容了 IE6</span></span><br></pre></td></tr></table></figure>
+
+<p>jQuery选择器支持CSS1、CSS2的全部规则，支持CSS3部分实用的规则，同时它还有少量独有的规则而jQuery选择器在获取节点对象的时候不但简单，还<strong>内置了容错功能</strong>区别如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#pox&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;red&#x27;</span>); <span class="comment">//不存在ID为pox的元素，也不报错</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;pox&#x27;</span>).style.color = <span class="string">&#x27;red&#x27;</span>; <span class="comment">//报错了</span></span><br></pre></td></tr></table></figure>
+
+<p>如何判断jQuery是否调取不存在的元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ($(<span class="string">&#x27;#pox&#x27;</span>).length &gt; <span class="number">0</span>) &#123; <span class="comment">//jQuery对象，判断元素包含数量即可</span></span><br><span class="line">    $(<span class="string">&#x27;#pox&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;red&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//或者转化成DOM对象方式判断</span></span><br><span class="line"><span class="keyword">if</span> ($(<span class="string">&#x27;#pox&#x27;</span>)[<span class="number">0</span>]) &#123;&#125;; <span class="comment">//通过数组下标也可以获取 DOM 对象</span></span><br><span class="line"><span class="keyword">if</span> ($(<span class="string">&#x27;#pox&#x27;</span>).get(<span class="number">0</span>)) &#123;&#125; ;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（二）进阶选择器"><a href="#（二）进阶选择器" class="headerlink" title="（二）进阶选择器"></a>（二）进阶选择器</h3><p>在简单选择器中，我们了解了最基本的三种选择器：元素标签名、ID 和类(class)。那么在基础选择器外，还有一些进阶和高级的选择器方便我们更精准的选择元素</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>CSS 模式</th>
+<th>jQuery 模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>群组选择器</td>
+<td><code>span,.con,.box&#123;&#125;</code></td>
+<td><code>$(&#39;span,em,.box&#39;)</code></td>
+<td>获取多个选择器的 DOM 对象</td>
+</tr>
+<tr>
+<td>后代选择器</td>
+<td><code>ul li a&#123;&#125;</code></td>
+<td><code> $(&#39;ul li a&#39;)</code></td>
+<td>获取追溯到的多个 DOM 对象</td>
+</tr>
+<tr>
+<td>通配选择器</td>
+<td><code>*&#123;&#125;</code></td>
+<td><code>$(&#39;*&#39;)</code></td>
+<td>获取所有元素标签的 DOM 对象</td>
+</tr>
+</tbody></table>
+<p>目前介绍的六种选择器，在实际应用中，我们可以灵活的搭配，使得选择器更加的精准和快速：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#box p, ul li *&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;red&#x27;</span>);<span class="comment">//组合了多种选择器</span></span><br></pre></td></tr></table></figure>
+<p><strong>警告：</strong>在实际使用上，通配选择器一般用的并不多，一般只用在局部的环境内。因为在大通配上，比如：<code>$(&#39;*&#39;)</code>，这种使用方法效率很低，影响性能，建议尽可能的少用。(CSS上也很少用)</p>
+<p>还有一种选择器，可以在ID和类(class)中指明元素前缀，比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;div.box&#x27;</span>); <span class="comment">//限定.box获取到的元素标签名必须是div</span></span><br><span class="line">$(<span class="string">&#x27;p#box div.side&#x27;</span>); <span class="comment">//同上</span></span><br></pre></td></tr></table></figure>
+
+<p>如同CSS一样，类(class)有一个特殊的模式，就是同一个DOM节点可以声明多个类(class)。那么对于这种格式，我们有多class选择器可以使用，但要<strong>注意和class群组选择器的区别</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.box.pox &#123; <span class="comment">//双 class 选择器获取页面中class同时有.box.pox的元素</span></span><br><span class="line">    color:red;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="string">&#x27;.box.pox&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;red&#x27;</span>); <span class="comment">//用多个class进行精准确定</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意要点：</strong></p>
+<blockquote>
+<p>只追求必要的确定性。当选择器筛选越复杂，jQuery内部的选择器引擎处理字符串的时间就越长。</p>
+</blockquote>
+<h3 id="（三）高级选择器"><a href="#（三）高级选择器" class="headerlink" title="（三）高级选择器"></a>（三）高级选择器</h3><p>在前面学习了六种最常规的选择器，一般来说通过这六种选择器基本上可以解决所有DOM节点对象选择的问题。但在很多特殊的元素上，比如父子关系的元素，兄弟关系的元素，特殊属性的元素等等并不好获取，下面就来说说这些高级选择器：</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>CSS 模式</th>
+<th>jQuery 模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>后代选择器</td>
+<td><code>ul li a &#123;&#125;</code></td>
+<td><code>$(&#39;ul li a&#39;)</code></td>
+<td>获取追溯到的多个 DOM 对象</td>
+</tr>
+<tr>
+<td>子选择器</td>
+<td><code> div &gt; p &#123;&#125;</code></td>
+<td><code> $(&#39;div p&#39;)</code></td>
+<td>只获取子类节点的多个 DOM 对象</td>
+</tr>
+<tr>
+<td>next 选择器（相连）</td>
+<td><code>div + p &#123;&#125;</code></td>
+<td><code> $(&#39;div + p&#39;)</code></td>
+<td>只获取某节点后一个同级DOM对象</td>
+</tr>
+<tr>
+<td>nextAll 选择器(之后所有)</td>
+<td><code>div ~ p &#123;&#125;</code></td>
+<td><code>$(&#39;div ~ p&#39;)</code></td>
+<td>获取某节点后面所有同级DOM对象</td>
+</tr>
+</tbody></table>
+<p>其实后代选择器我们在进阶选择器里面已经有过使用，这里为什么要再提起呢?</p>
+<p>因为它属于层次选择器，在高级选择器中，jQuery为这样的选择器都提供了一个相对应的方法。</p>
+<ol>
+<li>jQuery为后代选择器提供了一个等价的find(）方法:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#box p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;red&#x27;</span>); <span class="comment">//后代选择器</span></span><br><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).find(<span class="string">&#x27;p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="comment">//和后代选择器等价</span></span><br></pre></td></tr></table></figure></li>
+<li>jQuery为子选择器提供了一个等价的children()方法<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#box &gt; p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="comment">//子选择器，孙子失明</span></span><br><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).children(<span class="string">&#x27;p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="comment">//和子选择器等价</span></span><br></pre></td></tr></table></figure></li>
+<li>jQuery为next选择器提供了一个等价的next()方法：<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#box+p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="regexp">//</span>下一个同级节点</span><br><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).<span class="keyword">next</span>(<span class="string">&#x27;p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="regexp">//</span>和<span class="keyword">next</span>选择器等价</span><br></pre></td></tr></table></figure></li>
+<li>jQuery为nextAll选择器提供了一个等价的方法nextAll()：<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#box ~ p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="comment">//后面所有同级节点</span></span><br><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).nextAll(<span class="string">&#x27;p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;red&#x27;</span>); <span class="comment">//和 nextAll 选择器等价</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>需要注意的是：</strong></p>
+<ol>
+<li>层次选择器对节点的层次都是有要求的，比如子选择器，有子节点才可以被选择到，孙子节点和重孙子节点都无法选择到。next和nextAll选择器，必须是同一个层次的后一个和后N个，不在同一个层次就无法选取到了。</li>
+<li>在 <code>find()</code>、<code>children()</code>、<code>next()</code>和<code>nextAll()</code>和这四个方法中，如果不传递参数，就相当于传递了“<em>”，选择所有符合条件的元素，*<em>建议尽量保持参数的传递</em></em></li>
+</ol>
+<p><strong>jQuery独有补充方法。CSS未含有</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).prev(<span class="string">&#x27;p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="comment">//同级上一个元素</span></span><br><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).prevAll(<span class="string">&#x27;p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="comment">//同级上面所有的元素</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).prevUntil(<span class="string">&#x27;p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="comment">//同级上非指定元素选定，遇到则停止</span></span><br><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).nextUntil(<span class="string">&#x27;p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="comment">//同级下非指定元素选定，遇到则停止</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).siblings(<span class="string">&#x27;p&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>,<span class="string">&#x27;red&#x27;</span>);<span class="comment">//siblings()方法正好集成了prevAll()和nextAll()两个功能的效果，及上下相邻的所有元素进行选定：</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>扩展：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;p&#x27;</span>, <span class="string">&#x27;#box&#x27;</span>);<span class="comment">//jQuery会自动把这条语句转成$(&#x27;#box&#x27;).find(&#x27;p&#x27;)，这会导致一定的性能损失。</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">&#x27;p&#x27;</span>, $(<span class="string">&#x27;#parent&#x27;</span>));<span class="comment">//jQuery内部会也将这条语句转成$(&#x27;#box&#x27;).find(&#x27;p&#x27;)</span></span><br></pre></td></tr></table></figure>
+
+<p>这里，<strong>推荐使用jQuery提供的方法。</strong>使用“+”或“~”从字面上没有next和nextAll更加语义化，更加清晰，jQuery的方法更加丰富，提供了相对的prev和prevAll。<br>并且有时需要能够灵活的拆分和组合选择器。所以，如果jQuery提供了独立的方法来代替某些选择器的功能，推荐优先使用独立的方法。</p>
+<h3 id="（四）属性选择器"><a href="#（四）属性选择器" class="headerlink" title="（四）属性选择器"></a>（四）属性选择器</h3><blockquote>
+<p>注意<code>¦</code>应该是<code>|</code>，因为markdown表格解析的问题，所以用来替代</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>CSS 模式</th>
+<th>jQuery模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>a[title]</code></td>
+<td><code>$(&#39;a[title]&#39;)</code></td>
+<td>获取具有这个属性的 DOM 对象</td>
+</tr>
+<tr>
+<td><code>a[title=num1]</code></td>
+<td><code>$(&#39;a[title=num1]&#39;)</code></td>
+<td>获取具有这个属性=这个属性值的DOM对象</td>
+</tr>
+<tr>
+<td><code>a[title^=num]</code></td>
+<td><code>$(&#39;a[title^=num]&#39;)</code></td>
+<td>获取具有这个属性且开头属性值匹配的DOM对象</td>
+</tr>
+<tr>
+<td><code>a[title¦=num]</code></td>
+<td><code>$(&#39;a[title¦=num]&#39;)</code></td>
+<td>获取具有这个属性且等于属性值或开头属性值匹配后面跟一个<code>-</code>号的DOM对象</td>
+</tr>
+<tr>
+<td><code>a[title$=num]</code></td>
+<td><code>$(&#39;a[title$=num]&#39;)</code></td>
+<td>获取具有这个属性且结尾属性值匹配的DOM对象</td>
+</tr>
+<tr>
+<td><code>a[title!=num]</code></td>
+<td><code>$(&#39;a[title!=num]&#39;)</code></td>
+<td>获取不具有这个属性或不等于该属性值的DOM对象</td>
+</tr>
+<tr>
+<td><code>a[title~=num]</code></td>
+<td><code>$(&#39;a[title~=num]&#39;)</code></td>
+<td>获取具有这个属性且属性值是以一个空格分割的列表，其中包含属性值的DOM对象</td>
+</tr>
+<tr>
+<td><code>a[title*=num]</code></td>
+<td><code>$(&#39;a[title*=num]&#39;)</code></td>
+<td>获取具有这个属性且属性值含有一个指定字串的DOM对象</td>
+</tr>
+<tr>
+<td><code>a[bbb][title=num1]</code></td>
+<td><code>$(&#39;a[bbb][title=num1]&#39;)</code></td>
+<td>获取具有这个属性且属性值匹配的DOM对象</td>
+</tr>
+</tbody></table>
+<h2 id="二-过滤选择器"><a href="#二-过滤选择器" class="headerlink" title="二. 过滤选择器"></a>二. 过滤选择器</h2><h3 id="（一）基本过滤器"><a href="#（一）基本过滤器" class="headerlink" title="（一）基本过滤器"></a>（一）基本过滤器</h3><table>
+<thead>
+<tr>
+<th>过滤器名</th>
+<th>jQuery 语法</th>
+<th>说明</th>
+<th>返回</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:first</code></td>
+<td><code>$(&#39;li:first&#39;)</code></td>
+<td>选取第一个元素</td>
+<td>单个</td>
+</tr>
+<tr>
+<td><code>:last </code></td>
+<td><code>$(&#39;li:last&#39;) </code></td>
+<td>选取最后一个元素</td>
+<td>单个</td>
+</tr>
+<tr>
+<td><code>:not(selector)</code></td>
+<td><code>$(&#39;li:not(.red)&#39;)</code></td>
+<td>选取class不是red的li元素</td>
+<td>集合</td>
+</tr>
+<tr>
+<td><code>:even</code></td>
+<td><code> $(&#39;li:even&#39;)</code></td>
+<td>选择索引(以下几个都是从0开始)是偶数的所有元素</td>
+<td>集合</td>
+</tr>
+<tr>
+<td><code>:odd </code></td>
+<td><code>$(&#39;li:odd&#39;)</code></td>
+<td>选择索引是奇数的所有元素</td>
+<td>集合</td>
+</tr>
+<tr>
+<td><code>:eq(index)</code></td>
+<td><code>$(&#39;li:eq(2)&#39;)</code></td>
+<td>选择索引等于index的元素(负数从后开始)</td>
+<td>单个</td>
+</tr>
+<tr>
+<td><code>:gt(index)</code></td>
+<td><code>$(&#39;li:gt(2)&#39;)</code></td>
+<td>选择索引大于index的元素</td>
+<td>集合</td>
+</tr>
+<tr>
+<td><code>:lt(index)</code></td>
+<td><code>$(&#39;li.lt(2)&#39;)</code></td>
+<td>选择索引小于index的元素</td>
+<td>集合</td>
+</tr>
+<tr>
+<td><code>:header</code></td>
+<td><code>$(&#39;:header&#39;) </code></td>
+<td>选择标题元素，h1~h6</td>
+<td>集合</td>
+</tr>
+<tr>
+<td><code>:animated</code></td>
+<td><code>$(&#39;:animated&#39;)</code></td>
+<td>选择正在执行动画的元素</td>
+<td>集合</td>
+</tr>
+<tr>
+<td><code>:focus</code></td>
+<td><code>$(&#39;:focus&#39;)</code></td>
+<td>选择当前被焦点的元素</td>
+<td>集合</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong><code>:focus</code>过滤器，必须是网页初始状态的已经被激活焦点的元素才能实现元素获取。而不是鼠标点击或者Tab键盘敲击激活的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;input&#x27;</span>).get(<span class="number">0</span>).focus(); <span class="comment">//先初始化激活一个元素焦点</span></span><br><span class="line">$(<span class="string">&#x27;:focus&#x27;</span>).css(<span class="string">&#x27;background&#x27;</span>, <span class="string">&#x27;red&#x27;</span>); <span class="comment">//被焦点的元素</span></span><br></pre></td></tr></table></figure>
+
+<p>jQuery为最常用的过滤器提供了专用的方法，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;li&#x27;</span>).eq(<span class="number">2</span>).css(<span class="string">&#x27;background&#x27;</span>,<span class="string">&#x27;#ccc&#x27;</span>);<span class="comment">//元素li的第三个元素，负数从后开始</span></span><br><span class="line">$(<span class="string">&#x27;li&#x27;</span>).first().css(<span class="string">&#x27;background&#x27;</span>,<span class="string">&#x27;#ccc&#x27;</span>);<span class="comment">//元素li的第一个元素</span></span><br><span class="line">$(<span class="string">&#x27;li&#x27;</span>).last().css(<span class="string">&#x27;background&#x27;</span>,<span class="string">&#x27;#ccc&#x27;</span>);<span class="comment">//元素li的最后一个元素</span></span><br><span class="line">$(<span class="string">&#x27;li&#x27;</span>).not(<span class="string">&#x27;.red&#x27;</span>).css(<span class="string">&#x27;background&#x27;</span>,<span class="string">&#x27;#ccc&#x27;</span>);<span class="comment">//元素li不含class为red的元素</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="（二）内容过滤器"><a href="#（二）内容过滤器" class="headerlink" title="（二）内容过滤器"></a>（二）内容过滤器</h3><p>内容过滤器的过滤规则主要是包含的子元素或文本内容上。</p>
+<table>
+<thead>
+<tr>
+<th>过滤器名</th>
+<th>jQuery语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:contains(text)</code></td>
+<td><code>$(&#39;:contains(&quot;ycku.com&quot;)&#39;)</code></td>
+<td>选取含”ycku.com”文本的元素</td>
+</tr>
+<tr>
+<td><code>:empty</code></td>
+<td><code>$(&#39;:empty&#39;)</code></td>
+<td>选取不包含子元素或空文本的元素</td>
+</tr>
+<tr>
+<td><code>:has(selector)</code></td>
+<td><code>$(&#39;:has(.red)&#39;)</code></td>
+<td>选取含有class是red的元素(在父元素调用)</td>
+</tr>
+<tr>
+<td><code>:parent</code></td>
+<td><code>$(&#39;:parent&#39;)</code></td>
+<td>选取含有子元素或文本的元素</td>
+</tr>
+</tbody></table>
+<p>jQuery 提供了一个 has()方法来提高:has 过滤器的性能：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;ul&#x27;</span>).has(<span class="string">&#x27;.red&#x27;</span>).css(<span class="string">&#x27;background&#x27;</span>, <span class="string">&#x27;#ccc&#x27;</span>); <span class="comment">//选择子元素含有 class 是 red 的元素</span></span><br></pre></td></tr></table></figure>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<p>jQuery提供了一个名称和:parent相似的方法，但这个方法并不是选取含有子元素或文本的元素，而是获取当前元素的父元素，返回的是元素集合。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;li&#x27;</span>).parent().css(<span class="string">&#x27;background&#x27;</span>,<span class="string">&#x27;#ccc&#x27;</span>);<span class="comment">//选择当前元素的父元素</span></span><br><span class="line">$(<span class="string">&#x27;li&#x27;</span>).parents().css(<span class="string">&#x27;background&#x27;</span>,<span class="string">&#x27;#ccc&#x27;</span>);<span class="comment">//选择当前元素的父元素及祖先元素（追溯到html）</span></span><br><span class="line">$(<span class="string">&#x27;li&#x27;</span>).parentsUntil(<span class="string">&#x27;html&#x27;</span>).css(<span class="string">&#x27;background&#x27;</span>,<span class="string">&#x27;#ccc&#x27;</span>);<span class="comment">//选择当前元素遇到html父元素停止（会在body上加）</span></span><br></pre></td></tr></table></figure>
 
-{% block page_class %}page-post-detail{% endblock %}
-
-
-{% block content %}
-
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
-
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
-    </div>
-  </div>
-
-{% endblock %}
-
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
-
-
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+<h3 id="（三）可见性过滤器"><a href="#（三）可见性过滤器" class="headerlink" title="（三）可见性过滤器"></a>（三）可见性过滤器</h3><p>可见性过滤器根据元素的可见性和不可见性来选择相应的元素。</p>
+<table>
+<thead>
+<tr>
+<th>过滤器名</th>
+<th>jQuery 语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:hidden</code></td>
+<td><code> $(&#39;:hidden&#39;)</code></td>
+<td>选取所有不可见元素</td>
+</tr>
+<tr>
+<td><code>:visible</code></td>
+<td><code> $(&#39;:visible&#39;)</code></td>
+<td>选取所有可见元素</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong>:hidden过滤器一般是包含的内容为：CSS样式为<code>display:none</code>、input表单类型为<code>type=&quot;hidden&quot;</code>和<code>visibility:hidden</code>的元素。</p>
+<h3 id="（四）子元素过滤器"><a href="#（四）子元素过滤器" class="headerlink" title="（四）子元素过滤器"></a>（四）子元素过滤器</h3><p>子元素过滤器的过滤规则是通过父元素和子元素的关系来获取相应的元素。</p>
+<p>|过滤器名|jQuery语法|说明|<br>|—|—|—|—|<br>|<code>:first-child</code>|<code>$(&#39;li:first-child&#39;)</code>|获取每个父元素的第一个子元素|<br>|<code>:last-child</code>|<code>$(&#39;li:last-child&#39;)</code>|获取每个父元素的最后一个子元素|<br>|<code>:only-child</code>|<code>$(&#39;li:only-child&#39;)</code>|获取有且只有一个子元素的元素|<br>|<code>:nth-child(odd/even/index)</code>支持表达式，如2n等同even|<code>$(&#39;li:nth-child(even)&#39;)</code>|获取每个自定义子元素的元素(索引值从 1 开始计算)|</p>
+<h3 id="（五）其他方法"><a href="#（五）其他方法" class="headerlink" title="（五）其他方法"></a>（五）其他方法</h3><p>jQuery 在选择器和过滤器上，还提供了一些常用的方法，方便我们开发时灵活使用。</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>jQuery 语法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>is(s/o/e/f)</code></td>
+<td><code>$(&#39;li&#39;).is(&#39;.red&#39;)</code>返回布尔值</td>
+<td>传递选择器、DOM、jquery对象或是函数来匹配元素集合，如果这些元素中至少有一个元素匹配给定的参数，返回true</td>
+</tr>
+<tr>
+<td><code>hasClass(class)</code></td>
+<td><code>$(&#39;li&#39;).eq(2).hasClass(&#39;red&#39;)</code></td>
+<td>其实就是<code>is(&quot;.&quot; + class)</code>,但只能传递class</td>
+</tr>
+<tr>
+<td><code>slice(start, end)</code></td>
+<td><code>$(&#39;li&#39;).slice(0,2)</code></td>
+<td>选择从start到end位置的元素，如果是负数，则从后开始</td>
+</tr>
+<tr>
+<td><code>filter(s/o/e/f)</code></td>
+<td><code>$(&#39;li&#39;).filter(&#39;.red&#39;)</code></td>
+<td>筛选元素集合中匹配表达式或通过传递函数测试的那些元素集合。</td>
+</tr>
+<tr>
+<td><code>end() </code></td>
+<td><code>$(&#39;div&#39;).find(&#39;p&#39;).end()</code></td>
+<td>获取当前元素的前一个状态的元素(同级或父级)</td>
+</tr>
+<tr>
+<td><code>contents()</code></td>
+<td><code>$(&#39;div&#39;).contents()</code></td>
+<td>获取某元素下面所有元素节点，包括文本节点，如果是iframe，则可以查找文本内容</td>
+</tr>
+</tbody></table>
+<p><strong>is:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;.red&#x27;</span>).is(<span class="string">&#x27;li&#x27;</span>); <span class="comment">//选择器，检测class为是否为 red</span></span><br><span class="line">$(<span class="string">&#x27;.red&#x27;</span>).is($(<span class="string">&#x27;li&#x27;</span>)); <span class="comment">//jQuery 对象集合，同上</span></span><br><span class="line">$(<span class="string">&#x27;.red&#x27;</span>).is($(<span class="string">&#x27;li&#x27;</span>).eq(<span class="number">2</span>)); <span class="comment">//jQuery 对象单个，同上</span></span><br><span class="line">$(<span class="string">&#x27;.red&#x27;</span>).is($(<span class="string">&#x27;li&#x27;</span>).get(<span class="number">1</span>)); <span class="comment">//DOM 对象，同上</span></span><br></pre></td></tr></table></figure>
+<p>还可以进行各种自定义判断：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>list <span class="tag">&lt;<span class="name">strong</span>&gt;</span>item 1<span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>list item 2<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>list item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">$(<span class="string">&quot;ul&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> $target = $(event.target);</span></span><br><span class="line"><span class="javascript">  <span class="keyword">if</span> ( $target.is(<span class="string">&quot;li&quot;</span>) ) &#123;</span></span><br><span class="line"><span class="javascript">    $target.css(<span class="string">&quot;background-color&quot;</span>, <span class="string">&quot;red&quot;</span>);</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当用户点击的是第一个列表项中的单词<code>&quot;list&quot;</code>或第三个列表项中的任何单词时，被点击的列表项会被设置为红色背景。<br>不过，当用户点击第一个列表项中的<code>item1</code>或第二个列表项中的任何单词时，都不会有任何变化，这是为这上面的情况中，事件的目标分别是 <code>&lt;strong&gt; </code>是 <code>&lt;span&gt;</code>。</p>
+<p><strong>slice:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;li&#x27;</span>).slice(<span class="number">0</span>,<span class="number">2</span>).css(<span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;red&#x27;</span>); <span class="comment">//前三个变成红色</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>这个参数有多种传法和JavaScript中的slice方法是一样的比如：slice(2)，从第三个开始到最后选定；slice(2,4)，第三和第四被选定；slice(0,-2)，从倒数第三个位置，向前选定所有；slice(2,-2)，前两个和末尾两个未选定。</p>
+<p><strong>filter：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;li&#x27;</span>).filter(<span class="string">&#x27;.red&#x27;</span>).css(<span class="string">&#x27;background&#x27;</span>,<span class="string">&#x27;#ccc&#x27;</span>);<span class="comment">//选择li的class为red的元素</span></span><br><span class="line">$(<span class="string">&#x27;li&#x27;</span>).filter(<span class="string">&#x27;.red,:first,:last&#x27;</span>).css(<span class="string">&#x27;background&#x27;</span>,<span class="string">&#x27;#ccc&#x27;</span>);<span class="comment">//增加了首尾选择</span></span><br><span class="line"><span class="comment">//特殊要求函数返回</span></span><br><span class="line">$(<span class="string">&#x27;li&#x27;</span>).filter(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $(<span class="built_in">this</span>).attr(<span class="string">&#x27;class&#x27;</span>)==<span class="string">&#x27;red&#x27;</span> &amp;&amp; $(<span class="built_in">this</span>).attr(<span class="string">&#x27;title&#x27;</span>)==<span class="string">&#x27;列表3&#x27;</span>;</span><br><span class="line">&#125;).css(<span class="string">&#x27;background&#x27;</span>, <span class="string">&#x27;#ccc&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>此处注意<code>$(this)</code>的使用，这把this包装成了jQuery对象，以便使用jQuery的方法。</p>
+<h2 id="三-表单选择器"><a href="#三-表单选择器" class="headerlink" title="三. 表单选择器"></a>三. 表单选择器</h2><h3 id="（一）常规选择器"><a href="#（一）常规选择器" class="headerlink" title="（一）常规选择器"></a>（一）常规选择器</h3><p>其实使用上面的选择器已经能对表单元素进行选取了，先来验证一下，来看看如何利用上面的方法来进行表单元素的选择。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//val()是jQuery用来获取表单元素文本内容的一个方法</span></span><br><span class="line">$(<span class="string">&#x27;input&#x27;</span>).val(); <span class="comment">//元素名定位，默认获取第一个</span></span><br><span class="line">$(<span class="string">&#x27;input&#x27;</span>).eq(<span class="number">1</span>).val(); <span class="comment">//同上，获取第二个</span></span><br><span class="line">$(<span class="string">&#x27;input[type=password]&#x27;</span>).val();<span class="comment">//选择type为password的字段</span></span><br><span class="line">$(<span class="string">&#x27;input[name=user]&#x27;</span>).val(); <span class="comment">//选择 name 为 user 的字段</span></span><br></pre></td></tr></table></figure>
+<p>很显然，上面的这个方法都能选择到想要的元素，那么对于 id 和class基本一致，也可以结合属性选择器来精确的定位，在这里我们不在重复。<br>对于表单中的其他元素名比如：textarea、select 和 button 等，原理一样，不在重复。<br>但是这样是不是太过于复杂了呢？假如我们要同时选择input、textarea、select 和 button？继续看吧。</p>
+<h3 id="（二）表单选择器"><a href="#（二）表单选择器" class="headerlink" title="（二）表单选择器"></a>（二）表单选择器</h3><p>虽然可以使用常规选择器来对表单的元素进行定位，但有时还是不能满足开发者灵活多变的需求，而且也太过于繁琐。所以，jQuery为表单提供了专用的选择器。</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:input</code></td>
+<td>选取所有 <code>input</code>、<code>textarea</code>、<code>select</code> 和 <code>button</code>元素</td>
+</tr>
+<tr>
+<td><code>:text </code></td>
+<td>选择所有单行文本框，即 <code>type=text</code></td>
+</tr>
+<tr>
+<td><code>:password</code></td>
+<td>选择所有密码框，即 <code>type=password</code></td>
+</tr>
+<tr>
+<td><code>:radio</code></td>
+<td>选择所有单选框，即 <code>type=radio</code></td>
+</tr>
+<tr>
+<td><code>:checkbox</code></td>
+<td>选择所有复选框，即 <code>type=checkbox</code></td>
+</tr>
+<tr>
+<td><code>:submit </code></td>
+<td>选取所有提交按钮，即 <code>type=submit</code></td>
+</tr>
+<tr>
+<td><code>:reset </code></td>
+<td>选取所有重置按钮，即 <code>type=reset</code></td>
+</tr>
+<tr>
+<td><code>:image </code></td>
+<td>选取所有图像按钮，即 <code>type=image</code></td>
+</tr>
+<tr>
+<td><code>:button</code></td>
+<td>选择所有普通按钮，即 <code>button 元素</code></td>
+</tr>
+<tr>
+<td><code>:file </code></td>
+<td>选择所有文件按钮，即 <code>type=file</code></td>
+</tr>
+<tr>
+<td><code>:hidden </code></td>
+<td>选择所有不可见字段，即 <code>type=hidden</code></td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong></p>
+<ol>
+<li>由于这些选择器都是返回元素集合，如果想获取某一个指定的元素，最好结合一下属性选择器。比如：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;:text[name=user]).size(); //获取单行文本框 name=user 的元素</span></span><br></pre></td></tr></table></figure></li>
+<li>在使用这些属性时最好界定父元素，比如直接<code>$(&quot;:hidden&quot;).length</code>这样是不正确的，因为它还会选择到<code>head</code>标签内的元素，所以length属性不会为0，建议使用这样的形式：<code>$(&quot;form :hidden&quot;)</code></li>
+</ol>
+<h3 id="（三）表单过滤器"><a href="#（三）表单过滤器" class="headerlink" title="（三）表单过滤器"></a>（三）表单过滤器</h3><p>jQuery 提供了四种表单过滤器，分别在是否可以用、是否选定来进行表单字段的筛选过滤。</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:enabled </code></td>
+<td>选取所有可用元素</td>
+</tr>
+<tr>
+<td><code>:disabled</code></td>
+<td>选取所有不可用元素</td>
+</tr>
+<tr>
+<td><code>:checked</code></td>
+<td>选取所有被选中的元素，单选和复选字段</td>
+</tr>
+<tr>
+<td><code>:selected</code></td>
+<td>选取所有被选中的元素，下拉列表</td>
+</tr>
+</tbody></table>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2015/12/31/jQuery-01-Sizzle/">http://guowenfh.github.io/2015/12/31/jQuery-01-Sizzle/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/jQuery/">jQuery</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2015/12/31/jQuery-02-DocumentObjectModel/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">jQuery入门笔记之（二）文档对象模型</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2015/12/27/jQuery-00-thinkingBasicCore/"><span class="paginator-prev__text">jQuery入门笔记之（零）思考与基础核心</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E5%B8%B8%E8%A7%84%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">一. 常规选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">（一）简单选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E8%BF%9B%E9%98%B6%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">（二）进阶选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E9%AB%98%E7%BA%A7%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.3.</span> <span class="toc-text">（三）高级选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.4.</span> <span class="toc-text">（四）属性选择器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E8%BF%87%E6%BB%A4%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">二. 过滤选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E6%9C%AC%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">2.1.</span> <span class="toc-text">（一）基本过滤器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E5%86%85%E5%AE%B9%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">2.2.</span> <span class="toc-text">（二）内容过滤器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E5%8F%AF%E8%A7%81%E6%80%A7%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text">（三）可见性过滤器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E5%AD%90%E5%85%83%E7%B4%A0%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">2.4.</span> <span class="toc-text">（四）子元素过滤器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%94%EF%BC%89%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="toc-number">2.5.</span> <span class="toc-text">（五）其他方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E8%A1%A8%E5%8D%95%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">3.</span> <span class="toc-text">三. 表单选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E5%B8%B8%E8%A7%84%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">3.1.</span> <span class="toc-text">（一）常规选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E8%A1%A8%E5%8D%95%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">3.2.</span> <span class="toc-text">（二）表单选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A8%E5%8D%95%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-number">3.3.</span> <span class="toc-text">（三）表单过滤器</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
