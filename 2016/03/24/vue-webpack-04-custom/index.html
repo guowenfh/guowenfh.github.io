@@ -1,23 +1,23 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="这是一系列文章，此系列所有的练习都存在了我的github仓库中vue-webpack，在本人有了新的理解与认识之后,会对文章有不定时的更正与更新。下面是目前完成的列表：  webpack入坑之旅（一）不是开始的开始 webpack入坑之旅（二）loader入门 webpack入坑之旅（三）webpack.config入门 webpack入坑之旅（四）扬帆起航 webpack入坑之旅（五）加载vue">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="这是一系列文章，此系列所有的练习都存在了我的github仓库中vue-webpack，在本人有了新的理解与认识之后,会对文章有不定时的更正与更新。下面是目前完成的列表：  webpack入坑之旅（一）不是开始的开始 webpack入坑之旅（二）loader入门 webpack入坑之旅（三）webpack.config入门 webpack入坑之旅（四）扬帆起航 webpack入坑之旅（五）加载vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack入坑之旅（四）扬帆起航">
 <meta property="og:url" content="http://guowenfh.github.io/2016/03/24/vue-webpack-04-custom/index.html">
 <meta property="og:site_name" content="三省吾身丶丶">
 <meta property="og:description" content="这是一系列文章，此系列所有的练习都存在了我的github仓库中vue-webpack，在本人有了新的理解与认识之后,会对文章有不定时的更正与更新。下面是目前完成的列表：  webpack入坑之旅（一）不是开始的开始 webpack入坑之旅（二）loader入门 webpack入坑之旅（三）webpack.config入门 webpack入坑之旅（四）扬帆起航 webpack入坑之旅（五）加载vue">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2016-03-24T09:28:34.000Z">
 <meta property="article:modified_time" content="2020-03-12T04:04:13.295Z">
 <meta property="article:author" content="guowenfh">
 <meta property="article:tag" content="webpack">
 <meta property="article:tag" content="vue">
-<meta name="twitter:card" content="summary"><title>webpack入坑之旅（四）扬帆起航 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2016/03/24/vue-webpack-04-custom/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:card" content="summary"><title>webpack入坑之旅（四）扬帆起航 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2016/03/24/vue-webpack-04-custom/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
-  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":true},
   postWidget: {"endText":true},
   nightMode: {"enable":true},
   back2top: {"enable":true},
@@ -30,12 +30,11 @@ var CONFIG = {
   pjax: undefined,
   externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
   shortcuts: undefined,
-  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
-</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">webpack入坑之旅（四）扬帆起航</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2016-03-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><p>这是一系列文章，此系列所有的练习都存在了我的github仓库中<a target="_blank" rel="noopener" href="https://github.com/guowenfh/vue-webpack">vue-webpack</a>，在本人有了新的理解与认识之后,会对文章有不定时的更正与更新。下面是目前完成的列表：</p>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">webpack入坑之旅（四）扬帆起航</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2016-03-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-03-12</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1.3k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">8分</span></span></div></header><div class="post-body"><p>这是一系列文章，此系列所有的练习都存在了我的github仓库中<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/guowenfh/vue-webpack" >vue-webpack</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，在本人有了新的理解与认识之后,会对文章有不定时的更正与更新。下面是目前完成的列表：</p>
 <ul>
 <li><a href="//guowenfh.github.io/2016/03/24/vue-webpack-01-base/">webpack入坑之旅（一）不是开始的开始</a></li>
 <li><a href="//guowenfh.github.io/2016/03/24/vue-webpack-02-deploy/">webpack入坑之旅（二）loader入门</a></li>
@@ -44,25 +43,31 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li><a href="//guowenfh.github.io/2016/03/25/vue-webpack-05-vue/">webpack入坑之旅（五）加载vue单文件组件</a></li>
 <li><a href="//guowenfh.github.io/2016/03/28/vue-webpack-06-router/">webpack入坑之旅（六）配合vue-router实现SPA</a></li>
 </ul>
-<h2 id="加载图片"><a href="#加载图片" class="headerlink" title="加载图片"></a>加载图片</h2><p>现在来我们来试试加载图片，首先第一件事情，肯定是安装对应的<code>loader</code>。它会将样式中引用到的图片转为模块来处理，使用该加载器需要先进行安装：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install url-loader --save-dev</span><br></pre></td></tr></table></figure>
+
+        <h2 id="加载图片"   >
+          <a href="#加载图片" class="heading-link"><i class="fas fa-link"></i></a><a href="#加载图片" class="headerlink" title="加载图片"></a>加载图片</h2>
+      <p>现在来我们来试试加载图片，首先第一件事情，肯定是安装对应的<code>loader</code>。它会将样式中引用到的图片转为模块来处理，使用该加载器需要先进行安装：</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install url-loader --save-dev</span><br></pre></td></tr></table></div></figure>
 <p>当然你也可以在<code>package.json</code>添加依赖，然后再<code>npm nstall</code>一样的效果。</p>
 <p>现在去我们的项目目录中添加img文件夹，添加两张图片，一张大图jpg，一张小图png。</p>
 <p>然后在我们的<code>webpack.config.js</code>中添加这段：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rules: [</span><br><span class="line">    &#123;</span><br><span class="line">        test: <span class="regexp">/\.(png|jpe?g|gif|svg)(\?.*)?$/</span>,</span><br><span class="line">        loader: <span class="string">&#x27;url-loader&#x27;</span>,</span><br><span class="line">        options: &#123;</span><br><span class="line">            limit: <span class="number">8192</span>,</span><br><span class="line">            name: path.posix.join(<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;img/[name].[hash:7].[ext]&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 添加到这并且会按照文件大小, 或者转化为 base64, 或者单独作为文件</span></span><br><span class="line">        <span class="comment">//在大小限制可以name属性/[name].[ext]，会将我们的文件生成在设定的文件夹下。</span></span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rules: [</span><br><span class="line">    &#123;</span><br><span class="line">        test: <span class="regexp">/\.(png|jpe?g|gif|svg)(\?.*)?$/</span>,</span><br><span class="line">        loader: <span class="string">&#x27;url-loader&#x27;</span>,</span><br><span class="line">        options: &#123;</span><br><span class="line">            limit: <span class="number">8192</span>,</span><br><span class="line">            name: path.posix.join(<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;img/[name].[hash:7].[ext]&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 添加到这并且会按照文件大小, 或者转化为 base64, 或者单独作为文件</span></span><br><span class="line">        <span class="comment">//在大小限制可以name属性/[name].[ext]，会将我们的文件生成在设定的文件夹下。</span></span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></div></figure>
 <p>在html中添加：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;img/logo.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;qwe&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;asd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;img/logo.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;qwe&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;asd&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
 
 <p>在我们的css中添加：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*记得写宽高。。*/</span></span><br><span class="line"><span class="selector-id">#qwe</span>&#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">img/logo.png</span>);<span class="comment">/*3.2k*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#asd</span>&#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">img/5.jpg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*记得写宽高。。*/</span></span><br><span class="line"><span class="selector-id">#qwe</span>&#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">img/logo.png</span>);<span class="comment">/*3.2k*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#asd</span>&#123;</span><br><span class="line">    <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">img/5.jpg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
 <p>继续运行<code>webpack</code>如果正确的话，打开我们的浏览器，就可以看到我们正确的图片显示。</p>
 <p>如果不正确，请运行<code>npm install file-loader -D</code>，再进行尝试。</p>
 <p>现在我们打开浏览器的调试工具，可以看到小于8K的 <strong>背景图片</strong> 图片已经被转化成了base64的编码，而大于8k的图片则并没有转化（<strong>注意它的地址的变化！</strong>）。<br>直接使用img导入的图也并没有进行base64的转化。</p>
-<h3 id="热加载"><a href="#热加载" class="headerlink" title="热加载"></a>热加载</h3><p>当项目逐渐变大，<code>webpack </code>的编译时间会变长，可以通过参数让编译的输出内容带有 <strong>进度</strong> 和 <strong>颜色</strong> 。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack --progress --colors</span><br></pre></td></tr></table></figure>
+
+        <h3 id="热加载"   >
+          <a href="#热加载" class="heading-link"><i class="fas fa-link"></i></a><a href="#热加载" class="headerlink" title="热加载"></a>热加载</h3>
+      <p>当项目逐渐变大，<code>webpack </code>的编译时间会变长，可以通过参数让编译的输出内容带有 <strong>进度</strong> 和 <strong>颜色</strong> 。</p>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webpack --progress --colors</span><br></pre></td></tr></table></div></figure>
 <p>下面还有一些其他常用的命令：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">webpack <span class="comment">#最基本的启动webpack命令</span></span><br><span class="line">webpack -w <span class="comment">#提供watch方法，实时进行打包更新</span></span><br><span class="line">webpack -p <span class="comment">#对打包后的文件进行压缩</span></span><br><span class="line">webpack -d <span class="comment">#提供SourceMaps，方便调试</span></span><br><span class="line">webpack --colors <span class="comment">#输出结果带彩色，比如：会用红色显示耗时较长的步骤</span></span><br><span class="line">webpack --profile <span class="comment">#输出性能数据，可以看到每一步的耗时</span></span><br><span class="line">webpack --display-modules <span class="comment">#默认情况下 node_modules 下的模块会被隐藏，加上这个参数可以显示这些被隐藏的模块</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">webpack <span class="comment">#最基本的启动webpack命令</span></span><br><span class="line">webpack -w <span class="comment">#提供watch方法，实时进行打包更新</span></span><br><span class="line">webpack -p <span class="comment">#对打包后的文件进行压缩</span></span><br><span class="line">webpack -d <span class="comment">#提供SourceMaps，方便调试</span></span><br><span class="line">webpack --colors <span class="comment">#输出结果带彩色，比如：会用红色显示耗时较长的步骤</span></span><br><span class="line">webpack --profile <span class="comment">#输出性能数据，可以看到每一步的耗时</span></span><br><span class="line">webpack --display-modules <span class="comment">#默认情况下 node_modules 下的模块会被隐藏，加上这个参数可以显示这些被隐藏的模块</span></span><br></pre></td></tr></table></div></figure>
 
 <p>我们已经把webpack的内容了解了一部分了，那么在生产环境中，我不想每一次进行改变，都去命令行中运行我们的<code>webpack</code>的命令，我们应该怎么样实现改变后自动更新呢？</p>
 <p>webpack 为我们提供了一个<code>webpack --watch</code>，他会启动监听模式。开启监听模式后，没有变化的模块会在编译后缓存到内存中，而不会每次都被重新编译，所以监听模式的整体速度是很快的。</p>
@@ -70,15 +75,294 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <p>在我们改变代码之后，命令行中可以看到直接就自动编译了，但是显然不够智能，还需要我们手动去刷新浏览器，（其实用<code>liveload</code>hack成自动刷新！）。</p>
 <p>我反正不能忍，还要手动刷新浏览器。所以使用<code>webpack-dev-server</code>会是一个更好的办法！</p>
 <p>它将在<code>localhost:8080</code>启动一个express静态资源web服务器，并且会以监听模式自动运行<code>webpack</code>，在浏览器打开<code>http://localhost:8080/</code>或 <code>http://localhost:8080/webpack-dev-server/</code> 可以浏览项目中的页面和编译后的资源输出，并且通过一个<code>socket.io</code>服务实时监听它们的变化并自动刷新页面。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">npm install webpack-dev-server -D</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">npx webpack-dev-server --config ./webpack.config.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">npm install webpack-dev-server -D</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">npx webpack-dev-server --config ./webpack.config.js</span><br></pre></td></tr></table></div></figure>
 
 
-<h2 id="试试vue"><a href="#试试vue" class="headerlink" title="试试vue"></a>试试vue</h2><p>我们来试试使用vue能配合webpack能不能实现自动刷新。(有关vuejs的知识，大家可以可以先自行上<a target="_blank" rel="noopener" href="http://cn.vuejs.org/guide/">官网查看</a>)</p>
+
+        <h2 id="试试vue"   >
+          <a href="#试试vue" class="heading-link"><i class="fas fa-link"></i></a><a href="#试试vue" class="headerlink" title="试试vue"></a>试试vue</h2>
+      <p>我们来试试使用vue能配合webpack能不能实现自动刷新。(有关vuejs的知识，大家可以可以先自行上<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://cn.vuejs.org/guide/" >官网查看</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>)</p>
 <p>首先运行<code>npm install vue -save</code>将vue添加到我们的项目依赖中去。</p>
 <p>首先在我们的<code>entry.js</code>这个入口文件中进行添加：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import Vue form (&quot;vue&quot;) //如果你安装了babel-loader的话，可以直接使用ES6的语法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Vue =<span class="built_in">require</span>(<span class="string">&#x27;vue/dist/vue&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#main&#x27;</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message: <span class="string">&#x27;hello vue.js&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import Vue form (&quot;vue&quot;) //如果你安装了babel-loader的话，可以直接使用ES6的语法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Vue =<span class="built_in">require</span>(<span class="string">&#x27;vue/dist/vue&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#main&#x27;</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    message: <span class="string">&#x27;hello vue.js&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
 
 <p>同样在<code>index.html</code>中添加<code>&#123;&#123; meassge &#125;&#125;</code>来响应vue的数据绑定。</p>
 <p>运行<code>webpack-dev-server</code>。去浏览器查看试试效果吧！<code>http://localhost:8080</code>。 任意改变<code>message</code>中的值，可以看到浏览器会自动刷新。并且将改变的值展示在眼前。（有可能只在<code>http://localhost:8080/webpack-dev-server/</code>才会自动刷新）</p>
 <p>自动刷新都配好了。下面我们就来试试怎么加载vue的文件，来实现单文件组件！</p>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2016/03/24/vue-webpack-04-custom/">http://guowenfh.github.io/2016/03/24/vue-webpack-04-custom/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/webpack/">webpack</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/vue/">vue</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2016/03/25/vue-webpack-05-vue/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">webpack入坑之旅（五）加载vue单文件组件</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2016/03/24/vue-webpack-03-config/"><span class="paginator-prev__text">webpack入坑之旅（三）webpack.config入门</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87"><span class="toc-number">1.</span> <span class="toc-text">加载图片</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.1.</span> <span class="toc-text">热加载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%95%E8%AF%95vue"><span class="toc-number">2.</span> <span class="toc-text">试试vue</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2016/03/24/vue-webpack-04-custom/">http://guowenfh.github.io/2016/03/24/vue-webpack-04-custom/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/webpack/">webpack</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/vue/">vue</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2016/03/25/vue-webpack-05-vue/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">webpack入坑之旅（五）加载vue单文件组件</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2016/03/24/vue-webpack-03-config/"><span class="paginator-prev__text">webpack入坑之旅（三）webpack.config入门</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87"><span class="toc-number">1.</span> <span class="toc-text">
+          加载图片</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.1.</span> <span class="toc-text">
+          热加载</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%95%E8%AF%95vue"><span class="toc-number">2.</span> <span class="toc-text">
+          试试vue</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://ws1.sinaimg.cn/large/82d12951gy1fewv9toa2xj206y06ygnp.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">芝兰生于深林，不以无人而不芳。</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/guowenfh" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2194745681" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/guowenfh" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="mailto:guowen921@gmail.com" target="_blank" rel="noopener" data-popover="social.Gmail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">Gmail</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">19</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span><span class="footer__devider">|</span><span>浙ICP备17036927号-1</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

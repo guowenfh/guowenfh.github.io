@@ -1,10 +1,10 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="包括5部分：  小练习1-处理用户输入 小练习2-日期对象的使用 小练习3：轮播图 小练习4：输入提示框 小练习5：界面拖拽交互  源码地址task0002 在线Demo 小练习1：处理用户输入 这里直接可以利用原来写过的util.js。所以应该不是特别难。主要考察对字符串的操作，以及正则表达式的使用  任务描述在task0002目录下创建一个task0002_1.html文件，以及一个js目录和">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="包括5部分：  小练习1-处理用户输入 小练习2-日期对象的使用 小练习3：轮播图 小练习4：输入提示框 小练习5：界面拖拽交互  源码地址task0002 在线Demo                     小练习1：处理用户输入        这里直接可以利用原来写过的util.js。所以应该不是特别难。主要考察对字符串的操作，以及正则表达式的使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="task0002（四）- 练习：数据处理、轮播及交互">
 <meta property="og:url" content="http://guowenfh.github.io/2015/12/24/task0002-Exercises/index.html">
 <meta property="og:site_name" content="三省吾身丶丶">
-<meta property="og:description" content="包括5部分：  小练习1-处理用户输入 小练习2-日期对象的使用 小练习3：轮播图 小练习4：输入提示框 小练习5：界面拖拽交互  源码地址task0002 在线Demo 小练习1：处理用户输入 这里直接可以利用原来写过的util.js。所以应该不是特别难。主要考察对字符串的操作，以及正则表达式的使用  任务描述在task0002目录下创建一个task0002_1.html文件，以及一个js目录和">
-<meta property="og:locale">
+<meta property="og:description" content="包括5部分：  小练习1-处理用户输入 小练习2-日期对象的使用 小练习3：轮播图 小练习4：输入提示框 小练习5：界面拖拽交互  源码地址task0002 在线Demo                     小练习1：处理用户输入        这里直接可以利用原来写过的util.js。所以应该不是特别难。主要考察对字符串的操作，以及正则表达式的使用">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewio59lnrj20bm089jri.jpg">
 <meta property="og:image" content="https://github.com/baidu-ife/ife/raw/master/2015_spring/task/task0002/img/task0002_sug.png">
 <meta property="og:image" content="https://github.com/baidu-ife/ife/raw/master/2015_spring/task/task0002/img/task0002_drag.png">
@@ -16,14 +16,14 @@
 <meta property="article:tag" content="百度前端技术学院">
 <meta property="article:tag" content="task0002">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewio59lnrj20bm089jri.jpg"><title>task0002（四）- 练习：数据处理、轮播及交互 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2015/12/24/task0002-Exercises/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/82d12951gy1fewio59lnrj20bm089jri.jpg"><title>task0002（四）- 练习：数据处理、轮播及交互 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2015/12/24/task0002-Exercises/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
-  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":true},
   postWidget: {"endText":true},
   nightMode: {"enable":true},
   back2top: {"enable":true},
@@ -36,12 +36,11 @@ var CONFIG = {
   pjax: undefined,
   externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
   shortcuts: undefined,
-  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
-</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">task0002（四）- 练习：数据处理、轮播及交互</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2015-12-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><p>包括5部分：</p>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">task0002（四）- 练习：数据处理、轮播及交互</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2015-12-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-03-12</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">6.1k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">39分</span></span></div></header><div class="post-body"><p>包括5部分：</p>
 <ul>
 <li>小练习1-处理用户输入</li>
 <li>小练习2-日期对象的使用</li>
@@ -49,12 +48,21 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>小练习4：输入提示框</li>
 <li>小练习5：界面拖拽交互</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/guowenfh/IFE/tree/master/task0002">源码地址</a><br><a href="https://guowenfh.github.io/IFE/task0002/index.html">task0002 在线Demo</a></p>
-<h2 id="小练习1：处理用户输入"><a href="#小练习1：处理用户输入" class="headerlink" title="小练习1：处理用户输入"></a>小练习1：处理用户输入</h2><blockquote>
+<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/guowenfh/IFE/tree/master/task0002" >源码地址</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br><a href="https://guowenfh.github.io/IFE/task0002/index.html">task0002 在线Demo</a></p>
+
+        <h2 id="小练习1：处理用户输入"   >
+          <a href="#小练习1：处理用户输入" class="heading-link"><i class="fas fa-link"></i></a><a href="#小练习1：处理用户输入" class="headerlink" title="小练习1：处理用户输入"></a>小练习1：处理用户输入</h2>
+      <blockquote>
 <p>这里直接可以利用原来写过的<code>util.js</code>。所以应该不是特别难。主要考察对字符串的操作，以及正则表达式的使用</p>
 </blockquote>
-<h3 id="任务描述"><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h3><p>在<code>task0002</code>目录下创建一个<code>task0002_1.html</code>文件，以及一个<code>js</code>目录和<code>css</code>目录，在<code>js</code>目录中创建<code>task0002_1.js</code>，并将之前写的<code>util.js</code>也拷贝到<code>js</code>目录下。然后完成以下需求。</p>
-<h4 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h4><p>在页面中，有一个单行输入框，一个按钮，输入框中用来输入用户的兴趣爱好，允许用户用半角逗号来作为不同爱好的分隔。</p>
+
+        <h3 id="任务描述"   >
+          <a href="#任务描述" class="heading-link"><i class="fas fa-link"></i></a><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h3>
+      <p>在<code>task0002</code>目录下创建一个<code>task0002_1.html</code>文件，以及一个<code>js</code>目录和<code>css</code>目录，在<code>js</code>目录中创建<code>task0002_1.js</code>，并将之前写的<code>util.js</code>也拷贝到<code>js</code>目录下。然后完成以下需求。</p>
+
+        <h4 id="第一阶段"   >
+          <a href="#第一阶段" class="heading-link"><i class="fas fa-link"></i></a><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h4>
+      <p>在页面中，有一个单行输入框，一个按钮，输入框中用来输入用户的兴趣爱好，允许用户用半角逗号来作为不同爱好的分隔。</p>
 <p>当点击按钮时，把用户输入的兴趣爱好，按照上面所说的分隔符分开后保存到一个数组，过滤掉空的、重复的爱好，在按钮下方创建一个段落显示处理后的爱好。</p>
 <p><strong>实现</strong></p>
 <p>根据题目要求，这个地方比较简单，可以直接利用前面写过的一些函数，分成四步，进行。</p>
@@ -65,17 +73,23 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>innerHTML进行输出。</li>
 </ol>
 <p>html：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;user_input&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;user_output&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;user_input&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;user_output&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
 
 <p><code>task0002_1.js</code>中的js:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自执行的匿名函数</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">handle_1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//其实这里没必要使用id因为数据那么少$函数直接获取标签就行</span></span><br><span class="line">    <span class="keyword">var</span> inp = $(<span class="string">&quot;#user_input&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> out = $(<span class="string">&quot;#user_output&quot;</span>);</span><br><span class="line">    $.click(<span class="string">&quot;#btn&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> value = inp.value.split(<span class="regexp">/\,|\，/</span>); <span class="comment">//1.根据半角逗号分割成数组。</span></span><br><span class="line">        <span class="keyword">var</span> unValue = uniqArray(value); <span class="comment">//2.数组去重</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = unValue.length; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> trimValue = trim(unValue[i]); <span class="comment">//3.对每一项进行去除首尾空格操作</span></span><br><span class="line">            <span class="built_in">console</span>.log(trimValue);</span><br><span class="line">            <span class="keyword">if</span> (trimValue !== <span class="string">&quot;&quot;</span>) &#123; <span class="comment">//4.只有在去除首尾空格后不为空的数组才输出。</span></span><br><span class="line">                out.innerHTML += <span class="string">&quot;&lt;li&gt;&quot;</span> + trimValue + <span class="string">&quot;&lt;/li&gt;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-<h4 id="第二阶段"><a href="#第二阶段" class="headerlink" title="第二阶段"></a>第二阶段</h4><p>单行变成多行输入框，一个按钮，输入框中用来输入用户的兴趣爱好，允许用户用换行、空格（全角/半角）、逗号（全角/半角）、顿号、分号来作为不同爱好的分隔。</p>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自执行的匿名函数</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">handle_1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//其实这里没必要使用id因为数据那么少$函数直接获取标签就行</span></span><br><span class="line">    <span class="keyword">var</span> inp = $(<span class="string">&quot;#user_input&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> out = $(<span class="string">&quot;#user_output&quot;</span>);</span><br><span class="line">    $.click(<span class="string">&quot;#btn&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> value = inp.value.split(<span class="regexp">/\,|\，/</span>); <span class="comment">//1.根据半角逗号分割成数组。</span></span><br><span class="line">        <span class="keyword">var</span> unValue = uniqArray(value); <span class="comment">//2.数组去重</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = unValue.length; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> trimValue = trim(unValue[i]); <span class="comment">//3.对每一项进行去除首尾空格操作</span></span><br><span class="line">            <span class="built_in">console</span>.log(trimValue);</span><br><span class="line">            <span class="keyword">if</span> (trimValue !== <span class="string">&quot;&quot;</span>) &#123; <span class="comment">//4.只有在去除首尾空格后不为空的数组才输出。</span></span><br><span class="line">                out.innerHTML += <span class="string">&quot;&lt;li&gt;&quot;</span> + trimValue + <span class="string">&quot;&lt;/li&gt;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></div></figure>
+
+        <h4 id="第二阶段"   >
+          <a href="#第二阶段" class="heading-link"><i class="fas fa-link"></i></a><a href="#第二阶段" class="headerlink" title="第二阶段"></a>第二阶段</h4>
+      <p>单行变成多行输入框，一个按钮，输入框中用来输入用户的兴趣爱好，允许用户用换行、空格（全角/半角）、逗号（全角/半角）、顿号、分号来作为不同爱好的分隔。</p>
 <p>当点击按钮时的行为同上</p>
 <p><strong>实现</strong></p>
 <p>看题目描述，主要是对于第一步进行修改，第一阶段只要求对半角逗号进行处理，但是在第二阶段中，需要对<strong>“换行、空格（全角/半角）、逗号（全角/半角）、顿号、分号”</strong>进行处理。<br>主要是考察对于正则表达式的应用。</p>
 <p>只需要对<code>var value = inp.value.split(/\,|\，/); </code>进行更改如下：</p>
 <p><code>var value = inp.value.split(/\n|\s+|\,|\，|\、|\;|\；/); </code><br>需要注意的是：在正则表达式进行匹配这些符号时最好是前面加上转义字符。</p>
-<h4 id="第三阶段"><a href="#第三阶段" class="headerlink" title="第三阶段"></a>第三阶段</h4><p>用户输入的爱好数量不能超过10个，也不能什么都不输入。当发生异常时，在按钮上方显示一段红色的错误提示文字，并且不继续执行后面的行为；当输入正确时，提示文字消失。</p>
+
+        <h4 id="第三阶段"   >
+          <a href="#第三阶段" class="heading-link"><i class="fas fa-link"></i></a><a href="#第三阶段" class="headerlink" title="第三阶段"></a>第三阶段</h4>
+      <p>用户输入的爱好数量不能超过10个，也不能什么都不输入。当发生异常时，在按钮上方显示一段红色的错误提示文字，并且不继续执行后面的行为；当输入正确时，提示文字消失。</p>
 <p>同时，当点击按钮时，不再是输出到一个段落，而是每一个爱好输出成为一个checkbox，爱好内容作为checkbox的label。</p>
 <p><strong>实现</strong></p>
 <ul>
@@ -83,14 +97,23 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>直接判断数组长度就行了。。输入为空时，判断字符串=“”。</li>
 <li>输出<code>checkbox</code>这里不过多的设置了，只是演示。</li>
 </ul>
-<h3 id="最终完成"><a href="#最终完成" class="headerlink" title="最终完成"></a>最终完成</h3><p>html:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;user_input&quot;</span> <span class="attr">id</span>=<span class="string">&quot;user_input&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;45&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>处理并输出<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>输入的爱好数量不能超过10个，或什么都不输入<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">&quot;user_output&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+        <h3 id="最终完成"   >
+          <a href="#最终完成" class="heading-link"><i class="fas fa-link"></i></a><a href="#最终完成" class="headerlink" title="最终完成"></a>最终完成</h3>
+      <p>html:</p>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;user_input&quot;</span> <span class="attr">id</span>=<span class="string">&quot;user_input&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;45&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>处理并输出<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>输入的爱好数量不能超过10个，或什么都不输入<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">&quot;user_output&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
 <p>js:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">handle_1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> inp = $(<span class="string">&quot;#user_input&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> out = $(<span class="string">&quot;#user_output&quot;</span>);</span><br><span class="line">    $.click(<span class="string">&quot;#btn&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> value = inp.value.split(<span class="regexp">/\n|\s+|\,|\，|\、|\;|\；/</span>); <span class="comment">//分割成数组。</span></span><br><span class="line">        <span class="keyword">var</span> unValue = uniqArray(value); <span class="comment">//数组去重</span></span><br><span class="line">        <span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> len = unValue.length;</span><br><span class="line">        <span class="keyword">if</span> (len &gt; <span class="number">10</span> || unValue == <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">            $(<span class="string">&quot;p&quot;</span>).style.disautoPlay = <span class="string">&quot;block&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $(<span class="string">&quot;p&quot;</span>).style.disautoPlay = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">            <span class="keyword">for</span> (; i &lt; len; i++) &#123;</span><br><span class="line">                <span class="keyword">var</span> trimValue = trim(unValue[i]); <span class="comment">//对每一项进行去除首尾空格操作</span></span><br><span class="line">                <span class="built_in">console</span>.log(trimValue);</span><br><span class="line">                <span class="keyword">if</span> (trimValue !== <span class="string">&quot;&quot;</span>) &#123; <span class="comment">//只有在去除首尾空格后不为空的数组才输出。</span></span><br><span class="line">                    out.innerHTML += <span class="string">&quot;&lt;label&gt;&quot;</span> + <span class="string">&quot;&lt;input type=&#x27;checkbox&#x27;&gt;&quot;</span> + trimValue + <span class="string">&quot;&lt;/label&gt;&quot;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> <span class="title">handle_1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> inp = $(<span class="string">&quot;#user_input&quot;</span>);</span><br><span class="line">    <span class="keyword">var</span> out = $(<span class="string">&quot;#user_output&quot;</span>);</span><br><span class="line">    $.click(<span class="string">&quot;#btn&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> value = inp.value.split(<span class="regexp">/\n|\s+|\,|\，|\、|\;|\；/</span>); <span class="comment">//分割成数组。</span></span><br><span class="line">        <span class="keyword">var</span> unValue = uniqArray(value); <span class="comment">//数组去重</span></span><br><span class="line">        <span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> len = unValue.length;</span><br><span class="line">        <span class="keyword">if</span> (len &gt; <span class="number">10</span> || unValue == <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">            $(<span class="string">&quot;p&quot;</span>).style.disautoPlay = <span class="string">&quot;block&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $(<span class="string">&quot;p&quot;</span>).style.disautoPlay = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">            <span class="keyword">for</span> (; i &lt; len; i++) &#123;</span><br><span class="line">                <span class="keyword">var</span> trimValue = trim(unValue[i]); <span class="comment">//对每一项进行去除首尾空格操作</span></span><br><span class="line">                <span class="built_in">console</span>.log(trimValue);</span><br><span class="line">                <span class="keyword">if</span> (trimValue !== <span class="string">&quot;&quot;</span>) &#123; <span class="comment">//只有在去除首尾空格后不为空的数组才输出。</span></span><br><span class="line">                    out.innerHTML += <span class="string">&quot;&lt;label&gt;&quot;</span> + <span class="string">&quot;&lt;input type=&#x27;checkbox&#x27;&gt;&quot;</span> + trimValue + <span class="string">&quot;&lt;/label&gt;&quot;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></div></figure>
 
 
 <p>在线演示：**<a href="https://guowenfh.github.io/IFE/task0002/task0002_1.html">小练习1：处理兴趣列表</a>**</p>
-<h2 id="小练习2：日期对象的使用"><a href="#小练习2：日期对象的使用" class="headerlink" title="小练习2：日期对象的使用"></a>小练习2：日期对象的使用</h2><h3 id="任务描述-1"><a href="#任务描述-1" class="headerlink" title="任务描述"></a>任务描述</h3><p>在和上一任务同一目录下面创建一个<code>task0002_2.html</code>文件，在<code>js</code>目录中创建<code>task0002_2.js</code>，并在其中编码，实现一个倒计时功能。</p>
+
+        <h2 id="小练习2：日期对象的使用"   >
+          <a href="#小练习2：日期对象的使用" class="heading-link"><i class="fas fa-link"></i></a><a href="#小练习2：日期对象的使用" class="headerlink" title="小练习2：日期对象的使用"></a>小练习2：日期对象的使用</h2>
+      
+        <h3 id="任务描述-1"   >
+          <a href="#任务描述-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#任务描述-1" class="headerlink" title="任务描述"></a>任务描述</h3>
+      <p>在和上一任务同一目录下面创建一个<code>task0002_2.html</code>文件，在<code>js</code>目录中创建<code>task0002_2.js</code>，并在其中编码，实现一个倒计时功能。</p>
 <ul>
 <li>界面首先有一个文本输入框，允许按照特定的格式<code>YYYY-MM-DD</code>输入年月日；</li>
 <li>输入框旁有一个按钮，点击按钮后，计算当前距离输入的日期的00:00:00有多少时间差</li>
@@ -98,14 +121,23 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>每一秒钟更新倒计时上显示的数</li>
 <li>如果时差为0，则倒计时停止</li>
 </ul>
-<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><h4 id="了解日期对象"><a href="#了解日期对象" class="headerlink" title="了解日期对象"></a>了解日期对象</h4><p>这里主要是考察的对于日期对象的使用。</p>
+
+        <h3 id="实现思路"   >
+          <a href="#实现思路" class="heading-link"><i class="fas fa-link"></i></a><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3>
+      
+        <h4 id="了解日期对象"   >
+          <a href="#了解日期对象" class="heading-link"><i class="fas fa-link"></i></a><a href="#了解日期对象" class="headerlink" title="了解日期对象"></a>了解日期对象</h4>
+      <p>这里主要是考察的对于日期对象的使用。</p>
 <p><code>new Date()</code>。如果没有输入任何参数，则Date的构造器会依据系统设置的当前时间来创建一个Date对象。表示当前系统时间。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间对象创建的几种方式。</span></span><br><span class="line"><span class="keyword">var</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;December 17, 1995 03:24:00&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;1995-12-17T03:24:00&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">1995</span>,<span class="number">11</span>,<span class="number">17</span>);</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">1995</span>,<span class="number">11</span>,<span class="number">17</span>,<span class="number">3</span>,<span class="number">24</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//时间对象创建的几种方式。</span></span><br><span class="line"><span class="keyword">var</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;December 17, 1995 03:24:00&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;1995-12-17T03:24:00&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">1995</span>,<span class="number">11</span>,<span class="number">17</span>);</span><br><span class="line"><span class="keyword">var</span> birthday = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">1995</span>,<span class="number">11</span>,<span class="number">17</span>,<span class="number">3</span>,<span class="number">24</span>,<span class="number">0</span>);</span><br></pre></td></tr></table></div></figure>
 <ul>
-<li>Date对象中处理时间和日期的常用方法：详细内容在<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date">MDN</a>上</li>
+<li>Date对象中处理时间和日期的常用方法：详细内容在<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date" >MDN</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>上</li>
 </ul>
 <p><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewio59lnrj20bm089jri.jpg" alt="日期对象常用方法"></p>
-<h4 id="正式开始："><a href="#正式开始：" class="headerlink" title="正式开始："></a>正式开始：</h4><ol>
+
+        <h4 id="正式开始："   >
+          <a href="#正式开始：" class="heading-link"><i class="fas fa-link"></i></a><a href="#正式开始：" class="headerlink" title="正式开始："></a>正式开始：</h4>
+      <ol>
 <li>创建时间处理函数，使用正则表达式，处理输入的值，<code>value.match(/(^\d&#123;4&#125;)-(\d&#123;2&#125;)-(\d&#123;2&#125;$)/);</code>用到了match方法和正则的分组，在我写的正则博客里应该有过详细介绍了。这里也不过的说明了。</li>
 <li>使用目标时间的<code>getTime()</code>毫秒数减去得到当前的毫秒数，得到相差的毫秒数。处理它：<strong>（注意毫秒的问题）</strong></li>
 </ol>
@@ -125,15 +157,24 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>给按钮添加点击事件，在点击时，调用刚刚编写的的时间处理函数。</li>
 </ol>
 <p>在线演示：**<a href="https://guowenfh.github.io/IFE/task0002/task0002_2.html">小练习2：倒计时</a>**</p>
-<h2 id="小练习3：轮播图组件"><a href="#小练习3：轮播图组件" class="headerlink" title="小练习3：轮播图组件"></a>小练习3：轮播图组件</h2><h3 id="任务描述-2"><a href="#任务描述-2" class="headerlink" title="任务描述"></a>任务描述</h3><p>在和上一任务同一目录下面创建一个<code>task0002_3.html</code>文件，在<code>js</code>目录中创建<code>task0002_3.js</code>，并在其中编码，实现一个轮播图的功能。</p>
+
+        <h2 id="小练习3：轮播图组件"   >
+          <a href="#小练习3：轮播图组件" class="heading-link"><i class="fas fa-link"></i></a><a href="#小练习3：轮播图组件" class="headerlink" title="小练习3：轮播图组件"></a>小练习3：轮播图组件</h2>
+      
+        <h3 id="任务描述-2"   >
+          <a href="#任务描述-2" class="heading-link"><i class="fas fa-link"></i></a><a href="#任务描述-2" class="headerlink" title="任务描述"></a>任务描述</h3>
+      <p>在和上一任务同一目录下面创建一个<code>task0002_3.html</code>文件，在<code>js</code>目录中创建<code>task0002_3.js</code>，并在其中编码，实现一个轮播图的功能。</p>
 <ul>
 <li>图片数量及URL均在HTML中写好</li>
 <li>可以配置轮播的顺序（正序、逆序）、是否循环、间隔时长</li>
 <li>图片切换的动画要流畅</li>
 <li>在轮播图下方自动生成对应图片的小点，点击小点，轮播图自动动画切换到对应的图片</li>
 </ul>
-<p>效果示例：<a target="_blank" rel="noopener" href="http://echarts.baidu.com/">http://echarts.baidu.com/</a> 上面的轮播图（不需要做左右两个箭头）</p>
-<h3 id="实现思路-1"><a href="#实现思路-1" class="headerlink" title="实现思路:"></a>实现思路:</h3><blockquote>
+<p>效果示例：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://echarts.baidu.com/" >http://echarts.baidu.com/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 上面的轮播图（不需要做左右两个箭头）</p>
+
+        <h3 id="实现思路-1"   >
+          <a href="#实现思路-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#实现思路-1" class="headerlink" title="实现思路:"></a>实现思路:</h3>
+      <blockquote>
 <p>主要是对于考察对于定时器，以及事件绑定的处理，以及动画效果，为此我专门写了一篇博客《<a href="https://guowenfh.github.io/2015/12/21/JS-Animated-Frames/">JS完美运动框架的封装过程</a>》。 这里就直接使用里面封装好的函数了。</p>
 <p>本来都要放弃组件的编写了，只想按照常规方法来写个轮播图就好，但是在先把小练习4完成的情况下，就发现了一种新方法，可以帮助我完成这个任务（强烈建议先看小练习四！）使用<code>nextElementNode</code>,图片向左切换。（不涉及任何css，我假设css都会了，也没有用到特别难css属性）</p>
 </blockquote>
@@ -146,7 +187,10 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>事件代理函数：<code>delegateEvent</code>。</li>
 <li>添加class与删除class元素<code>addClass、romoveClass</code>。</li>
 </ul>
-<h4 id="第一步：实现点击切换"><a href="#第一步：实现点击切换" class="headerlink" title="第一步：实现点击切换"></a>第一步：实现点击切换</h4><p>编写幻灯片函数：<code>Slideshow(element)</code>。</p>
+
+        <h4 id="第一步：实现点击切换"   >
+          <a href="#第一步：实现点击切换" class="heading-link"><i class="fas fa-link"></i></a><a href="#第一步：实现点击切换" class="headerlink" title="第一步：实现点击切换"></a>第一步：实现点击切换</h4>
+      <p>编写幻灯片函数：<code>Slideshow(element)</code>。</p>
 <ol>
 <li>根据图片的数量创建与图片数量相同的导航小点：<code>ul&gt;li*length</code> 。设置其<code>li</code>样式，并且默认把第一个<code>li</code>设置为活动状态<code>className</code>为<code>active</code>。</li>
 <li>编写点击函数<code>clickLi</code>：</li>
@@ -156,9 +200,12 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>设置当前点击的<code>li</code>为选中：状态<code>active</code></li>
 <li>调用运动框架实现动画效果。</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Slideshow</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//1.创建li</span></span><br><span class="line">    <span class="keyword">var</span> imgArr = element.getElementsByTagName(<span class="string">&quot;img&quot;</span>); <span class="comment">//获取图片数量</span></span><br><span class="line">    <span class="keyword">var</span> imgArrLen = imgArr.length; <span class="comment">//缓存图片数量</span></span><br><span class="line">    <span class="keyword">var</span> createUl = <span class="built_in">document</span>.createElement(<span class="string">&quot;ul&quot;</span>); <span class="comment">//创建小点的ul</span></span><br><span class="line">    <span class="keyword">var</span> iCurrent = <span class="built_in">parseInt</span>(getStyle(imgArr[<span class="number">0</span>], <span class="string">&quot;width&quot;</span>)); <span class="comment">//获取一张图片的宽度</span></span><br><span class="line">    element.style.width = iCurrent * imgArrLen + <span class="string">&quot;px&quot;</span>; <span class="comment">//设置图片容器的宽度。</span></span><br><span class="line">    <span class="comment">//创建li</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = imgArrLen; i &lt; len; i++) &#123;</span><br><span class="line">        createUl.innerHTML += <span class="string">&quot;&lt;li&gt;&lt;/li&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    element.parentNode.appendChild(createUl); <span class="comment">//插入导航</span></span><br><span class="line">    addClass(createUl, <span class="string">&quot;Slideshow-nav&quot;</span>); <span class="comment">//添加导航样式</span></span><br><span class="line">    addClass(createUl.getElementsByTagName(<span class="string">&quot;li&quot;</span>)[<span class="number">0</span>], <span class="string">&quot;active&quot;</span>); <span class="comment">//默认设置第一个为第当前活动的li</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//编写点击函数clickLi：</span></span><br><span class="line">    clickLi();</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 点击导航</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">clickLi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        delegateEvent(createUl, <span class="string">&quot;li&quot;</span>, <span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> iTaget = -iCurrent * getIndex(<span class="built_in">this</span>);</span><br><span class="line">            removeLiClass();</span><br><span class="line">            addClass(<span class="built_in">this</span>, <span class="string">&quot;active&quot;</span>); <span class="comment">//移出</span></span><br><span class="line">            startMove(element, &#123;</span><br><span class="line">                <span class="string">&quot;left&quot;</span>: iTaget</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 用于移除所有的Li的选中状态：active</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">removeLiClass</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> oLi = createUl.getElementsByTagName(<span class="string">&quot;li&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = oLi.length; i &lt; len; i++) &#123;</span><br><span class="line">            removeClass(oLi[i], <span class="string">&quot;active&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Slideshow</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//1.创建li</span></span><br><span class="line">    <span class="keyword">var</span> imgArr = element.getElementsByTagName(<span class="string">&quot;img&quot;</span>); <span class="comment">//获取图片数量</span></span><br><span class="line">    <span class="keyword">var</span> imgArrLen = imgArr.length; <span class="comment">//缓存图片数量</span></span><br><span class="line">    <span class="keyword">var</span> createUl = <span class="built_in">document</span>.createElement(<span class="string">&quot;ul&quot;</span>); <span class="comment">//创建小点的ul</span></span><br><span class="line">    <span class="keyword">var</span> iCurrent = <span class="built_in">parseInt</span>(getStyle(imgArr[<span class="number">0</span>], <span class="string">&quot;width&quot;</span>)); <span class="comment">//获取一张图片的宽度</span></span><br><span class="line">    element.style.width = iCurrent * imgArrLen + <span class="string">&quot;px&quot;</span>; <span class="comment">//设置图片容器的宽度。</span></span><br><span class="line">    <span class="comment">//创建li</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = imgArrLen; i &lt; len; i++) &#123;</span><br><span class="line">        createUl.innerHTML += <span class="string">&quot;&lt;li&gt;&lt;/li&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    element.parentNode.appendChild(createUl); <span class="comment">//插入导航</span></span><br><span class="line">    addClass(createUl, <span class="string">&quot;Slideshow-nav&quot;</span>); <span class="comment">//添加导航样式</span></span><br><span class="line">    addClass(createUl.getElementsByTagName(<span class="string">&quot;li&quot;</span>)[<span class="number">0</span>], <span class="string">&quot;active&quot;</span>); <span class="comment">//默认设置第一个为第当前活动的li</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//编写点击函数clickLi：</span></span><br><span class="line">    clickLi();</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 点击导航</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">clickLi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        delegateEvent(createUl, <span class="string">&quot;li&quot;</span>, <span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> iTaget = -iCurrent * getIndex(<span class="built_in">this</span>);</span><br><span class="line">            removeLiClass();</span><br><span class="line">            addClass(<span class="built_in">this</span>, <span class="string">&quot;active&quot;</span>); <span class="comment">//移出</span></span><br><span class="line">            startMove(element, &#123;</span><br><span class="line">                <span class="string">&quot;left&quot;</span>: iTaget</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 用于移除所有的Li的选中状态：active</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">removeLiClass</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> oLi = createUl.getElementsByTagName(<span class="string">&quot;li&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = oLi.length; i &lt; len; i++) &#123;</span><br><span class="line">            removeClass(oLi[i], <span class="string">&quot;active&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
 
-<h4 id="第二步：实现自动播放"><a href="#第二步：实现自动播放" class="headerlink" title="第二步：实现自动播放"></a>第二步：实现自动播放</h4><blockquote>
+
+        <h4 id="第二步：实现自动播放"   >
+          <a href="#第二步：实现自动播放" class="heading-link"><i class="fas fa-link"></i></a><a href="#第二步：实现自动播放" class="headerlink" title="第二步：实现自动播放"></a>第二步：实现自动播放</h4>
+      <blockquote>
 <p>为了方便后续的封装，暂时只考虑：<strong>正序</strong>，<strong>不循环</strong>的情况！</p>
 </blockquote>
 <ol>
@@ -180,16 +227,19 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>然后你会发现问题成功的解决了！（而且我观察了大部分的轮播，都是这个效果，移入暂停，移出继续)</li>
 </ul>
 <p>这里我们的最基本的功能都实现了，代码如下：(放在<code>Slideshow()</code>函数内部)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iSpeed = <span class="number">4000</span>;<span class="comment">//定时器间隔。</span></span><br><span class="line"></span><br><span class="line">hoverElement();</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 移入图片容器暂停，移除继续播放。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hoverElement</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    addEvent(element.parentNode, <span class="string">&quot;mouseover&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">    &#125;);</span><br><span class="line">    addEvent(element.parentNode, <span class="string">&quot;mouseout&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        timer = <span class="built_in">setInterval</span>(autoPlay, iSpeed);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">timer = <span class="built_in">setInterval</span>(autoPlay, iSpeed);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 自动播放函数。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">autoPlay</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> heightLi = $(<span class="string">&quot;.Slideshow-nav .active&quot;</span>); <span class="comment">//高亮的li</span></span><br><span class="line">    <span class="keyword">var</span> iTaget;</span><br><span class="line">    iTaget = (getIndex(heightLi) + <span class="number">1</span>) === imgArrLen ? <span class="number">0</span> : (-iCurrent * (getIndex(heightLi) + <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (getIndex(heightLi) + <span class="number">1</span> === imgArrLen - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> nextLi = heightLi.nextElementSibling;</span><br><span class="line">    <span class="keyword">if</span> (nextLi) &#123;</span><br><span class="line">        removeLiClass();</span><br><span class="line">        addClass(nextLi, <span class="string">&quot;active&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    startMove(element, &#123;</span><br><span class="line">        <span class="string">&quot;left&quot;</span>: iTaget</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iSpeed = <span class="number">4000</span>;<span class="comment">//定时器间隔。</span></span><br><span class="line"></span><br><span class="line">hoverElement();</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 移入图片容器暂停，移除继续播放。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hoverElement</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    addEvent(element.parentNode, <span class="string">&quot;mouseover&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">    &#125;);</span><br><span class="line">    addEvent(element.parentNode, <span class="string">&quot;mouseout&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        timer = <span class="built_in">setInterval</span>(autoPlay, iSpeed);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">timer = <span class="built_in">setInterval</span>(autoPlay, iSpeed);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 自动播放函数。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">autoPlay</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> heightLi = $(<span class="string">&quot;.Slideshow-nav .active&quot;</span>); <span class="comment">//高亮的li</span></span><br><span class="line">    <span class="keyword">var</span> iTaget;</span><br><span class="line">    iTaget = (getIndex(heightLi) + <span class="number">1</span>) === imgArrLen ? <span class="number">0</span> : (-iCurrent * (getIndex(heightLi) + <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (getIndex(heightLi) + <span class="number">1</span> === imgArrLen - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> nextLi = heightLi.nextElementSibling;</span><br><span class="line">    <span class="keyword">if</span> (nextLi) &#123;</span><br><span class="line">        removeLiClass();</span><br><span class="line">        addClass(nextLi, <span class="string">&quot;active&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    startMove(element, &#123;</span><br><span class="line">        <span class="string">&quot;left&quot;</span>: iTaget</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
-<h4 id="第三步：添加配置项（题目要求完成）"><a href="#第三步：添加配置项（题目要求完成）" class="headerlink" title="第三步：添加配置项（题目要求完成）"></a>第三步：添加配置项（题目要求完成）</h4><ol>
+
+        <h4 id="第三步：添加配置项（题目要求完成）"   >
+          <a href="#第三步：添加配置项（题目要求完成）" class="heading-link"><i class="fas fa-link"></i></a><a href="#第三步：添加配置项（题目要求完成）" class="headerlink" title="第三步：添加配置项（题目要求完成）"></a>第三步：添加配置项（题目要求完成）</h4>
+      <ol>
 <li>获取题目要求：主要是以下三点。</li>
 <li>是否循环，默认为循环。</li>
 <li>是否反向，默认不反向。只有循环时，才可反向。</li>
 <li>轮播间隔时间，默认4000。</li>
 <li>如何实现？（使用JSON如下：）</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @param &#123;JSON&#125;         option       配置项</span></span><br><span class="line"><span class="comment"> *   @config   &#123;String&#125;  noLoop       不循环？，默认为循环，只要存在则不循环，任意值</span></span><br><span class="line"><span class="comment"> *   @config   &#123;String&#125;  reverse      是否反向，任意值。只有“noLoop”不存在时，也就是只有循环时，才执行。</span></span><br><span class="line"><span class="comment"> *   @config   &#123;Number&#125;  intervalTime 轮播间隔时间（单位为毫秒），默认为4000，</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @param &#123;JSON&#125;         option       配置项</span></span><br><span class="line"><span class="comment"> *   @config   &#123;String&#125;  noLoop       不循环？，默认为循环，只要存在则不循环，任意值</span></span><br><span class="line"><span class="comment"> *   @config   &#123;String&#125;  reverse      是否反向，任意值。只有“noLoop”不存在时，也就是只有循环时，才执行。</span></span><br><span class="line"><span class="comment"> *   @config   &#123;Number&#125;  intervalTime 轮播间隔时间（单位为毫秒），默认为4000，</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></div></figure>
 
 <ol start="3">
 <li>在<code>Slideshow()</code>内部，以下部分进行修改或添加。</li>
@@ -204,7 +254,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 </ol>
 <ul>
 <li> 第一步：删除<code>(getIndex(heightLi)+1)===imgArrLen-1</code>清除定时器的部分，只有这样才能实现循环，</li>
-<li>第二步：在上面被提取到不循环的内容中(也就是第一版的<code>autoPlay()</code>)的<code>if (nextLi)</code>部分加上<code>else</code>的情况就行了！<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在下一个元素节点不存在的情况下（也就是到了最后了），设置第一个节点为活动状态，就这样正向的循环就成功了！</span></span><br><span class="line"> <span class="keyword">else</span> &#123;</span><br><span class="line">    removeLiClass();</span><br><span class="line">    addClass($(<span class="string">&quot;.Slideshow-nav li&quot;</span>), <span class="string">&quot;active&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>第二步：在上面被提取到不循环的内容中(也就是第一版的<code>autoPlay()</code>)的<code>if (nextLi)</code>部分加上<code>else</code>的情况就行了！<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在下一个元素节点不存在的情况下（也就是到了最后了），设置第一个节点为活动状态，就这样正向的循环就成功了！</span></span><br><span class="line"> <span class="keyword">else</span> &#123;</span><br><span class="line">    removeLiClass();</span><br><span class="line">    addClass($(<span class="string">&quot;.Slideshow-nav li&quot;</span>), <span class="string">&quot;active&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure></li>
 </ul>
 <ol start="3">
 <li>反向的情况(只需要对正向循环进行修改)：</li>
@@ -221,8 +271,11 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <p>但是！不挑战一下怎么能行？</p>
 <p>为什么不把左右点击切换一起实现了呢？</p>
 <p>既然这样，我们就继续吧！</p>
-<h4 id="第四步：扩展！左右箭头实现！"><a href="#第四步：扩展！左右箭头实现！" class="headerlink" title="第四步：扩展！左右箭头实现！"></a>第四步：扩展！左右箭头实现！</h4><ol>
-<li>创建并设置箭头样式(配合css使用)<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建左右导航</span></span><br><span class="line"><span class="keyword">var</span> createSpan = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">addClass(createSpan, <span class="string">&quot;left-right&quot;</span>)</span><br><span class="line">createSpan.innerHTML = <span class="string">&quot;&lt;span class=&#x27;nav-left&#x27;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#x27;nav-right&#x27;&gt;&amp;gt;&lt;/span&gt;&quot;</span></span><br><span class="line">element.parentNode.appendChild(createSpan);</span><br></pre></td></tr></table></figure></li>
+
+        <h4 id="第四步：扩展！左右箭头实现！"   >
+          <a href="#第四步：扩展！左右箭头实现！" class="heading-link"><i class="fas fa-link"></i></a><a href="#第四步：扩展！左右箭头实现！" class="headerlink" title="第四步：扩展！左右箭头实现！"></a>第四步：扩展！左右箭头实现！</h4>
+      <ol>
+<li>创建并设置箭头样式(配合css使用)<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建左右导航</span></span><br><span class="line"><span class="keyword">var</span> createSpan = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">addClass(createSpan, <span class="string">&quot;left-right&quot;</span>)</span><br><span class="line">createSpan.innerHTML = <span class="string">&quot;&lt;span class=&#x27;nav-left&#x27;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#x27;nav-right&#x27;&gt;&amp;gt;&lt;/span&gt;&quot;</span></span><br><span class="line">element.parentNode.appendChild(createSpan);</span><br></pre></td></tr></table></div></figure></li>
 <li>创建点击事件，事件代理。</li>
 <li>炸裂的函数调用。</li>
 </ol>
@@ -238,10 +291,16 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>想想左右箭头的索引，是不是0和1。这样就懂了吧！</li>
 <li>对索引进行取反。传参！代码如下：</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">delegateEvent(createSpan, <span class="string">&quot;span&quot;</span>, <span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> heightLi = $(<span class="string">&quot;.Slideshow-nav .active&quot;</span>); <span class="comment">//高亮的待选li</span></span><br><span class="line">    <span class="keyword">var</span> leftIndex = !getIndex(<span class="built_in">this</span>); <span class="comment">//点击左时为true，点击又为false</span></span><br><span class="line">    <span class="comment">//移动的目标值，默认正向</span></span><br><span class="line">    play(leftIndex);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>至此，我们的轮播图组件就完成了！ 需要配合CSS使用。 通过这次封装，收益良多，感兴趣的话可以看看<a target="_blank" rel="noopener" href="https://github.com/guowenfh/IFE/tree/master/task0002">源码</a></p>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">delegateEvent(createSpan, <span class="string">&quot;span&quot;</span>, <span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> heightLi = $(<span class="string">&quot;.Slideshow-nav .active&quot;</span>); <span class="comment">//高亮的待选li</span></span><br><span class="line">    <span class="keyword">var</span> leftIndex = !getIndex(<span class="built_in">this</span>); <span class="comment">//点击左时为true，点击又为false</span></span><br><span class="line">    <span class="comment">//移动的目标值，默认正向</span></span><br><span class="line">    play(leftIndex);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></div></figure>
+<p>至此，我们的轮播图组件就完成了！ 需要配合CSS使用。 通过这次封装，收益良多，感兴趣的话可以看看<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/guowenfh/IFE/tree/master/task0002" >源码</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 <p>在线演示：**<a href="https://guowenfh.github.io/IFE/task0002/task0002_3.html">小练习3：图片轮播组件</a>**</p>
-<h2 id="小练习4：输入提示框"><a href="#小练习4：输入提示框" class="headerlink" title="小练习4：输入提示框"></a>小练习4：输入提示框</h2><h3 id="任务描述-3"><a href="#任务描述-3" class="headerlink" title="任务描述"></a>任务描述</h3><p>在和上一任务同一目录下面创建一个<code>task0002_4.html</code>文件，在<code>js</code>目录中创建<code>task0002_4.js</code>，并在其中编码，实现一个类似百度搜索框的输入提示的功能。</p>
+
+        <h2 id="小练习4：输入提示框"   >
+          <a href="#小练习4：输入提示框" class="heading-link"><i class="fas fa-link"></i></a><a href="#小练习4：输入提示框" class="headerlink" title="小练习4：输入提示框"></a>小练习4：输入提示框</h2>
+      
+        <h3 id="任务描述-3"   >
+          <a href="#任务描述-3" class="heading-link"><i class="fas fa-link"></i></a><a href="#任务描述-3" class="headerlink" title="任务描述"></a>任务描述</h3>
+      <p>在和上一任务同一目录下面创建一个<code>task0002_4.html</code>文件，在<code>js</code>目录中创建<code>task0002_4.js</code>，并在其中编码，实现一个类似百度搜索框的输入提示的功能。</p>
 <p>要求如下：</p>
 <ul>
 <li>允许使用鼠标点击选中提示栏中的某个选项</li>
@@ -252,7 +311,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <ul>
 <li>不要求和后端交互，可以自己伪造一份提示数据例如：</li>
 </ul>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var suggestData</span> = [<span class="string">&#x27;Simon&#x27;</span>, <span class="string">&#x27;Erik&#x27;</span>, <span class="string">&#x27;Kener&#x27;</span>];</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var suggestData</span> = [<span class="string">&#x27;Simon&#x27;</span>, <span class="string">&#x27;Erik&#x27;</span>, <span class="string">&#x27;Kener&#x27;</span>];</span><br></pre></td></tr></table></div></figure>
 
 <p><strong>中级班：</strong></p>
 <ul>
@@ -260,8 +319,14 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 </ul>
 <p>示例：</p>
 <p><img src="https://github.com/baidu-ife/ife/raw/master/2015_spring/task/task0002/img/task0002_sug.png" alt="示例"></p>
-<h3 id="实现思路-2"><a href="#实现思路-2" class="headerlink" title="实现思路"></a>实现思路</h3><p>这里我并没有一开始就直接进行数据获取的部分，而是进行了任务分解，如下：</p>
-<h4 id="第一阶段-1"><a href="#第一阶段-1" class="headerlink" title="第一阶段"></a>第一阶段</h4><ol>
+
+        <h3 id="实现思路-2"   >
+          <a href="#实现思路-2" class="heading-link"><i class="fas fa-link"></i></a><a href="#实现思路-2" class="headerlink" title="实现思路"></a>实现思路</h3>
+      <p>这里我并没有一开始就直接进行数据获取的部分，而是进行了任务分解，如下：</p>
+
+        <h4 id="第一阶段-1"   >
+          <a href="#第一阶段-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#第一阶段-1" class="headerlink" title="第一阶段"></a>第一阶段</h4>
+      <ol>
 <li>先在使用写好的<code>ul&gt;li</code>标签下，。添加3个事件<code>mouseover</code>、<code>mouseout</code>、<code>click</code>。实现点击li使其值变成输入框内的值。（直接使用事件代理）</li>
 <li>对输入框添加键盘事件（对，你没看错，只有在聚焦在输入框时才触发）</li>
 </ol>
@@ -277,11 +342,14 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>在移除高亮状态时，最好是遍历一遍。因为键盘与鼠标划过有可能同时触发，导致有多个高亮。</li>
 <li>错误处理</li>
 </ul>
-<h4 id="第二阶段-1"><a href="#第二阶段-1" class="headerlink" title="第二阶段"></a>第二阶段</h4><ol>
+
+        <h4 id="第二阶段-1"   >
+          <a href="#第二阶段-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#第二阶段-1" class="headerlink" title="第二阶段"></a>第二阶段</h4>
+      <ol>
 <li>删除原来的<code>ul&gt;li</code>html部分的<code>li</code>。添加对于输入框进行实时监听（这部分不在这里展开讲，如何实现大家去google吧，因为一展开就太多要说的了）。</li>
 </ol>
 <ul>
-<li>给个参考：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/lhb25/archive/2012/11/30/oninput-and-onpropertychange-event-for-input.html">实时监听输入框值变化</a></li>
+<li>给个参考：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.cnblogs.com/lhb25/archive/2012/11/30/oninput-and-onpropertychange-event-for-input.html" >实时监听输入框值变化</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 </ul>
 <ol start="2">
 <li>使用AJAX获取服务器上的数据，解析，遍历，并进行数据匹配。</li>
@@ -294,7 +362,10 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li><code>click</code>和<code>enter</code>部分获取的值，因为<code>span</code>标签的存在，需要使用正则进行处理，输出删除<code>span</code>后的值。</li>
 </ul>
 <p>在线演示：**<a href="https://guowenfh.github.io/IFE/task0002/task0002_4.html">小练习4：输入框即时提示</a>**</p>
-<h2 id="小练习5：界面拖拽交互"><a href="#小练习5：界面拖拽交互" class="headerlink" title="小练习5：界面拖拽交互"></a>小练习5：界面拖拽交互</h2><ul>
+
+        <h2 id="小练习5：界面拖拽交互"   >
+          <a href="#小练习5：界面拖拽交互" class="heading-link"><i class="fas fa-link"></i></a><a href="#小练习5：界面拖拽交互" class="headerlink" title="小练习5：界面拖拽交互"></a>小练习5：界面拖拽交互</h2>
+      <ul>
 <li>实现一个可拖拽交互的界面</li>
 <li>如示例图，左右两侧各有一个容器，里面的选项可以通过拖拽来左右移动</li>
 <li>被选择拖拽的容器在拖拽过程后，在原容器中消失，跟随鼠标移动</li>
@@ -303,7 +374,13 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>注意交互中良好的用户体验和使用引导</li>
 </ul>
 <p><img src="https://github.com/baidu-ife/ife/raw/master/2015_spring/task/task0002/img/task0002_drag.png" alt="示例"></p>
-<h3 id="实现思路："><a href="#实现思路：" class="headerlink" title="实现思路："></a>实现思路：</h3><h4 id="第一步：封装拖拽函数"><a href="#第一步：封装拖拽函数" class="headerlink" title="第一步：封装拖拽函数"></a>第一步：封装拖拽函数</h4><blockquote>
+
+        <h3 id="实现思路："   >
+          <a href="#实现思路：" class="heading-link"><i class="fas fa-link"></i></a><a href="#实现思路：" class="headerlink" title="实现思路："></a>实现思路：</h3>
+      
+        <h4 id="第一步：封装拖拽函数"   >
+          <a href="#第一步：封装拖拽函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#第一步：封装拖拽函数" class="headerlink" title="第一步：封装拖拽函数"></a>第一步：封装拖拽函数</h4>
+      <blockquote>
 <p>开一个DEMO页面，实践如下：</p>
 </blockquote>
 <ol>
@@ -317,15 +394,18 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>那么怎么改变呢？获取鼠标在<code>div</code>中的位置？对。就这样，在鼠标按下时记录鼠标在<code>div</code>中的位置.</li>
 <li>在鼠标移动时，用当前的位置，减去刚刚的位置，这就是应该的值！</li>
 <li>别忘了鼠标抬起时，需要清除事件，不然鼠标就粘住了。<blockquote>
-<p>这里用到了event,事件对象的相关概念，推荐观看慕课网的视频。<a target="_blank" rel="noopener" href="http://www.imooc.com/learn/138">DOM事件探秘</a></p>
+<p>这里用到了event,事件对象的相关概念，推荐观看慕课网的视频。<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.imooc.com/learn/138" >DOM事件探秘</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
 </blockquote>
 </li>
 <li>善用this。</li>
 </ol>
 <p><strong>扩展</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 鼠标拖拽函数。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 需要拖拽的对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setDrag</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">    addEvent(element, <span class="string">&quot;mousedown&quot;</span>, onmousedown);</span><br><span class="line">    <span class="comment">//鼠标按下</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onmousedown</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> oEvent = ev || event;</span><br><span class="line">        <span class="keyword">var</span> disX = oEvent.clientX - <span class="built_in">this</span>.offsetLeft;</span><br><span class="line">        <span class="keyword">var</span> disY = oEvent.clientY - <span class="built_in">this</span>.offsetTop;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        addEvent(<span class="built_in">document</span>, <span class="string">&quot;mousemove&quot;</span>, onmousemove);</span><br><span class="line">        addEvent(<span class="built_in">document</span>, <span class="string">&quot;mouseup&quot;</span>, onmouseup);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 鼠标移动</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">onmousemove</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> oEvent = ev || event;</span><br><span class="line">            that.style.left = oEvent.clientX - disX + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">            that.style.top = oEvent.clientY - disY + <span class="string">&quot;px&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 鼠标抬起删除事件</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">onmouseup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            removeEvent(<span class="built_in">document</span>, <span class="string">&quot;mousemove&quot;</span>, onmousemove);</span><br><span class="line">            removeEvent(<span class="built_in">document</span>, <span class="string">&quot;mouseup&quot;</span>, onmouseup);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 鼠标拖拽函数。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 需要拖拽的对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setDrag</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">    addEvent(element, <span class="string">&quot;mousedown&quot;</span>, onmousedown);</span><br><span class="line">    <span class="comment">//鼠标按下</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onmousedown</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> oEvent = ev || event;</span><br><span class="line">        <span class="keyword">var</span> disX = oEvent.clientX - <span class="built_in">this</span>.offsetLeft;</span><br><span class="line">        <span class="keyword">var</span> disY = oEvent.clientY - <span class="built_in">this</span>.offsetTop;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        addEvent(<span class="built_in">document</span>, <span class="string">&quot;mousemove&quot;</span>, onmousemove);</span><br><span class="line">        addEvent(<span class="built_in">document</span>, <span class="string">&quot;mouseup&quot;</span>, onmouseup);</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 鼠标移动</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">onmousemove</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> oEvent = ev || event;</span><br><span class="line">            that.style.left = oEvent.clientX - disX + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">            that.style.top = oEvent.clientY - disY + <span class="string">&quot;px&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 鼠标抬起删除事件</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">onmouseup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            removeEvent(<span class="built_in">document</span>, <span class="string">&quot;mousemove&quot;</span>, onmousemove);</span><br><span class="line">            removeEvent(<span class="built_in">document</span>, <span class="string">&quot;mouseup&quot;</span>, onmouseup);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
-<h4 id="第二步：布局转换函数"><a href="#第二步：布局转换函数" class="headerlink" title="第二步：布局转换函数"></a>第二步：布局转换函数</h4><ol>
+
+        <h4 id="第二步：布局转换函数"   >
+          <a href="#第二步：布局转换函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#第二步：布局转换函数" class="headerlink" title="第二步：布局转换函数"></a>第二步：布局转换函数</h4>
+      <ol>
 <li>两个参数，第一个参数，传入父级对象。第二个参数传入标签名，</li>
 <li>循环，使用数组，对象，获取标签当前元素的位置<code>left</code>，<code>top</code>。（<code>offsetLeft</code>）。这里不能使用获取实际样式函数，因为本身就需要获取其相对父元素的位置。</li>
 <li>第二个循环</li>
@@ -338,23 +418,335 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <ol start="4">
 <li>调用函数，把对象从文档流布局，变成绝对定位布局。</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 布局转换函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElment&#125;</span> </span>element  HTML对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span>     </span>childEle 其内需要转换的标签名</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toPosition</span>(<span class="params">element, childEle</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> eleArr = element.getElementsByTagName(childEle);</span><br><span class="line">    <span class="keyword">var</span> aPos = [];</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = eleArr.length; i &lt; len; i++) &#123;</span><br><span class="line">        aPos[i] = &#123;</span><br><span class="line">            left: eleArr[i].offsetLeft,</span><br><span class="line">            top: eleArr[i].offsetTop</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = eleArr.length; i &lt; len; i++) &#123;</span><br><span class="line">        eleArr[i].style.left = aPos[i].left + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        eleArr[i].style.top = aPos[i].top + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        eleArr[i].style.position = <span class="string">&quot;absolute&quot;</span>;</span><br><span class="line">        eleArr[i].style.margin = <span class="string">&quot;0&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 布局转换函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElment&#125;</span> </span>element  HTML对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span>     </span>childEle 其内需要转换的标签名</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toPosition</span>(<span class="params">element, childEle</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> eleArr = element.getElementsByTagName(childEle);</span><br><span class="line">    <span class="keyword">var</span> aPos = [];</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = eleArr.length; i &lt; len; i++) &#123;</span><br><span class="line">        aPos[i] = &#123;</span><br><span class="line">            left: eleArr[i].offsetLeft,</span><br><span class="line">            top: eleArr[i].offsetTop</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = eleArr.length; i &lt; len; i++) &#123;</span><br><span class="line">        eleArr[i].style.left = aPos[i].left + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        eleArr[i].style.top = aPos[i].top + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        eleArr[i].style.position = <span class="string">&quot;absolute&quot;</span>;</span><br><span class="line">        eleArr[i].style.margin = <span class="string">&quot;0&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
 <p>在线演示：**<a href="https://guowenfh.github.io/IFE/task0002/task0002_5.html">小练习5：拖拽交互</a>**</p>
-<h4 id="第三步：实现拖拽"><a href="#第三步：实现拖拽" class="headerlink" title="第三步：实现拖拽"></a>第三步：实现拖拽</h4><blockquote>
+
+        <h4 id="第三步：实现拖拽"   >
+          <a href="#第三步：实现拖拽" class="heading-link"><i class="fas fa-link"></i></a><a href="#第三步：实现拖拽" class="headerlink" title="第三步：实现拖拽"></a>第三步：实现拖拽</h4>
+      <blockquote>
 <p>前面我们已经实现了<code>setDrag(element)</code>函数，常规方法就是直使用循环，然后传入<code>element</code>。</p>
 </blockquote>
 <p>但是，为什么不用事件代理呢？</p>
 <p>特别简单，只需要对上面写的函数进行一些简单的改装。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">delegateEvent(parentElement, <span class="string">&quot;li&quot;</span>, <span class="string">&quot;mousedown&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line"><span class="comment">//此处是原函数中的内容。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">delegateEvent(parentElement, <span class="string">&quot;li&quot;</span>, <span class="string">&quot;mousedown&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line"><span class="comment">//此处是原函数中的内容。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
 <p><strong>现在知道为什么上面的函数会用到this了吧？</strong></p>
-<h4 id="第四步：碰撞检测函数"><a href="#第四步：碰撞检测函数" class="headerlink" title="第四步：碰撞检测函数"></a>第四步：碰撞检测函数</h4><p>先来看张图：<br><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewio5ne1oj20jg0bygm0.jpg" alt="碰撞检测示意图"></p>
+
+        <h4 id="第四步：碰撞检测函数"   >
+          <a href="#第四步：碰撞检测函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#第四步：碰撞检测函数" class="headerlink" title="第四步：碰撞检测函数"></a>第四步：碰撞检测函数</h4>
+      <p>先来看张图：<br><img src="https://ws1.sinaimg.cn/large/82d12951gy1fewio5ne1oj20jg0bygm0.jpg" alt="碰撞检测示意图"></p>
 <p>是不是有瞬间豁然开朗的感觉呢？</p>
 <p>获取相关值，只需要考虑不碰不上的情况就行了！。如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 碰撞检测函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;object&#125;</span>  </span>obj1 对象1</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;object&#125;</span>  </span>obj2 对象2</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>碰撞时返回true，否则反正false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hitDetection</span>(<span class="params">obj1, obj2</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//对象1的相关值</span></span><br><span class="line">    <span class="keyword">var</span> l1 = obj1.offsetLeft;</span><br><span class="line">    <span class="keyword">var</span> r1 = obj1.offsetLeft + obj1.offsetWidth;</span><br><span class="line">    <span class="keyword">var</span> t1 = obj1.offsetTop;</span><br><span class="line">    <span class="keyword">var</span> b1 = obj1.offsetTop + obj1.offsetHeight;</span><br><span class="line">    <span class="comment">//对象2的相关值</span></span><br><span class="line">    <span class="keyword">var</span> l2 = obj2.offsetLeft;</span><br><span class="line">    <span class="keyword">var</span> r2 = obj2.offsetLeft + obj2.offsetWidth;</span><br><span class="line">    <span class="keyword">var</span> t2 = obj2.offsetTop;</span><br><span class="line">    <span class="keyword">var</span> b2 = obj2.offsetTop + obj2.offsetHeight;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (r1 &lt; l1 || l1 &gt; r2 || b1 &lt; t2 || t1 &gt; b2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//没碰上</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 碰撞检测函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;object&#125;</span>  </span>obj1 对象1</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;object&#125;</span>  </span>obj2 对象2</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>碰撞时返回true，否则反正false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hitDetection</span>(<span class="params">obj1, obj2</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//对象1的相关值</span></span><br><span class="line">    <span class="keyword">var</span> l1 = obj1.offsetLeft;</span><br><span class="line">    <span class="keyword">var</span> r1 = obj1.offsetLeft + obj1.offsetWidth;</span><br><span class="line">    <span class="keyword">var</span> t1 = obj1.offsetTop;</span><br><span class="line">    <span class="keyword">var</span> b1 = obj1.offsetTop + obj1.offsetHeight;</span><br><span class="line">    <span class="comment">//对象2的相关值</span></span><br><span class="line">    <span class="keyword">var</span> l2 = obj2.offsetLeft;</span><br><span class="line">    <span class="keyword">var</span> r2 = obj2.offsetLeft + obj2.offsetWidth;</span><br><span class="line">    <span class="keyword">var</span> t2 = obj2.offsetTop;</span><br><span class="line">    <span class="keyword">var</span> b2 = obj2.offsetTop + obj2.offsetHeight;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (r1 &lt; l1 || l1 &gt; r2 || b1 &lt; t2 || t1 &gt; b2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//没碰上</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
-<h4 id="第五步：处理各种碰撞情况"><a href="#第五步：处理各种碰撞情况" class="headerlink" title="第五步：处理各种碰撞情况"></a>第五步：处理各种碰撞情况</h4><blockquote>
+
+        <h4 id="第五步：处理各种碰撞情况"   >
+          <a href="#第五步：处理各种碰撞情况" class="heading-link"><i class="fas fa-link"></i></a><a href="#第五步：处理各种碰撞情况" class="headerlink" title="第五步：处理各种碰撞情况"></a>第五步：处理各种碰撞情况</h4>
+      <blockquote>
 <p>这里讲起来就太复杂了。源代码中注释还是比较详细的，有兴趣可以看下</p>
 </blockquote>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2015/12/24/task0002-Exercises/">http://guowenfh.github.io/2015/12/24/task0002-Exercises/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/JS/">JS</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2/">百度前端技术学院</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/task0002/">task0002</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2015/12/26/SublimeText/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">一个前端程序猿的Sublime Text3的自我修养</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2015/12/21/JS-Animated-Frames/"><span class="paginator-prev__text">JavaScript完美运动框架的进阶之旅</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A01%EF%BC%9A%E5%A4%84%E7%90%86%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">小练习1：处理用户输入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">任务描述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">第一阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.2.</span> <span class="toc-text">第二阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.3.</span> <span class="toc-text">第三阶段</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E5%AE%8C%E6%88%90"><span class="toc-number">1.2.</span> <span class="toc-text">最终完成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A02%EF%BC%9A%E6%97%A5%E6%9C%9F%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">小练习2：日期对象的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">任务描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="toc-number">2.2.</span> <span class="toc-text">实现思路</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%E6%97%A5%E6%9C%9F%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.2.1.</span> <span class="toc-text">了解日期对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%A7%8B%EF%BC%9A"><span class="toc-number">2.2.2.</span> <span class="toc-text">正式开始：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A03%EF%BC%9A%E8%BD%AE%E6%92%AD%E5%9B%BE%E7%BB%84%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">小练习3：轮播图组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.1.</span> <span class="toc-text">任务描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF-1"><span class="toc-number">3.2.</span> <span class="toc-text">实现思路:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%9E%E7%8E%B0%E7%82%B9%E5%87%BB%E5%88%87%E6%8D%A2"><span class="toc-number">3.2.1.</span> <span class="toc-text">第一步：实现点击切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE"><span class="toc-number">3.2.2.</span> <span class="toc-text">第二步：实现自动播放</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE%E9%A1%B9%EF%BC%88%E9%A2%98%E7%9B%AE%E8%A6%81%E6%B1%82%E5%AE%8C%E6%88%90%EF%BC%89"><span class="toc-number">3.2.3.</span> <span class="toc-text">第三步：添加配置项（题目要求完成）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E6%89%A9%E5%B1%95%EF%BC%81%E5%B7%A6%E5%8F%B3%E7%AE%AD%E5%A4%B4%E5%AE%9E%E7%8E%B0%EF%BC%81"><span class="toc-number">3.2.4.</span> <span class="toc-text">第四步：扩展！左右箭头实现！</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A04%EF%BC%9A%E8%BE%93%E5%85%A5%E6%8F%90%E7%A4%BA%E6%A1%86"><span class="toc-number">4.</span> <span class="toc-text">小练习4：输入提示框</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0-3"><span class="toc-number">4.1.</span> <span class="toc-text">任务描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF-2"><span class="toc-number">4.2.</span> <span class="toc-text">实现思路</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">第一阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">第二阶段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A05%EF%BC%9A%E7%95%8C%E9%9D%A2%E6%8B%96%E6%8B%BD%E4%BA%A4%E4%BA%92"><span class="toc-number">5.</span> <span class="toc-text">小练习5：界面拖拽交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">实现思路：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%B0%81%E8%A3%85%E6%8B%96%E6%8B%BD%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.1.</span> <span class="toc-text">第一步：封装拖拽函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%B8%83%E5%B1%80%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.2.</span> <span class="toc-text">第二步：布局转换函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%AE%9E%E7%8E%B0%E6%8B%96%E6%8B%BD"><span class="toc-number">5.1.3.</span> <span class="toc-text">第三步：实现拖拽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.4.</span> <span class="toc-text">第四步：碰撞检测函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E5%A4%84%E7%90%86%E5%90%84%E7%A7%8D%E7%A2%B0%E6%92%9E%E6%83%85%E5%86%B5"><span class="toc-number">5.1.5.</span> <span class="toc-text">第五步：处理各种碰撞情况</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2015/12/24/task0002-Exercises/">http://guowenfh.github.io/2015/12/24/task0002-Exercises/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/JS/">JS</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2/">百度前端技术学院</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/task0002/">task0002</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2015/12/26/SublimeText/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">一个前端程序猿的Sublime Text3的自我修养</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2015/12/21/JS-Animated-Frames/"><span class="paginator-prev__text">JavaScript完美运动框架的进阶之旅</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A01%EF%BC%9A%E5%A4%84%E7%90%86%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">
+          小练习1：处理用户输入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">
+          任务描述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">
+          第一阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.2.</span> <span class="toc-text">
+          第二阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.3.</span> <span class="toc-text">
+          第三阶段</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E5%AE%8C%E6%88%90"><span class="toc-number">1.2.</span> <span class="toc-text">
+          最终完成</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A02%EF%BC%9A%E6%97%A5%E6%9C%9F%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">
+          小练习2：日期对象的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0-1"><span class="toc-number">2.1.</span> <span class="toc-text">
+          任务描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="toc-number">2.2.</span> <span class="toc-text">
+          实现思路</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%E6%97%A5%E6%9C%9F%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.2.1.</span> <span class="toc-text">
+          了解日期对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%BC%8F%E5%BC%80%E5%A7%8B%EF%BC%9A"><span class="toc-number">2.2.2.</span> <span class="toc-text">
+          正式开始：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A03%EF%BC%9A%E8%BD%AE%E6%92%AD%E5%9B%BE%E7%BB%84%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">
+          小练习3：轮播图组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0-2"><span class="toc-number">3.1.</span> <span class="toc-text">
+          任务描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF-1"><span class="toc-number">3.2.</span> <span class="toc-text">
+          实现思路:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%9E%E7%8E%B0%E7%82%B9%E5%87%BB%E5%88%87%E6%8D%A2"><span class="toc-number">3.2.1.</span> <span class="toc-text">
+          第一步：实现点击切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE"><span class="toc-number">3.2.2.</span> <span class="toc-text">
+          第二步：实现自动播放</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE%E9%A1%B9%EF%BC%88%E9%A2%98%E7%9B%AE%E8%A6%81%E6%B1%82%E5%AE%8C%E6%88%90%EF%BC%89"><span class="toc-number">3.2.3.</span> <span class="toc-text">
+          第三步：添加配置项（题目要求完成）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E6%89%A9%E5%B1%95%EF%BC%81%E5%B7%A6%E5%8F%B3%E7%AE%AD%E5%A4%B4%E5%AE%9E%E7%8E%B0%EF%BC%81"><span class="toc-number">3.2.4.</span> <span class="toc-text">
+          第四步：扩展！左右箭头实现！</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A04%EF%BC%9A%E8%BE%93%E5%85%A5%E6%8F%90%E7%A4%BA%E6%A1%86"><span class="toc-number">4.</span> <span class="toc-text">
+          小练习4：输入提示框</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0-3"><span class="toc-number">4.1.</span> <span class="toc-text">
+          任务描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF-2"><span class="toc-number">4.2.</span> <span class="toc-text">
+          实现思路</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">
+          第一阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">
+          第二阶段</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%83%E4%B9%A05%EF%BC%9A%E7%95%8C%E9%9D%A2%E6%8B%96%E6%8B%BD%E4%BA%A4%E4%BA%92"><span class="toc-number">5.</span> <span class="toc-text">
+          小练习5：界面拖拽交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">
+          实现思路：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%B0%81%E8%A3%85%E6%8B%96%E6%8B%BD%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.1.</span> <span class="toc-text">
+          第一步：封装拖拽函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%B8%83%E5%B1%80%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.2.</span> <span class="toc-text">
+          第二步：布局转换函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%AE%9E%E7%8E%B0%E6%8B%96%E6%8B%BD"><span class="toc-number">5.1.3.</span> <span class="toc-text">
+          第三步：实现拖拽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.4.</span> <span class="toc-text">
+          第四步：碰撞检测函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E5%A4%84%E7%90%86%E5%90%84%E7%A7%8D%E7%A2%B0%E6%92%9E%E6%83%85%E5%86%B5"><span class="toc-number">5.1.5.</span> <span class="toc-text">
+          第五步：处理各种碰撞情况</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://ws1.sinaimg.cn/large/82d12951gy1fewv9toa2xj206y06ygnp.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">芝兰生于深林，不以无人而不芳。</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/guowenfh" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2194745681" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/guowenfh" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="mailto:guowen921@gmail.com" target="_blank" rel="noopener" data-popover="social.Gmail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">Gmail</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">19</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span><span class="footer__devider">|</span><span>浙ICP备17036927号-1</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

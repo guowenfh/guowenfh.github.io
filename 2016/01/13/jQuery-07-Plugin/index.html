@@ -1,22 +1,22 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="插件(Plugin)也成为 jQuery 扩展(Extension)，是一种遵循一定规范的应用程序接口编写出来的程序。目前 jQuery 插件已超过几千种，由来自世界各地的开发者共同编写、验证和完善。而对于jQuery开发者而言，直接使用这些插件将快速稳定架构系统，节约项目成本。  一． 插件概述插件是以 jQuery 的核心代码为基础，编写出复合一定规范的应用程序。也就是说，插件也是 jQue">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="插件(Plugin)也成为 jQuery 扩展(Extension)，是一种遵循一定规范的应用程序接口编写出来的程序。目前 jQuery 插件已超过几千种，由来自世界各地的开发者共同编写、验证和完善。而对于jQuery开发者而言，直接使用这些插件将快速稳定架构系统，节约项目成本。                      一． 插件概述       插件是以 jQuery 的核心代码为基础，编写">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jQuery入门笔记之（七）插件">
 <meta property="og:url" content="http://guowenfh.github.io/2016/01/13/jQuery-07-Plugin/index.html">
 <meta property="og:site_name" content="三省吾身丶丶">
-<meta property="og:description" content="插件(Plugin)也成为 jQuery 扩展(Extension)，是一种遵循一定规范的应用程序接口编写出来的程序。目前 jQuery 插件已超过几千种，由来自世界各地的开发者共同编写、验证和完善。而对于jQuery开发者而言，直接使用这些插件将快速稳定架构系统，节约项目成本。  一． 插件概述插件是以 jQuery 的核心代码为基础，编写出复合一定规范的应用程序。也就是说，插件也是 jQue">
-<meta property="og:locale">
+<meta property="og:description" content="插件(Plugin)也成为 jQuery 扩展(Extension)，是一种遵循一定规范的应用程序接口编写出来的程序。目前 jQuery 插件已超过几千种，由来自世界各地的开发者共同编写、验证和完善。而对于jQuery开发者而言，直接使用这些插件将快速稳定架构系统，节约项目成本。                      一． 插件概述       插件是以 jQuery 的核心代码为基础，编写">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2016-01-13T09:20:59.000Z">
 <meta property="article:modified_time" content="2020-03-12T04:04:13.290Z">
 <meta property="article:author" content="guowenfh">
 <meta property="article:tag" content="jQuery">
-<meta name="twitter:card" content="summary"><title>jQuery入门笔记之（七）插件 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2016/01/13/jQuery-07-Plugin/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:card" content="summary"><title>jQuery入门笔记之（七）插件 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2016/01/13/jQuery-07-Plugin/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
-  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":true},
   postWidget: {"endText":true},
   nightMode: {"enable":true},
   back2top: {"enable":true},
@@ -29,33 +29,44 @@ var CONFIG = {
   pjax: undefined,
   externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
   shortcuts: undefined,
-  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
-</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">jQuery入门笔记之（七）插件</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2016-01-13</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><blockquote>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">jQuery入门笔记之（七）插件</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2016-01-13</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-03-12</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.5k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">15分</span></span></div></header><div class="post-body"><blockquote>
 <p>插件(Plugin)也成为 jQuery 扩展(Extension)，是一种遵循一定规范的应用程序接口编写出来的程序。目前 jQuery 插件已超过几千种，由来自世界各地的开发者共同编写、验证和完善。而对于jQuery开发者而言，直接使用这些插件将快速稳定架构系统，节约项目成本。</p>
 </blockquote>
-<h2 id="一．-插件概述"><a href="#一．-插件概述" class="headerlink" title="一． 插件概述"></a>一． 插件概述</h2><p>插件是以 jQuery 的核心代码为基础，编写出复合一定规范的应用程序。也就是说，插件也是 jQuery 代码，通过 js 文件引入的方式植入即可。<br>插件的种类很多，主要大致可以分为：UI 类、表单及验证类、输入类、特效类、Ajax类、滑动类、图形图像类、导航类、综合工具类、动画类等等。<br>引入插件是需要一定步骤的，基本如下：</p>
+
+        <h2 id="一．-插件概述"   >
+          <a href="#一．-插件概述" class="heading-link"><i class="fas fa-link"></i></a><a href="#一．-插件概述" class="headerlink" title="一． 插件概述"></a>一． 插件概述</h2>
+      <p>插件是以 jQuery 的核心代码为基础，编写出复合一定规范的应用程序。也就是说，插件也是 jQuery 代码，通过 js 文件引入的方式植入即可。<br>插件的种类很多，主要大致可以分为：UI 类、表单及验证类、输入类、特效类、Ajax类、滑动类、图形图像类、导航类、综合工具类、动画类等等。<br>引入插件是需要一定步骤的，基本如下：</p>
 <ol>
 <li>必须先引入 jquery.js 文件，而且在所有插件之前引入；</li>
 <li>引入插件；</li>
 <li>引入插件的周边，比如皮肤、中文包等。</li>
 </ol>
 <p>比如最常用到的表单验证插件：<code>validate</code>，除了最基本的插件文件<code>jquery.validate.min.js</code>之外，还有着<code>messages_zh.js</code>等等各国的语言包可以供你使用。</p>
-<p>如何使用该插件在这里就不进行描述了，可以去看看慕课网上的视频<a target="_blank" rel="noopener" href="http://www.imooc.com/learn/385">jQuery插件——Validation Plugin</a>，里面详细的描述了这个插件的各种配置项，以及扩展。</p>
+<p>如何使用该插件在这里就不进行描述了，可以去看看慕课网上的视频<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.imooc.com/learn/385" >jQuery插件——Validation Plugin</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，里面详细的描述了这个插件的各种配置项，以及扩展。</p>
 <p>触类旁通，一个优秀的插件，详细的说明文档必不可少，详细的看说明文档能，并且在本地进行测试能让你快速的入门各种插件的使用。</p>
 <p>还有各种各样的别人编写好的插件可以供你使用：比如管理cookie的插件–cookie等等。</p>
-<p>插件可以去jQuery官网的插件模块进行查找<a target="_blank" rel="noopener" href="http://plugins.jquery.com/">The jQuery Plugin Registry</a></p>
-<h2 id="二-自定义插件"><a href="#二-自定义插件" class="headerlink" title="二. 自定义插件"></a>二. 自定义插件</h2><p>前面我们使用了别人提供好的插件，使用起来非常的方便。如果市面上找不到自己满意的插件，并且想自己封装一个插件提供给别人使用。那么就需要自己编写一个 jQuery 插件了。</p>
-<h3 id="插件种类"><a href="#插件种类" class="headerlink" title="插件种类"></a>插件种类</h3><p>按照功能分类，插件的形式可以分为一下三类：</p>
+<p>插件可以去jQuery官网的插件模块进行查找<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://plugins.jquery.com/" >The jQuery Plugin Registry</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+
+        <h2 id="二-自定义插件"   >
+          <a href="#二-自定义插件" class="heading-link"><i class="fas fa-link"></i></a><a href="#二-自定义插件" class="headerlink" title="二. 自定义插件"></a>二. 自定义插件</h2>
+      <p>前面我们使用了别人提供好的插件，使用起来非常的方便。如果市面上找不到自己满意的插件，并且想自己封装一个插件提供给别人使用。那么就需要自己编写一个 jQuery 插件了。</p>
+
+        <h3 id="插件种类"   >
+          <a href="#插件种类" class="heading-link"><i class="fas fa-link"></i></a><a href="#插件种类" class="headerlink" title="插件种类"></a>插件种类</h3>
+      <p>按照功能分类，插件的形式可以分为一下三类：</p>
 <ol>
 <li>封装对象方法的插件；（也就是基于某个 DOM 元素的 jQuery 对象，局部性，使用最多）</li>
 <li>封装全局函数的插件；（全局性的封装）</li>
 <li>选择器插件。(类似与.find()，例如：<code>color(red)</code>来选择所有的红色元素之类)</li>
 </ol>
-<h3 id="插件的基本要点"><a href="#插件的基本要点" class="headerlink" title="插件的基本要点"></a>插件的基本要点</h3><p>主要用以以解决各种因为插件导致的冲突、错误等问题，包括如下：</p>
+
+        <h3 id="插件的基本要点"   >
+          <a href="#插件的基本要点" class="heading-link"><i class="fas fa-link"></i></a><a href="#插件的基本要点" class="headerlink" title="插件的基本要点"></a>插件的基本要点</h3>
+      <p>主要用以以解决各种因为插件导致的冲突、错误等问题，包括如下：</p>
 <ol>
 <li>插件名推荐使用 jQuery.[插件名].js，以免和其他 js 文件或者其他库相冲突（可以使用alert(<code>$.[插件名]</code>)验证是否存在该全局方法）；</li>
 <li>局部对象附加 jQuery.fn 对象上，全局函数附加在 jQuery对象本身上（可以使用alert(<code>$(selector).[插件名]</code>)验证是否存在该局部方法）；</li>
@@ -63,35 +74,316 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>可以通过 this.each 来遍历所有元素；</li>
 <li>所有的方法或插件，必须用分号结尾，避免出现问题（为了更稳妥，可在插件头部先加上一个分号）；</li>
 <li>插件应该返回的是 jQuery 对象，以保证可链式操作；</li>
-<li>避免插件内部使用$，如果要使用，使用闭包把传递 jQuery 进去，使插件内部继续使用$作为jQuery的别名。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;<span class="comment">//这里将$符作为匿名函数的形参</span></span><br><span class="line"><span class="comment">/*在此处编写代码，可使用$作为jQuery的缩写别名*/</span></span><br><span class="line">&#125;)(jQuery);<span class="comment">//这里将jQuery作为实参传递给匿名函数了</span></span><br></pre></td></tr></table></figure></li>
+<li>避免插件内部使用$，如果要使用，使用闭包把传递 jQuery 进去，使插件内部继续使用$作为jQuery的别名。<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;<span class="comment">//这里将$符作为匿名函数的形参</span></span><br><span class="line"><span class="comment">/*在此处编写代码，可使用$作为jQuery的缩写别名*/</span></span><br><span class="line">&#125;)(jQuery);<span class="comment">//这里将jQuery作为实参传递给匿名函数了</span></span><br></pre></td></tr></table></div></figure></li>
 </ol>
-<h3 id="编写一个插件"><a href="#编写一个插件" class="headerlink" title="编写一个插件"></a>编写一个插件</h3><p>假设我们的插件需求是：实现一个下拉菜单，在移入该元素时，把对应的下拉列表展现出来，移出时收回。并且可以设置其展开时的文字颜色。</p>
+
+        <h3 id="编写一个插件"   >
+          <a href="#编写一个插件" class="heading-link"><i class="fas fa-link"></i></a><a href="#编写一个插件" class="headerlink" title="编写一个插件"></a>编写一个插件</h3>
+      <p>假设我们的插件需求是：实现一个下拉菜单，在移入该元素时，把对应的下拉列表展现出来，移出时收回。并且可以设置其展开时的文字颜色。</p>
 <p>根据惯例，我们在编写插件时，可以对于html结构有所约束。现在假设我们的页面上有如下HTML结构：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表1</span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表6<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表2</span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表6<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 默认已经引入jquery --&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表1</span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表6<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表2</span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>导航列表6<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 默认已经引入jquery --&gt;</span></span><br></pre></td></tr></table></div></figure>
 
 <p>在这里，我们就对我们的插件实现效果有了第一个要求，必须在<code>对于需要hover展现的元素</code>内部下面建立<code>ul</code>列表，且<code>className</code>必须为<code>nav</code>。（插件内部都是根据该条件来做文章）</p>
 <p>下面就可以开始编写我们的插件了。保存为<code>jQuery.nav.js</code>，（符合上面所说的要求，默认已经导入）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</span><br><span class="line">    $.extend(&#123; <span class="comment">//插件定义在全局方法上</span></span><br><span class="line">        <span class="string">&quot;nav&quot;</span> : <span class="function"><span class="keyword">function</span> (<span class="params">color</span>)</span>&#123;<span class="comment">//传参，这里只是抛砖引玉，在您编写的时候，参数选项可以更加丰富，例如传入json对象等等</span></span><br><span class="line">            $(<span class="string">&#x27;.nav&#x27;</span>).css(&#123;<span class="comment">//对展开的下拉列表设置样式，此处在下面进行详细说明</span></span><br><span class="line">                <span class="string">&quot;list-style&quot;</span> : <span class="string">&quot;none&quot;</span>,</span><br><span class="line">                <span class="string">&quot;margin&quot;</span> : <span class="number">0</span>,</span><br><span class="line">                <span class="string">&quot;padding&quot;</span> : <span class="number">0</span>,</span><br><span class="line">                <span class="string">&quot;display&quot;</span> : <span class="string">&quot;none&quot;</span>,</span><br><span class="line">                <span class="string">&quot;color&quot;</span>:color<span class="comment">//由用户控制hover时，展现出来列表的文字颜色</span></span><br><span class="line">            &#125;);</span><br><span class="line">            $(<span class="string">&#x27;.nav&#x27;</span>).parent().hover(<span class="comment">//这里用到了.nav的父节点（就是hover到的元素）</span></span><br><span class="line">                <span class="comment">//因为我们只能在插件要求的范围内进行设定，若是使用了外部的选择器，就违背了这个原则</span></span><br><span class="line">                <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">                    $(<span class="built_in">this</span>).find(<span class="string">&quot;.nav&quot;</span>).stop().slideDown(<span class="string">&quot;normal&quot;</span>);<span class="comment">//注意我们在这里使用了jquery的动画方法</span></span><br><span class="line">                &#125;,<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">                    $(<span class="built_in">this</span>).find(<span class="string">&quot;.nav&quot;</span>).stop().slideUp(<span class="string">&quot;normal&quot;</span>);<span class="comment">//注意stop()的使用，不然会有类似手风琴效果的出现，但那并不是我们需要的</span></span><br><span class="line">                &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)(jQuery);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</span><br><span class="line">    $.extend(&#123; <span class="comment">//插件定义在全局方法上</span></span><br><span class="line">        <span class="string">&quot;nav&quot;</span> : <span class="function"><span class="keyword">function</span> (<span class="params">color</span>)</span>&#123;<span class="comment">//传参，这里只是抛砖引玉，在您编写的时候，参数选项可以更加丰富，例如传入json对象等等</span></span><br><span class="line">            $(<span class="string">&#x27;.nav&#x27;</span>).css(&#123;<span class="comment">//对展开的下拉列表设置样式，此处在下面进行详细说明</span></span><br><span class="line">                <span class="string">&quot;list-style&quot;</span> : <span class="string">&quot;none&quot;</span>,</span><br><span class="line">                <span class="string">&quot;margin&quot;</span> : <span class="number">0</span>,</span><br><span class="line">                <span class="string">&quot;padding&quot;</span> : <span class="number">0</span>,</span><br><span class="line">                <span class="string">&quot;display&quot;</span> : <span class="string">&quot;none&quot;</span>,</span><br><span class="line">                <span class="string">&quot;color&quot;</span>:color<span class="comment">//由用户控制hover时，展现出来列表的文字颜色</span></span><br><span class="line">            &#125;);</span><br><span class="line">            $(<span class="string">&#x27;.nav&#x27;</span>).parent().hover(<span class="comment">//这里用到了.nav的父节点（就是hover到的元素）</span></span><br><span class="line">                <span class="comment">//因为我们只能在插件要求的范围内进行设定，若是使用了外部的选择器，就违背了这个原则</span></span><br><span class="line">                <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">                    $(<span class="built_in">this</span>).find(<span class="string">&quot;.nav&quot;</span>).stop().slideDown(<span class="string">&quot;normal&quot;</span>);<span class="comment">//注意我们在这里使用了jquery的动画方法</span></span><br><span class="line">                &#125;,<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">                    $(<span class="built_in">this</span>).find(<span class="string">&quot;.nav&quot;</span>).stop().slideUp(<span class="string">&quot;normal&quot;</span>);<span class="comment">//注意stop()的使用，不然会有类似手风琴效果的出现，但那并不是我们需要的</span></span><br><span class="line">                &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)(jQuery);</span><br></pre></td></tr></table></div></figure>
 
 <p>注意：这里使用css方法只是为了方便，在真实插件编写过程中，若存在如此大量的css样式编写时，推荐在外部定义css样式，例如可改写为：<br>插件依赖的css，需和插件一起导入html中</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hover</span>&#123;<span class="comment">/*插件必须样式*/</span></span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hover</span>&#123;<span class="comment">/*插件必须样式*/</span></span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
 <p>在插件内部修改。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;.nav&#x27;</span>).addClass(<span class="string">&quot;hover&quot;</span>);<span class="comment">//将CSS与jQuery分离开来</span></span><br><span class="line">$(<span class="string">&#x27;.nav&#x27;</span>).css(<span class="string">&quot;color&quot;</span>,color);<span class="comment">//存在用户设置时启用，不存在就不用了（进行判断）</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;.nav&#x27;</span>).addClass(<span class="string">&quot;hover&quot;</span>);<span class="comment">//将CSS与jQuery分离开来</span></span><br><span class="line">$(<span class="string">&#x27;.nav&#x27;</span>).css(<span class="string">&quot;color&quot;</span>,color);<span class="comment">//存在用户设置时启用，不存在就不用了（进行判断）</span></span><br></pre></td></tr></table></div></figure>
 
 
 <p>刚刚说的都是插件的js文件，最后要起到效果，别忘了页面的js中加上那么一句话（当前插件定义在全局方法上）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>  (<span class="params"></span>)</span>&#123;</span><br><span class="line">    $.nav(<span class="string">&quot;#999&quot;</span>);<span class="comment">//调用插件实现的全局方法，并且设置其展现背景颜色为#999。</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>  (<span class="params"></span>)</span>&#123;</span><br><span class="line">    $.nav(<span class="string">&quot;#999&quot;</span>);<span class="comment">//调用插件实现的全局方法，并且设置其展现背景颜色为#999。</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></div></figure>
 
 <p>就这样，我们的全局插件就编写，而且调用完成了，在你的页面刷新看看，是不是已经有了效果呢？</p>
 <p>但是，因为我们的方法定义在全局上，现在只要页面中出现了我们插件所规定的结构，就会存在hover展现效果，但是有时我们往往想要的不是这样，我们希望它在局部，在我指定的元素调用。所以我们需要对其进行一些改造，让其变成局部方法，其实也很简单：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</span><br><span class="line">    $.fn.extend(&#123;<span class="comment">//定义为局部方法</span></span><br><span class="line">        <span class="string">&quot;nav&quot;</span> : <span class="function"><span class="keyword">function</span> (<span class="params">color</span>)</span>&#123;</span><br><span class="line">            $(<span class="built_in">this</span>).find(<span class="string">&#x27;.nav&#x27;</span>).addClass(<span class="string">&#x27;hover&#x27;</span>);<span class="comment">//上面已经说过了,此时this指向调用该方法的元素</span></span><br><span class="line">            $(<span class="built_in">this</span>).find(<span class="string">&#x27;.nav&#x27;</span>).css(<span class="string">&quot;color&quot;</span>,color);<span class="comment">//在当前元素下，增加了一次find筛选，实现在对应的元素中执行。</span></span><br><span class="line">            $(<span class="built_in">this</span>).find(<span class="string">&#x27;.nav&#x27;</span>).parent().hover(</span><br><span class="line">                <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">                    $(<span class="built_in">this</span>).find(<span class="string">&quot;.nav&quot;</span>).stop().slideDown(<span class="string">&quot;normal&quot;</span>);</span><br><span class="line">                &#125;,<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">                    $(<span class="built_in">this</span>).find(<span class="string">&quot;.nav&quot;</span>).stop().slideUp(<span class="string">&quot;normal&quot;</span>);</span><br><span class="line">                &#125;);</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;<span class="comment">//返回当前的对象</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)(jQuery);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</span><br><span class="line">    $.fn.extend(&#123;<span class="comment">//定义为局部方法</span></span><br><span class="line">        <span class="string">&quot;nav&quot;</span> : <span class="function"><span class="keyword">function</span> (<span class="params">color</span>)</span>&#123;</span><br><span class="line">            $(<span class="built_in">this</span>).find(<span class="string">&#x27;.nav&#x27;</span>).addClass(<span class="string">&#x27;hover&#x27;</span>);<span class="comment">//上面已经说过了,此时this指向调用该方法的元素</span></span><br><span class="line">            $(<span class="built_in">this</span>).find(<span class="string">&#x27;.nav&#x27;</span>).css(<span class="string">&quot;color&quot;</span>,color);<span class="comment">//在当前元素下，增加了一次find筛选，实现在对应的元素中执行。</span></span><br><span class="line">            $(<span class="built_in">this</span>).find(<span class="string">&#x27;.nav&#x27;</span>).parent().hover(</span><br><span class="line">                <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">                    $(<span class="built_in">this</span>).find(<span class="string">&quot;.nav&quot;</span>).stop().slideDown(<span class="string">&quot;normal&quot;</span>);</span><br><span class="line">                &#125;,<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">                    $(<span class="built_in">this</span>).find(<span class="string">&quot;.nav&quot;</span>).stop().slideUp(<span class="string">&quot;normal&quot;</span>);</span><br><span class="line">                &#125;);</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;<span class="comment">//返回当前的对象</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)(jQuery);</span><br></pre></td></tr></table></div></figure>
 
 <p>我们去刷新一下浏览器。<br>你会发现，咦，怎么没效果？ 当然因为原来的代码是直接在全局调用的，现在变成局部方法了，显然就不能这样做了，需要做一点改变：</p>
 <p><strong>我这里就不贴html代码了，但是希望您在实践时能把上面的html代码在其下复制几份</strong>，以达到思考其实现的效果</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>  (<span class="params"></span>)</span>&#123;<span class="comment">//这里的eq(0)代表只对第一份起到效果，复制后的没有效果。</span></span><br><span class="line">    <span class="comment">//（你可以把上面的find筛选删除之后再试试，您会发现，他又对余下的几份起效果了）</span></span><br><span class="line">    $(<span class="string">&quot;.list&quot;</span>).eq(<span class="number">0</span>).nav(<span class="string">&quot;red&quot;</span>);<span class="comment">//调用局部方法</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>  (<span class="params"></span>)</span>&#123;<span class="comment">//这里的eq(0)代表只对第一份起到效果，复制后的没有效果。</span></span><br><span class="line">    <span class="comment">//（你可以把上面的find筛选删除之后再试试，您会发现，他又对余下的几份起效果了）</span></span><br><span class="line">    $(<span class="string">&quot;.list&quot;</span>).eq(<span class="number">0</span>).nav(<span class="string">&quot;red&quot;</span>);<span class="comment">//调用局部方法</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></div></figure>
 
 <p>现在回过头再把我们写的插件代码对应上面写的<strong>插件编写的要点</strong>，思考一下，我们还有哪些没有做到？就会发现，基本已经能对应上了。现在我们就完成了一个下拉菜单的插件。</p>
 <p>其实编写插件并不难，最主要的是在我们编写插件的时候，一定要时刻注意这样的要点，每一个细节都遵循在大家实践过程中总结出来的最佳实现，才能自定义实现一个良好的插件。</p>
 <p>代码首先是写个人看的，再然后才是给机器看的。</p>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2016/01/13/jQuery-07-Plugin/">http://guowenfh.github.io/2016/01/13/jQuery-07-Plugin/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/jQuery/">jQuery</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2016/01/17/Bootstrap-00-summary/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Bootstrap 入门笔记之（零）简介</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2016/01/10/css-MultiColumn-layout/"><span class="paginator-prev__text">CSS多列布局</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%EF%BC%8E-%E6%8F%92%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">一． 插件概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">二. 自定义插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E7%A7%8D%E7%B1%BB"><span class="toc-number">2.1.</span> <span class="toc-text">插件种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A6%81%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">插件的基本要点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">编写一个插件</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2016/01/13/jQuery-07-Plugin/">http://guowenfh.github.io/2016/01/13/jQuery-07-Plugin/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/jQuery/">jQuery</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2016/01/17/Bootstrap-00-summary/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Bootstrap 入门笔记之（零）简介</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2016/01/10/css-MultiColumn-layout/"><span class="paginator-prev__text">CSS多列布局</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%EF%BC%8E-%E6%8F%92%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">
+          一． 插件概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">
+          二. 自定义插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E7%A7%8D%E7%B1%BB"><span class="toc-number">2.1.</span> <span class="toc-text">
+          插件种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A6%81%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">
+          插件的基本要点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E6%8F%92%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">
+          编写一个插件</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://ws1.sinaimg.cn/large/82d12951gy1fewv9toa2xj206y06ygnp.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">芝兰生于深林，不以无人而不芳。</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/guowenfh" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2194745681" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/guowenfh" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="mailto:guowen921@gmail.com" target="_blank" rel="noopener" data-popover="social.Gmail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">Gmail</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">19</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span><span class="footer__devider">|</span><span>浙ICP备17036927号-1</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

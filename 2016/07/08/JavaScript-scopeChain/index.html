@@ -1,23 +1,23 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="无论什么语言中，作用域都是一个十分重要的概念，在JavaScript中也不例外，作用域定义了变量或者函数有权访问的范围，决定了它们各自的行为。要理解JavaScript中的作用域首先就要知道：在let出现之前，JS中变量的作用域只有两种：全局作用域和局部作用域。（本文也只讨论这两种作用域）  全局作用域全局作用域是最外围的一个执行环境，可以在代码的任何地方访问到。在浏览器中，我们的全局作用域就是">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="无论什么语言中，作用域都是一个十分重要的概念，在JavaScript中也不例外，作用域定义了变量或者函数有权访问的范围，决定了它们各自的行为。要理解JavaScript中的作用域首先就要知道：在let出现之前，JS中变量的作用域只有两种：全局作用域和局部作用域。（本文也只讨论这两种作用域）                      全局作用域       全局作用域是最外围的一个执行环境，可以在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript作用域学习笔记">
 <meta property="og:url" content="http://guowenfh.github.io/2016/07/08/JavaScript-scopeChain/index.html">
 <meta property="og:site_name" content="三省吾身丶丶">
-<meta property="og:description" content="无论什么语言中，作用域都是一个十分重要的概念，在JavaScript中也不例外，作用域定义了变量或者函数有权访问的范围，决定了它们各自的行为。要理解JavaScript中的作用域首先就要知道：在let出现之前，JS中变量的作用域只有两种：全局作用域和局部作用域。（本文也只讨论这两种作用域）  全局作用域全局作用域是最外围的一个执行环境，可以在代码的任何地方访问到。在浏览器中，我们的全局作用域就是">
-<meta property="og:locale">
+<meta property="og:description" content="无论什么语言中，作用域都是一个十分重要的概念，在JavaScript中也不例外，作用域定义了变量或者函数有权访问的范围，决定了它们各自的行为。要理解JavaScript中的作用域首先就要知道：在let出现之前，JS中变量的作用域只有两种：全局作用域和局部作用域。（本文也只讨论这两种作用域）                      全局作用域       全局作用域是最外围的一个执行环境，可以在">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2016-07-07T16:45:23.000Z">
 <meta property="article:modified_time" content="2020-03-12T04:04:13.285Z">
 <meta property="article:author" content="guowenfh">
 <meta property="article:tag" content="JS">
 <meta property="article:tag" content="百度前端技术学院">
-<meta name="twitter:card" content="summary"><title>JavaScript作用域学习笔记 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2016/07/08/JavaScript-scopeChain/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:card" content="summary"><title>JavaScript作用域学习笔记 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2016/07/08/JavaScript-scopeChain/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
-  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":true},
   postWidget: {"endText":true},
   nightMode: {"enable":true},
   back2top: {"enable":true},
@@ -30,51 +30,339 @@ var CONFIG = {
   pjax: undefined,
   externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
   shortcuts: undefined,
-  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
-</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">JavaScript作用域学习笔记</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2016-07-08</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><blockquote>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">JavaScript作用域学习笔记</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2016-07-08</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-03-12</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1.9k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">11分</span></span></div></header><div class="post-body"><blockquote>
 <p>无论什么语言中，作用域都是一个十分重要的概念，在JavaScript中也不例外，作用域定义了变量或者函数有权访问的范围，决定了它们各自的行为。要理解JavaScript中的作用域首先就要知道：在<code>let</code>出现之前，JS中变量的作用域只有两种：全局作用域和局部作用域。（本文也只讨论这两种作用域）</p>
 </blockquote>
-<h3 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h3><p>全局作用域是最外围的一个执行环境，可以在代码的任何地方访问到。在浏览器中，我们的全局作用域就是<code>window</code>。因此在浏览器中，所有的全局变量和函数都是作为<code>window</code>对象的属性和方法创建的。</p>
+
+        <h3 id="全局作用域"   >
+          <a href="#全局作用域" class="heading-link"><i class="fas fa-link"></i></a><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h3>
+      <p>全局作用域是最外围的一个执行环境，可以在代码的任何地方访问到。在浏览器中，我们的全局作用域就是<code>window</code>。因此在浏览器中，所有的全局变量和函数都是作为<code>window</code>对象的属性和方法创建的。</p>
 <p>下面就来看看全局作用域的创建方式：</p>
 <ol>
 <li>全局变量与全局函数</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> anotherName = <span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.info(name)</span><br><span class="line">        <span class="built_in">console</span>.info(anotherName)</span><br><span class="line">    &#125;</span><br><span class="line">    showName();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.info(name);<span class="comment">//小红</span></span><br><span class="line"><span class="built_in">console</span>.info(anotherName);<span class="comment">//【脚本出错】</span></span><br><span class="line">doSomething();<span class="comment">//小红---小黑</span></span><br><span class="line">showName();<span class="comment">//【脚本出错】</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> anotherName = <span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.info(name)</span><br><span class="line">        <span class="built_in">console</span>.info(anotherName)</span><br><span class="line">    &#125;</span><br><span class="line">    showName();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.info(name);<span class="comment">//小红</span></span><br><span class="line"><span class="built_in">console</span>.info(anotherName);<span class="comment">//【脚本出错】</span></span><br><span class="line">doSomething();<span class="comment">//小红---小黑</span></span><br><span class="line">showName();<span class="comment">//【脚本出错】</span></span><br></pre></td></tr></table></div></figure>
 <p>通过代码可以很清楚的看出来，我在前面所说的 <strong>作用域定义了变量或者函数有权访问的范围</strong> ，在这里我们定义了一个全局的变量<code>name</code>与全局函数<code>doSomething()</code>，他可以在任何地方被直接访问。但是我们又在函数内部创建了变量<code>anotherName</code>与函数<code>showName()</code>，通过代码中的调用情况可以发现，我们在外部调用它时提示【脚本出错】，因为他们处于局部作用域内（稍后讲），而 <strong>外部环境不能访问内部环境的任何变量与函数</strong>。这就涉及到了作用域的概念(稍后讲)</p>
 <ol start="2">
 <li>未声明直接定义的变量</li>
 </ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fullName = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line">    anotherName = <span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">    <span class="built_in">console</span>.info(fullName)</span><br><span class="line">&#125;</span><br><span class="line">showName();<span class="comment">//小红</span></span><br><span class="line"><span class="built_in">console</span>.info(anotherName);<span class="comment">//小黑</span></span><br><span class="line"><span class="built_in">console</span>.info(fullName);<span class="comment">//【脚本出错】</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fullName = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line">    anotherName = <span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">    <span class="built_in">console</span>.info(fullName)</span><br><span class="line">&#125;</span><br><span class="line">showName();<span class="comment">//小红</span></span><br><span class="line"><span class="built_in">console</span>.info(anotherName);<span class="comment">//小黑</span></span><br><span class="line"><span class="built_in">console</span>.info(fullName);<span class="comment">//【脚本出错】</span></span><br></pre></td></tr></table></div></figure>
 <p>在这样的情况下，变量<code>anotherName</code>拥有全局作用域，而<code>fullName</code>在函数外部无法访问到。（注：在高程中明确说明，不声明而直接初始化变量是错误做法，应该避免这样的情况<code>严格模式下，初始化未声明的变量将报错</code>）</p>
 <ol start="3">
 <li>所有window对象上的属性都具有全局作用</li>
 </ol>
 <p>这个实际上在上面已经提到了：<strong>所有的全局变量和函数都是作为<code>window</code>对象的属性和方法创建的。</strong>，自然<code>window</code>对象它本身所具有的属性和方法，同样是处于全局作用域，例如：<code>window.location</code>，<code>window.name</code>等等。</p>
-<h3 id="局部作用域"><a href="#局部作用域" class="headerlink" title="局部作用域"></a>局部作用域</h3><p>其实在上面的代码中，为了展示全局作用域的效果，我们就已经创造了局部作用域。局部作用域和全局作用域正好相反，局部作用域一般只在固定的代码片段内可访问到，最常见的就是函数内部，所以在很多地方就会有人把它称为函数作用域。（记住<code>let</code>之前无块级作用域）。我们再来看一下第一段代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> anotherName = <span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.info(name)</span><br><span class="line">        <span class="built_in">console</span>.info(anotherName)</span><br><span class="line">    &#125;</span><br><span class="line">    showName();</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.info(anotherName);<span class="comment">//【脚本出错】</span></span><br><span class="line">showName();<span class="comment">//【脚本出错】</span></span><br></pre></td></tr></table></figure>
+
+        <h3 id="局部作用域"   >
+          <a href="#局部作用域" class="heading-link"><i class="fas fa-link"></i></a><a href="#局部作用域" class="headerlink" title="局部作用域"></a>局部作用域</h3>
+      <p>其实在上面的代码中，为了展示全局作用域的效果，我们就已经创造了局部作用域。局部作用域和全局作用域正好相反，局部作用域一般只在固定的代码片段内可访问到，最常见的就是函数内部，所以在很多地方就会有人把它称为函数作用域。（记住<code>let</code>之前无块级作用域）。我们再来看一下第一段代码：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> anotherName = <span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.info(name)</span><br><span class="line">        <span class="built_in">console</span>.info(anotherName)</span><br><span class="line">    &#125;</span><br><span class="line">    showName();</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.info(anotherName);<span class="comment">//【脚本出错】</span></span><br><span class="line">showName();<span class="comment">//【脚本出错】</span></span><br></pre></td></tr></table></div></figure>
 <p>在这段代码中变量 <code>anotherName</code>,与函数 <code>showName()</code>，都拥有局部作用域。因此它不能被外部所访问，那么问题就来了，为什么全局变量他就能在局部作用域内被访问到呢？这就是 JavaScript 中的作用域链概念！</p>
-<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p>在JS中:”一切皆是对象, 函数也是”。</p>
+
+        <h3 id="作用域链"   >
+          <a href="#作用域链" class="heading-link"><i class="fas fa-link"></i></a><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3>
+      <p>在JS中:”一切皆是对象, 函数也是”。</p>
 <p>在 JavaScript 中，每个函数都有着自己的作用域，在每次调用一个函数的时候 ，就会进入一个函数内的作用域，而当函数执行返回以后，就返回调用前的作用域。</p>
 <p>当代码在一个作用域内执行时，就会根据其上下文创建一个作用域链，该作用域链的用途就是控制当前作用域对于内所有的变量与函数的有序访问。作用域链的最前端，始终都是当前执行代码所在的作用域的变量对象。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(name ===<span class="string">&quot;小红&quot;</span>)&#123;</span><br><span class="line">        name=<span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        name =<span class="string">&quot;小红&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">changeName();</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">&quot;新名字:&quot;</span>+name);<span class="comment">//小黑</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(name ===<span class="string">&quot;小红&quot;</span>)&#123;</span><br><span class="line">        name=<span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        name =<span class="string">&quot;小红&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">changeName();</span><br><span class="line"><span class="built_in">console</span>.info(<span class="string">&quot;新名字:&quot;</span>+name);<span class="comment">//小黑</span></span><br></pre></td></tr></table></div></figure>
 <p>在这个例子中，<code>changName()</code>被定义在全局作用域下，他的作用域链包含着包含两个对象：1.它本身的变量对象(函数都会包含<code>arguments</code>对象)，2.全局环境对象。之所以能在函数内部访问到变量<code>name</code>,就是因为在它的作用域中，能找到它。（<strong>JS的标识符解析，是沿着作用域链一级一级的查找搜索的过程，从作用域链的最前端开始直到全局环境，最终没有查找到时将报错。</strong>）我们再回过头来稍微改一下第一段代码：并且看看他们能访问到那些变量：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> anotherName = <span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> author =<span class="string">&quot;三省吾身丶丶&quot;</span>;</span><br><span class="line">        <span class="built_in">console</span>.info(name)</span><br><span class="line">        <span class="built_in">console</span>.info(anotherName)</span><br><span class="line">        <span class="comment">// 在这里可以访问到 name 、anotherName 、author</span></span><br><span class="line">    &#125;</span><br><span class="line">    showName();</span><br><span class="line">    <span class="comment">// 在这里可以访问到 name anotherName ,不能访问到 author</span></span><br><span class="line">&#125;</span><br><span class="line">doSomething();</span><br><span class="line"><span class="comment">// 在这里只能访问到 name</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> anotherName = <span class="string">&quot;小黑&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> author =<span class="string">&quot;三省吾身丶丶&quot;</span>;</span><br><span class="line">        <span class="built_in">console</span>.info(name)</span><br><span class="line">        <span class="built_in">console</span>.info(anotherName)</span><br><span class="line">        <span class="comment">// 在这里可以访问到 name 、anotherName 、author</span></span><br><span class="line">    &#125;</span><br><span class="line">    showName();</span><br><span class="line">    <span class="comment">// 在这里可以访问到 name anotherName ,不能访问到 author</span></span><br><span class="line">&#125;</span><br><span class="line">doSomething();</span><br><span class="line"><span class="comment">// 在这里只能访问到 name</span></span><br></pre></td></tr></table></div></figure>
 
 <p>要想理解这种作用域其实也很简单，作用域就像是一架 <strong>每一个台阶都是相对封闭（同级），并且只能上不能下的梯子</strong>，在越底层的台阶上，它能走的步数越多（作用域链越长）。为了找到它想要的东西，就开始爬台阶，每爬一步台阶，都能看到这一级台阶上有什么东西，直到最顶上的那一阶。（找到了就带回去一起玩耍，玩完了之后还得换回去，要是最后都没找到就掉下去摔死了）</p>
-<h3 id="坑与示例解析"><a href="#坑与示例解析" class="headerlink" title="坑与示例解析"></a>坑与示例解析</h3><p>在了解坑之前，其实只要记住权威指南里面的一句话，就可以躲过很多这方面的坑了，那就是：<strong>JavaScript中的函数运行在它们被定义的作用域里,而不是它们被执行的作用域里</strong></p>
+
+        <h3 id="坑与示例解析"   >
+          <a href="#坑与示例解析" class="heading-link"><i class="fas fa-link"></i></a><a href="#坑与示例解析" class="headerlink" title="坑与示例解析"></a>坑与示例解析</h3>
+      <p>在了解坑之前，其实只要记住权威指南里面的一句话，就可以躲过很多这方面的坑了，那就是：<strong>JavaScript中的函数运行在它们被定义的作用域里,而不是它们被执行的作用域里</strong></p>
 <p>下面就来看看这一个例子：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;小红&#x27;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">&#x27;小黑&#x27;</span>;</span><br><span class="line">    showName();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">show();</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;小红&#x27;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">&#x27;小黑&#x27;</span>;</span><br><span class="line">    showName();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">show();</span><br></pre></td></tr></table></div></figure>
 <p>结果会是什么呢？ </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小红</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">小红</span><br></pre></td></tr></table></div></figure>
 <p>如果你记住并且理解了上面的话，那么应该可以得到这个结果。用作用域链的角度解析：执行<code>show()</code>函数时，进入<code>function show()&#123;&#125;</code>的作用域内，然后执行<code>showName()</code>函数，再进入到<code>function showName()&#123;&#125;</code>的作用域内，要输出<code>name</code>，就在当前作用域找，但是找不到，然后就向上爬一层，在全局环境中找到了<code>var name = &#39;小红&#39;;</code>，所以<code>show()</code>就输出了小红。</p>
 <p>再来看一个这个例子的改动版本</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;小红&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">&#x27;小黑&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.info(name);</span><br><span class="line">    &#125;</span><br><span class="line">    showName();</span><br><span class="line">&#125;</span><br><span class="line">show();</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;小红&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">&#x27;小黑&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.info(name);</span><br><span class="line">    &#125;</span><br><span class="line">    showName();</span><br><span class="line">&#125;</span><br><span class="line">show();</span><br></pre></td></tr></table></div></figure>
 <p>结果是：<code>小黑</code></p>
 <p>解析：执行<code>show()</code>函数时，进入<code>function show()&#123;&#125;</code>的作用域内，然后执行<code>showName()</code>函数，再进入到<code>function showName()&#123;&#125;</code>的作用域内，要输出<code>name</code>，就在当前作用域找，发现本身找不到，就向上爬一层到了<code>show()</code>里面，发现已经找到了<code>var name = &#39;小黑&#39;;</code>，那么就停止查找，输出了<code>小黑</code><br>。</p>
 <p>先到这，不知道有没有对作用域有了更多的了解呢？感觉有些地方还了解的不够透彻，希望在开发项目的过程中能有更深的理解。</p>
 <p>如果有错误之处，请指正。谢谢！</p>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2016/07/08/JavaScript-scopeChain/">http://guowenfh.github.io/2016/07/08/JavaScript-scopeChain/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/JS/">JS</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2/">百度前端技术学院</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2016/07/24/JavaScript-ArrayMethod/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">JavaScript数组方法学习笔记</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2016/07/03/thoughtReport-2016-07-03/"><span class="paginator-prev__text">思想汇报</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.</span> <span class="toc-text">全局作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.</span> <span class="toc-text">局部作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-number">3.</span> <span class="toc-text">作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91%E4%B8%8E%E7%A4%BA%E4%BE%8B%E8%A7%A3%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">坑与示例解析</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2016/07/08/JavaScript-scopeChain/">http://guowenfh.github.io/2016/07/08/JavaScript-scopeChain/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/JS/">JS</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/%E7%99%BE%E5%BA%A6%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E5%AD%A6%E9%99%A2/">百度前端技术学院</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2016/07/24/JavaScript-ArrayMethod/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">JavaScript数组方法学习笔记</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2016/07/03/thoughtReport-2016-07-03/"><span class="paginator-prev__text">思想汇报</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">1.</span> <span class="toc-text">
+          全局作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.</span> <span class="toc-text">
+          局部作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-number">3.</span> <span class="toc-text">
+          作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91%E4%B8%8E%E7%A4%BA%E4%BE%8B%E8%A7%A3%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">
+          坑与示例解析</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://ws1.sinaimg.cn/large/82d12951gy1fewv9toa2xj206y06ygnp.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">芝兰生于深林，不以无人而不芳。</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/guowenfh" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2194745681" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/guowenfh" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="mailto:guowen921@gmail.com" target="_blank" rel="noopener" data-popover="social.Gmail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">Gmail</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">19</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span><span class="footer__devider">|</span><span>浙ICP备17036927号-1</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

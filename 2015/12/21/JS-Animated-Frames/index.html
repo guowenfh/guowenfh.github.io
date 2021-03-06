@@ -1,22 +1,22 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="运动框架的实现思路 运动，其实就是在一段时间内改变left、right、width、height、opactiy的值，到达目的地之后停止。  现在按照以下步骤来进行我们的运动框架的封装:  匀速运动。 缓冲运动。 多物体运动。 任意值变化。 链式运动。 同时运动。  （一）匀速运动速度动画运动基础思考：如何让div动起来?如下：  设置元素为绝对定位，只有绝对定位后，left,top等值才生效。">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="运动框架的实现思路        运动，其实就是在一段时间内改变left、right、width、height、opactiy的值，到达目的地之后停止。  现在按照以下步骤来进行我们的运动框架的封装:  匀速运动。 缓冲运动。 多物体运动。 任意值变化。 链式运动。 同时运动。                      （一）匀速运动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript完美运动框架的进阶之旅">
 <meta property="og:url" content="http://guowenfh.github.io/2015/12/21/JS-Animated-Frames/index.html">
 <meta property="og:site_name" content="三省吾身丶丶">
-<meta property="og:description" content="运动框架的实现思路 运动，其实就是在一段时间内改变left、right、width、height、opactiy的值，到达目的地之后停止。  现在按照以下步骤来进行我们的运动框架的封装:  匀速运动。 缓冲运动。 多物体运动。 任意值变化。 链式运动。 同时运动。  （一）匀速运动速度动画运动基础思考：如何让div动起来?如下：  设置元素为绝对定位，只有绝对定位后，left,top等值才生效。">
-<meta property="og:locale">
+<meta property="og:description" content="运动框架的实现思路        运动，其实就是在一段时间内改变left、right、width、height、opactiy的值，到达目的地之后停止。  现在按照以下步骤来进行我们的运动框架的封装:  匀速运动。 缓冲运动。 多物体运动。 任意值变化。 链式运动。 同时运动。                      （一）匀速运动">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2015-12-21T09:17:29.000Z">
 <meta property="article:modified_time" content="2020-03-12T04:04:13.284Z">
 <meta property="article:author" content="guowenfh">
 <meta property="article:tag" content="JS">
-<meta name="twitter:card" content="summary"><title>JavaScript完美运动框架的进阶之旅 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2015/12/21/JS-Animated-Frames/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:card" content="summary"><title>JavaScript完美运动框架的进阶之旅 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2015/12/21/JS-Animated-Frames/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
-  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":true},
   postWidget: {"endText":true},
   nightMode: {"enable":true},
   back2top: {"enable":true},
@@ -29,12 +29,14 @@ var CONFIG = {
   pjax: undefined,
   externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
   shortcuts: undefined,
-  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
-</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">JavaScript完美运动框架的进阶之旅</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2015-12-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><h2 id="运动框架的实现思路"><a href="#运动框架的实现思路" class="headerlink" title="运动框架的实现思路"></a>运动框架的实现思路</h2><blockquote>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">JavaScript完美运动框架的进阶之旅</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2015-12-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-03-12</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">3k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">21分</span></span></div></header><div class="post-body">
+        <h2 id="运动框架的实现思路"   >
+          <a href="#运动框架的实现思路" class="heading-link"><i class="fas fa-link"></i></a><a href="#运动框架的实现思路" class="headerlink" title="运动框架的实现思路"></a>运动框架的实现思路</h2>
+      <blockquote>
 <p>运动，其实就是在一段时间内改变<code>left</code>、<code>right</code>、<code>width</code>、<code>height</code>、<code>opactiy</code>的值，到达目的地之后停止。</p>
 </blockquote>
 <p>现在按照以下步骤来进行我们的运动框架的封装:</p>
@@ -46,7 +48,16 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>链式运动。</li>
 <li>同时运动。</li>
 </ol>
-<h2 id="（一）匀速运动"><a href="#（一）匀速运动" class="headerlink" title="（一）匀速运动"></a>（一）匀速运动</h2><h3 id="速度动画"><a href="#速度动画" class="headerlink" title="速度动画"></a>速度动画</h3><h4 id="运动基础"><a href="#运动基础" class="headerlink" title="运动基础"></a>运动基础</h4><p>思考：<strong>如何让<code>div</code>动起来?</strong><br>如下：</p>
+
+        <h2 id="（一）匀速运动"   >
+          <a href="#（一）匀速运动" class="heading-link"><i class="fas fa-link"></i></a><a href="#（一）匀速运动" class="headerlink" title="（一）匀速运动"></a>（一）匀速运动</h2>
+      
+        <h3 id="速度动画"   >
+          <a href="#速度动画" class="heading-link"><i class="fas fa-link"></i></a><a href="#速度动画" class="headerlink" title="速度动画"></a>速度动画</h3>
+      
+        <h4 id="运动基础"   >
+          <a href="#运动基础" class="heading-link"><i class="fas fa-link"></i></a><a href="#运动基础" class="headerlink" title="运动基础"></a>运动基础</h4>
+      <p>思考：<strong>如何让<code>div</code>动起来?</strong><br>如下：</p>
 <ol>
 <li>设置元素为绝对定位，只有绝对定位后，<code>left</code>,<code>top</code>等值才生效。</li>
 <li>定时器的使用（动态改变值），这里使用<code>setInterval()</code>每隔指定的时间执行代码。</li>
@@ -64,35 +75,47 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>改变值的大小</li>
 </ul>
 <p>根据上面的信息我们就可以开始封装运动框架创建一个变化的<code>div</code>了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-1-动起来</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 进行运动的节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">    timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="comment">//定时器</span></span><br><span class="line">        element.style.left = element.offsetLeft + <span class="number">5</span> + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-1-动起来</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 进行运动的节点</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">    timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="comment">//定时器</span></span><br><span class="line">        element.style.left = element.offsetLeft + <span class="number">5</span> + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 <p>你没看错，就是那么简单。但是等等， what？ 怎么不会停？WTF？</p>
 <p>那是因为我们没有运动终止条件。好再还是比较简单。直接在定时器内部，判断到达目标值，清除定时器就行拉！</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-2-运动终止</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 进行运动的节点</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span>      </span>iTarget 运动终止条件。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, iTarget</span>) </span>&#123;</span><br><span class="line">    timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        element.style.left = element.offsetLeft + <span class="number">5</span> + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (element.offsetLeft === iTarget) &#123;<span class="comment">//停止条件</span></span><br><span class="line">            <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-2-运动终止</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 进行运动的节点</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span>      </span>iTarget 运动终止条件。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, iTarget</span>) </span>&#123;</span><br><span class="line">    timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        element.style.left = element.offsetLeft + <span class="number">5</span> + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (element.offsetLeft === iTarget) &#123;<span class="comment">//停止条件</span></span><br><span class="line">            <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 <p>就这样是不是就完成了呢？已经ok了呢？<br>no。还有一些Bug需要处理。</p>
-<h4 id="运动中的Bug"><a href="#运动中的Bug" class="headerlink" title="运动中的Bug"></a>运动中的Bug</h4><ol>
+
+        <h4 id="运动中的Bug"   >
+          <a href="#运动中的Bug" class="heading-link"><i class="fas fa-link"></i></a><a href="#运动中的Bug" class="headerlink" title="运动中的Bug"></a>运动中的Bug</h4>
+      <ol>
 <li>速度取到某些值会无法停止</li>
 <li>到达位置后再点击还会运动</li>
 <li>重复点击速度加快</li>
 <li>速度无法更改</li>
 </ol>
-<h4 id="解决BUG"><a href="#解决BUG" class="headerlink" title="解决BUG"></a>解决BUG</h4><ol>
+
+        <h4 id="解决BUG"   >
+          <a href="#解决BUG" class="heading-link"><i class="fas fa-link"></i></a><a href="#解决BUG" class="headerlink" title="解决BUG"></a>解决BUG</h4>
+      <ol>
 <li>速度取到某些值会无法停止（这个Bug稍后解决，在进化过程中自然解决）</li>
 <li>把运动和停止隔开(if/else)</li>
 <li>在开始运动时,关闭已有定时器</li>
 <li>把速度用变量保存</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-3-解决Bug</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, iTarget</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(timer);<span class="comment">//在开始运动时,关闭已有定时器</span></span><br><span class="line">    timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> iSpeed = <span class="number">5</span>;<span class="comment">//把速度用变量保存</span></span><br><span class="line">        <span class="comment">//把运动和停止隔开(if/else)</span></span><br><span class="line">        <span class="keyword">if</span> (element.offsetLeft === iTarget) &#123;<span class="comment">//结束运动</span></span><br><span class="line">            <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            element.style.left = element.offsetLeft + iSpeed + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-3-解决Bug</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, iTarget</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(timer);<span class="comment">//在开始运动时,关闭已有定时器</span></span><br><span class="line">    timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> iSpeed = <span class="number">5</span>;<span class="comment">//把速度用变量保存</span></span><br><span class="line">        <span class="comment">//把运动和停止隔开(if/else)</span></span><br><span class="line">        <span class="keyword">if</span> (element.offsetLeft === iTarget) &#123;<span class="comment">//结束运动</span></span><br><span class="line">            <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            element.style.left = element.offsetLeft + iSpeed + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 <p>这样一个简单的运动框架就完成了。但是，再等等。只能向右走？别急，我们不是定义了把速度变成为了变量吗？只需要对它进行一些处理就行啦！<br><code>var iSpeed = 5;</code><strong>–&gt;</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断距离目标位置，达到自动变化速度正负</span></span><br><span class="line"><span class="keyword">var</span> iSpeed = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (element.offsetLeft &lt; iTarget) &#123;</span><br><span class="line">    iSpeed = <span class="number">5</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    iSpeed = -<span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断距离目标位置，达到自动变化速度正负</span></span><br><span class="line"><span class="keyword">var</span> iSpeed = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (element.offsetLeft &lt; iTarget) &#123;</span><br><span class="line">    iSpeed = <span class="number">5</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    iSpeed = -<span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
 
-<h3 id="透明度动画"><a href="#透明度动画" class="headerlink" title="透明度动画"></a>透明度动画</h3><ol>
+
+        <h3 id="透明度动画"   >
+          <a href="#透明度动画" class="heading-link"><i class="fas fa-link"></i></a><a href="#透明度动画" class="headerlink" title="透明度动画"></a>透明度动画</h3>
+      <ol>
 <li>用变量<code>alpha</code>储存当前透明度。</li>
 <li>把上面的<code>element.offsetLeft</code>改成变量<code>alpha</code>。</li>
 <li>运动和停止条件部分进行更改。如下：</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//透明度浏览器兼容实现</span></span><br><span class="line"><span class="keyword">if</span> (alpha === iTarget) &#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(time);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alpha += speed;</span><br><span class="line">    element.style.filter = <span class="string">&#x27;alpha(opacity:&#x27;</span> + alpha + <span class="string">&#x27;)&#x27;</span>; <span class="comment">//兼容IE</span></span><br><span class="line">    element.style.opacity = alpha / <span class="number">100</span>;<span class="comment">//标准</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="（二）缓冲动画"><a href="#（二）缓冲动画" class="headerlink" title="（二）缓冲动画"></a>（二）缓冲动画</h2><p>思考：<strong>怎么样才是缓冲动画？</strong></p>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//透明度浏览器兼容实现</span></span><br><span class="line"><span class="keyword">if</span> (alpha === iTarget) &#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(time);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alpha += speed;</span><br><span class="line">    element.style.filter = <span class="string">&#x27;alpha(opacity:&#x27;</span> + alpha + <span class="string">&#x27;)&#x27;</span>; <span class="comment">//兼容IE</span></span><br><span class="line">    element.style.opacity = alpha / <span class="number">100</span>;<span class="comment">//标准</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="（二）缓冲动画"   >
+          <a href="#（二）缓冲动画" class="heading-link"><i class="fas fa-link"></i></a><a href="#（二）缓冲动画" class="headerlink" title="（二）缓冲动画"></a>（二）缓冲动画</h2>
+      <p>思考：<strong>怎么样才是缓冲动画？</strong></p>
 <p>应该有以下几点：</p>
 <ul>
 <li>逐渐变慢,最后停止</li>
@@ -104,16 +127,19 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li> 向下取整。<code>Math.floor(iSpeed)</code></li>
 </ul>
 <p>还是对速度作文章：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-4-缓冲动画</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, iTarget</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">    timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//因为速度要动态改变，所以必须放在定时器中</span></span><br><span class="line">        <span class="keyword">var</span> iSpeed = (iTarget - element.offsetLeft) / <span class="number">10</span>; <span class="comment">//(目标值-当前值)/缩放系数=速度</span></span><br><span class="line">        iSpeed = iSpeed &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(iSpeed) : <span class="built_in">Math</span>.floor(iSpeed); <span class="comment">//速度取整</span></span><br><span class="line">        <span class="keyword">if</span> (element.offsetLeft === iTarget) &#123;<span class="comment">//结束运动</span></span><br><span class="line">            <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            element.style.left = element.offsetLeft + iSpeed + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-4-缓冲动画</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, iTarget</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">    timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//因为速度要动态改变，所以必须放在定时器中</span></span><br><span class="line">        <span class="keyword">var</span> iSpeed = (iTarget - element.offsetLeft) / <span class="number">10</span>; <span class="comment">//(目标值-当前值)/缩放系数=速度</span></span><br><span class="line">        iSpeed = iSpeed &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(iSpeed) : <span class="built_in">Math</span>.floor(iSpeed); <span class="comment">//速度取整</span></span><br><span class="line">        <span class="keyword">if</span> (element.offsetLeft === iTarget) &#123;<span class="comment">//结束运动</span></span><br><span class="line">            <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            element.style.left = element.offsetLeft + iSpeed + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 <ul>
 <li>做到这里，（速度取到某些值会无法停止)这个Bug就自动解决啦！</li>
 <li>例子:缓冲菜单</li>
-<li>跟随页面滚动的缓冲侧边栏<br>在线演示：<a target="_blank" rel="noopener" href="http://codepen.io/guowen921/pen/rxLOMd">codepen</a></li>
+<li>跟随页面滚动的缓冲侧边栏<br>在线演示：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://codepen.io/guowen921/pen/rxLOMd" >codepen</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 </ul>
 <blockquote>
 <p>潜在问题目标值不是整数时</p>
 </blockquote>
-<h2 id="（三）多物体运动"><a href="#（三）多物体运动" class="headerlink" title="（三）多物体运动"></a>（三）多物体运动</h2><p>思考：<strong>如何实现多物体运动？</strong></p>
+
+        <h2 id="（三）多物体运动"   >
+          <a href="#（三）多物体运动" class="heading-link"><i class="fas fa-link"></i></a><a href="#（三）多物体运动" class="headerlink" title="（三）多物体运动"></a>（三）多物体运动</h2>
+      <p>思考：<strong>如何实现多物体运动？</strong></p>
 <ul>
 <li>单定时器，存在问题。每个div一个定时器</li>
 <li>定时器作为对象的属性<ul>
@@ -123,15 +149,21 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>参数的传递:物体/目标值<br>比较简单把上面框架的进行如下更改：<code>timer</code><strong>–&gt;</strong><code>element.timer</code></li>
 </ul>
 <p>就这样就行啦！</p>
-<h2 id="（四）任意值变化"><a href="#（四）任意值变化" class="headerlink" title="（四）任意值变化"></a>（四）任意值变化</h2><p>咳咳。我们来给div加个1px的边框。<code>boder :1px solid #000</code></p>
+
+        <h2 id="（四）任意值变化"   >
+          <a href="#（四）任意值变化" class="heading-link"><i class="fas fa-link"></i></a><a href="#（四）任意值变化" class="headerlink" title="（四）任意值变化"></a>（四）任意值变化</h2>
+      <p>咳咳。我们来给div加个1px的边框。<code>boder :1px solid #000</code></p>
 <p>然后来试试下面的代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    oDiv.style.width = oDiv.offsetWidth - <span class="number">1</span> + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">&#125;, <span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    oDiv.style.width = oDiv.offsetWidth - <span class="number">1</span> + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">&#125;, <span class="number">30</span>)</span><br></pre></td></tr></table></div></figure>
 
 <p>嗯，神奇的事情发生了！what？我设置的不是宽度在减吗？怎么尼玛增加了！ 不对啊，大兄弟。</p>
 <p>究竟哪里出了问题呢？</p>
 <p>一起找找资料，看看文档，原来<code>offset</code>这一系列的属性都会存在，被其他属性干扰的问题。</p>
 <p>好吧，既然不能用，那么我们就顺便把任意值变化给做了吧。</p>
-<h3 id="第一步：获取实际样式"><a href="#第一步：获取实际样式" class="headerlink" title="第一步：获取实际样式"></a>第一步：获取实际样式</h3><blockquote>
+
+        <h3 id="第一步：获取实际样式"   >
+          <a href="#第一步：获取实际样式" class="heading-link"><i class="fas fa-link"></i></a><a href="#第一步：获取实际样式" class="headerlink" title="第一步：获取实际样式"></a>第一步：获取实际样式</h3>
+      <blockquote>
 <p>使用offsetLeft..等获取样式时, 若设置了边框, padding, 等可以改变元素宽度高度的属性时会出现BUG..</p>
 </blockquote>
 <ul>
@@ -139,9 +171,12 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>但是因为兼容性的问题，需封装getStyle函数。（万恶的IE）</li>
 <li>当然配合CSS的<code>box-sizing</code>属性设为<code>border-box</code>可以达到一样的效果 ? (自认为，未验证)。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取实际样式函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;HTMLElement&#125;</span>   </span>element  需要寻找的样式的html节点</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;String]&#125;</span> </span>attr 在对象中寻找的样式属性</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;String&#125;</span> </span>获取到的属性</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">element, attr</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//IE写法</span></span><br><span class="line">    <span class="keyword">if</span> (element.currentStyle) &#123;</span><br><span class="line">        <span class="keyword">return</span> element.currentStyle[attr];</span><br><span class="line">    <span class="comment">//标准</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> getComputedStyle(element, <span class="literal">false</span>)[attr];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取实际样式函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;HTMLElement&#125;</span>   </span>element  需要寻找的样式的html节点</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;String]&#125;</span> </span>attr 在对象中寻找的样式属性</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;String&#125;</span> </span>获取到的属性</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">element, attr</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//IE写法</span></span><br><span class="line">    <span class="keyword">if</span> (element.currentStyle) &#123;</span><br><span class="line">        <span class="keyword">return</span> element.currentStyle[attr];</span><br><span class="line">    <span class="comment">//标准</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> getComputedStyle(element, <span class="literal">false</span>)[attr];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
-<h3 id="第二步：改造原函数"><a href="#第二步：改造原函数" class="headerlink" title="第二步：改造原函数"></a>第二步：改造原函数</h3><ol>
+
+        <h3 id="第二步：改造原函数"   >
+          <a href="#第二步：改造原函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#第二步：改造原函数" class="headerlink" title="第二步：改造原函数"></a>第二步：改造原函数</h3>
+      <ol>
 <li>添加参数，<code>attr</code>表示需要改变的属性值。</li>
 <li>更改<code>element.offsetLeft</code>为<code>getStyle(element, attr)</code>。</li>
 </ol>
@@ -152,14 +187,17 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <ol start="3">
 <li><code>element.style.left</code>为<code>element.style[attr]</code>。</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-4-任意值变化</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 运动对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span>      </span>attr    需要改变的属性。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span>      </span>iTarget 目标值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, attr, iTarget</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">    element.timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//因为速度要动态改变，所以必须放在定时器中</span></span><br><span class="line">    <span class="keyword">var</span> iCurrent=<span class="number">0</span>;</span><br><span class="line">    iCurrent = <span class="built_in">parseInt</span>(getStyle(element, attr));<span class="comment">//实际样式大小</span></span><br><span class="line">        <span class="keyword">var</span> iSpeed = (iTarget - iCurrent) / <span class="number">10</span>; <span class="comment">//(目标值-当前值)/缩放系数=速度</span></span><br><span class="line">        iSpeed = iSpeed &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(iSpeed) : <span class="built_in">Math</span>.floor(iSpeed); <span class="comment">//速度取整</span></span><br><span class="line">        <span class="keyword">if</span> (iCurrent === iTarget) &#123;<span class="comment">//结束运动</span></span><br><span class="line">            <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            element.style[attr] = iCurrent + iSpeed + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-4-任意值变化</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 运动对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span>      </span>attr    需要改变的属性。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span>      </span>iTarget 目标值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, attr, iTarget</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">    element.timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//因为速度要动态改变，所以必须放在定时器中</span></span><br><span class="line">    <span class="keyword">var</span> iCurrent=<span class="number">0</span>;</span><br><span class="line">    iCurrent = <span class="built_in">parseInt</span>(getStyle(element, attr));<span class="comment">//实际样式大小</span></span><br><span class="line">        <span class="keyword">var</span> iSpeed = (iTarget - iCurrent) / <span class="number">10</span>; <span class="comment">//(目标值-当前值)/缩放系数=速度</span></span><br><span class="line">        iSpeed = iSpeed &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(iSpeed) : <span class="built_in">Math</span>.floor(iSpeed); <span class="comment">//速度取整</span></span><br><span class="line">        <span class="keyword">if</span> (iCurrent === iTarget) &#123;<span class="comment">//结束运动</span></span><br><span class="line">            <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            element.style[attr] = iCurrent + iSpeed + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
 <p>试一试，这样是不是就可以了呢？</p>
 <blockquote>
 <p>还记得上面我们写的透明度变化吗?  再试试</p>
 </blockquote>
 <p>果然还是不行， （废话，你见过透明度有”px”单位的么? - -<code>白眼</code> ）</p>
-<h3 id="第三步：透明度兼容处理"><a href="#第三步：透明度兼容处理" class="headerlink" title="第三步：透明度兼容处理"></a>第三步：透明度兼容处理</h3><p>思考：<strong>需要对那些属性进行修改？</strong></p>
+
+        <h3 id="第三步：透明度兼容处理"   >
+          <a href="#第三步：透明度兼容处理" class="heading-link"><i class="fas fa-link"></i></a><a href="#第三步：透明度兼容处理" class="headerlink" title="第三步：透明度兼容处理"></a>第三步：透明度兼容处理</h3>
+      <p>思考：<strong>需要对那些属性进行修改？</strong></p>
 <ol>
 <li>判断<code>attr</code>是不是透明度属性<code>opacity</code> 。</li>
 <li>对于速度进行处理。</li>
@@ -176,11 +214,14 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>判断是透明度属性，使用透明度方法</li>
 <li>否则，使用使用默认的输出格式。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-5-兼容透明度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 运动对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span>      </span>attr    需要改变的属性。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span>      </span>iTarget 目标值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, attr, iTarget</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">    element.timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//因为速度要动态改变，所以必须放在定时器中</span></span><br><span class="line">        <span class="keyword">var</span> iCurrent = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (attr === <span class="string">&quot;opacity&quot;</span>) &#123; <span class="comment">//为透明度时执行。</span></span><br><span class="line">            iCurrent = <span class="built_in">Math</span>.round(<span class="built_in">parseFloat</span>(getStyle(element, attr)) * <span class="number">100</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">//默认情况</span></span><br><span class="line">            iCurrent = <span class="built_in">parseInt</span>(getStyle(element, attr)); <span class="comment">//实际样式大小</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> iSpeed = (iTarget - iCurrent) / <span class="number">10</span>; <span class="comment">//(目标值-当前值)/缩放系数=速度</span></span><br><span class="line">        iSpeed = iSpeed &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(iSpeed) : <span class="built_in">Math</span>.floor(iSpeed); <span class="comment">//速度取整</span></span><br><span class="line">        <span class="keyword">if</span> (iCurrent === iTarget) &#123;<span class="comment">//结束运动</span></span><br><span class="line">            <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (attr === <span class="string">&quot;opacity&quot;</span>) &#123; <span class="comment">//为透明度时，执行</span></span><br><span class="line">                element.style.filter = <span class="string">&quot;alpha(opacity:&quot;</span> + (iCurrent + iSpeed) + <span class="string">&quot;)&quot;</span>; <span class="comment">//IE</span></span><br><span class="line">                element.style.opacity = (iCurrent + iSpeed) / <span class="number">100</span>; <span class="comment">//标准</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">//默认</span></span><br><span class="line">                element.style[attr] = iCurrent + iSpeed + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运动框架-5-兼容透明度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 运动对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span>      </span>attr    需要改变的属性。</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span>      </span>iTarget 目标值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, attr, iTarget</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">    element.timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//因为速度要动态改变，所以必须放在定时器中</span></span><br><span class="line">        <span class="keyword">var</span> iCurrent = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (attr === <span class="string">&quot;opacity&quot;</span>) &#123; <span class="comment">//为透明度时执行。</span></span><br><span class="line">            iCurrent = <span class="built_in">Math</span>.round(<span class="built_in">parseFloat</span>(getStyle(element, attr)) * <span class="number">100</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">//默认情况</span></span><br><span class="line">            iCurrent = <span class="built_in">parseInt</span>(getStyle(element, attr)); <span class="comment">//实际样式大小</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> iSpeed = (iTarget - iCurrent) / <span class="number">10</span>; <span class="comment">//(目标值-当前值)/缩放系数=速度</span></span><br><span class="line">        iSpeed = iSpeed &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(iSpeed) : <span class="built_in">Math</span>.floor(iSpeed); <span class="comment">//速度取整</span></span><br><span class="line">        <span class="keyword">if</span> (iCurrent === iTarget) &#123;<span class="comment">//结束运动</span></span><br><span class="line">            <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (attr === <span class="string">&quot;opacity&quot;</span>) &#123; <span class="comment">//为透明度时，执行</span></span><br><span class="line">                element.style.filter = <span class="string">&quot;alpha(opacity:&quot;</span> + (iCurrent + iSpeed) + <span class="string">&quot;)&quot;</span>; <span class="comment">//IE</span></span><br><span class="line">                element.style.opacity = (iCurrent + iSpeed) / <span class="number">100</span>; <span class="comment">//标准</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">//默认</span></span><br><span class="line">                element.style[attr] = iCurrent + iSpeed + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
 <p>到这里，这个运动框架就基本上完成了。但是，我们是追求完美的不是吗？</p>
 <p>继续进化！</p>
-<h2 id="（五）链式动画"><a href="#（五）链式动画" class="headerlink" title="（五）链式动画"></a>（五）链式动画</h2><blockquote>
+
+        <h2 id="（五）链式动画"   >
+          <a href="#（五）链式动画" class="heading-link"><i class="fas fa-link"></i></a><a href="#（五）链式动画" class="headerlink" title="（五）链式动画"></a>（五）链式动画</h2>
+      <blockquote>
 <p>链式动画：顾名思义，就是在该次运动停止时，开始下一次运动。</p>
 </blockquote>
 <p>如何实现呢？</p>
@@ -189,10 +230,13 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>添加<code>func</code>形参（回调函数）。</li>
 <li>在当前属性到达目的地时<code>iCurrent === iTarget</code>，判断是否有回调函数存在，有则执行。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (iCurrent === iTarget) &#123;<span class="comment">//结束运动</span></span><br><span class="line">    <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">    <span class="keyword">if</span> (func) &#123;</span><br><span class="line">        func();<span class="comment">//回调函数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (iCurrent === iTarget) &#123;<span class="comment">//结束运动</span></span><br><span class="line">    <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">    <span class="keyword">if</span> (func) &#123;</span><br><span class="line">        func();<span class="comment">//回调函数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 
 <p>good，链式动画完成！距离完美还差一步！</p>
-<h2 id="（六）同时运动"><a href="#（六）同时运动" class="headerlink" title="（六）同时运动"></a>（六）同时运动</h2><p>思考：<strong>如何实现同时运动？</strong></p>
+
+        <h2 id="（六）同时运动"   >
+          <a href="#（六）同时运动" class="heading-link"><i class="fas fa-link"></i></a><a href="#（六）同时运动" class="headerlink" title="（六）同时运动"></a>（六）同时运动</h2>
+      <p>思考：<strong>如何实现同时运动？</strong></p>
 <ol>
 <li>使用JSON传递多个值</li>
 <li>使用<code>for in</code>循环，遍历属性，与值。</li>
@@ -211,11 +255,17 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>修改运动终止条件，只有每一项的实际属性值<code>iCurrent</code>，等于目标值<code>json[attr]</code>时，<code>flag</code>才为<code>true</code>。清除定时器，判断是否回调。</li>
 <li>否则，继续执行代码，直到所有属性值等于目标值。</li>
 </ol>
-<h2 id="完美运动框架"><a href="#完美运动框架" class="headerlink" title="完美运动框架"></a>完美运动框架</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取实际样式函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;HTMLElement&#125;</span>   </span>element  需要寻找的样式的html节点</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;String]&#125;</span> </span>attr 在对象中寻找的样式属性</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;String&#125;</span> </span>获取到的属性</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">element, attr</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//IE写法</span></span><br><span class="line">    <span class="keyword">if</span> (element.currentStyle) &#123;</span><br><span class="line">        <span class="keyword">return</span> element.currentStyle[attr];</span><br><span class="line">        <span class="comment">//标准</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> getComputedStyle(element, <span class="literal">false</span>)[attr];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 完美运动框架</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 运动对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;JSON&#125;</span>        </span>json    属性：目标值      </span></span><br><span class="line"><span class="comment"> *   <span class="doctag">@property <span class="type">&#123;String&#125;</span> </span>attr    属性值</span></span><br><span class="line"><span class="comment"> *   <span class="doctag">@config   <span class="type">&#123;Number&#125;</span> </span>target  目标值</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;function&#125;</span>    </span>func    可选，回调函数，链式动画。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, json, func</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> flag = <span class="literal">true</span>; <span class="comment">//假设所有运动到达终点.</span></span><br><span class="line">    <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">    element.timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> attr <span class="keyword">in</span> json) &#123;</span><br><span class="line">            <span class="comment">//1.取当前的属性值。</span></span><br><span class="line">            <span class="keyword">var</span> iCurrent = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (attr === <span class="string">&quot;opacity&quot;</span>) &#123; <span class="comment">//为透明度时执行。</span></span><br><span class="line">                iCurrent = <span class="built_in">Math</span>.round(<span class="built_in">parseFloat</span>(getStyle(element, attr)) * <span class="number">100</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">//默认情况</span></span><br><span class="line">                iCurrent = <span class="built_in">parseInt</span>(getStyle(element, attr)); <span class="comment">//实际样式大小</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//2.算运动速度,动画缓冲效果</span></span><br><span class="line">            <span class="keyword">var</span> iSpeed = (json[attr] - iCurrent) / <span class="number">10</span>; <span class="comment">//(目标值-当前值)/缩放系数=速度</span></span><br><span class="line">            iSpeed = iSpeed &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(iSpeed) : <span class="built_in">Math</span>.floor(iSpeed); <span class="comment">//速度取整</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//3.未到达目标值时，执行代码 </span></span><br><span class="line">            <span class="keyword">if</span> (iCurrent != json[attr]) &#123;</span><br><span class="line">                flag = <span class="literal">false</span>; <span class="comment">//终止条件</span></span><br><span class="line">                <span class="keyword">if</span> (attr === <span class="string">&quot;opacity&quot;</span>) &#123; <span class="comment">//为透明度时，执行</span></span><br><span class="line">                    element.style.filter = <span class="string">&quot;alpha(opacity:&quot;</span> + (iCurrent + iSpeed) + <span class="string">&quot;)&quot;</span>; <span class="comment">//IE</span></span><br><span class="line">                    element.style.opacity = (iCurrent + iSpeed) / <span class="number">100</span>; <span class="comment">//标准</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123; <span class="comment">//默认</span></span><br><span class="line">                    element.style[attr] = iCurrent + iSpeed + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//4. 运动终止，是否回调</span></span><br><span class="line">            <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">                <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">                <span class="keyword">if</span> (func) &#123;</span><br><span class="line">                    func();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="运动框架总结"><a href="#运动框架总结" class="headerlink" title="运动框架总结"></a>运动框架总结</h2><ul>
+
+        <h2 id="完美运动框架"   >
+          <a href="#完美运动框架" class="heading-link"><i class="fas fa-link"></i></a><a href="#完美运动框架" class="headerlink" title="完美运动框架"></a>完美运动框架</h2>
+      <figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取实际样式函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;HTMLElement&#125;</span>   </span>element  需要寻找的样式的html节点</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param   <span class="type">&#123;String]&#125;</span> </span>attr 在对象中寻找的样式属性</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;String&#125;</span> </span>获取到的属性</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">element, attr</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//IE写法</span></span><br><span class="line">    <span class="keyword">if</span> (element.currentStyle) &#123;</span><br><span class="line">        <span class="keyword">return</span> element.currentStyle[attr];</span><br><span class="line">        <span class="comment">//标准</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> getComputedStyle(element, <span class="literal">false</span>)[attr];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 完美运动框架</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;HTMLElement&#125;</span> </span>element 运动对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;JSON&#125;</span>        </span>json    属性：目标值      </span></span><br><span class="line"><span class="comment"> *   <span class="doctag">@property <span class="type">&#123;String&#125;</span> </span>attr    属性值</span></span><br><span class="line"><span class="comment"> *   <span class="doctag">@config   <span class="type">&#123;Number&#125;</span> </span>target  目标值</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;function&#125;</span>    </span>func    可选，回调函数，链式动画。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">startMove</span>(<span class="params">element, json, func</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> flag = <span class="literal">true</span>; <span class="comment">//假设所有运动到达终点.</span></span><br><span class="line">    <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">    element.timer = <span class="built_in">setInterval</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> attr <span class="keyword">in</span> json) &#123;</span><br><span class="line">            <span class="comment">//1.取当前的属性值。</span></span><br><span class="line">            <span class="keyword">var</span> iCurrent = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (attr === <span class="string">&quot;opacity&quot;</span>) &#123; <span class="comment">//为透明度时执行。</span></span><br><span class="line">                iCurrent = <span class="built_in">Math</span>.round(<span class="built_in">parseFloat</span>(getStyle(element, attr)) * <span class="number">100</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">//默认情况</span></span><br><span class="line">                iCurrent = <span class="built_in">parseInt</span>(getStyle(element, attr)); <span class="comment">//实际样式大小</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//2.算运动速度,动画缓冲效果</span></span><br><span class="line">            <span class="keyword">var</span> iSpeed = (json[attr] - iCurrent) / <span class="number">10</span>; <span class="comment">//(目标值-当前值)/缩放系数=速度</span></span><br><span class="line">            iSpeed = iSpeed &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(iSpeed) : <span class="built_in">Math</span>.floor(iSpeed); <span class="comment">//速度取整</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//3.未到达目标值时，执行代码 </span></span><br><span class="line">            <span class="keyword">if</span> (iCurrent != json[attr]) &#123;</span><br><span class="line">                flag = <span class="literal">false</span>; <span class="comment">//终止条件</span></span><br><span class="line">                <span class="keyword">if</span> (attr === <span class="string">&quot;opacity&quot;</span>) &#123; <span class="comment">//为透明度时，执行</span></span><br><span class="line">                    element.style.filter = <span class="string">&quot;alpha(opacity:&quot;</span> + (iCurrent + iSpeed) + <span class="string">&quot;)&quot;</span>; <span class="comment">//IE</span></span><br><span class="line">                    element.style.opacity = (iCurrent + iSpeed) / <span class="number">100</span>; <span class="comment">//标准</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123; <span class="comment">//默认</span></span><br><span class="line">                    element.style[attr] = iCurrent + iSpeed + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//4. 运动终止，是否回调</span></span><br><span class="line">            <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">                <span class="built_in">clearInterval</span>(element.timer);</span><br><span class="line">                <span class="keyword">if</span> (func) &#123;</span><br><span class="line">                    func();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="运动框架总结"   >
+          <a href="#运动框架总结" class="heading-link"><i class="fas fa-link"></i></a><a href="#运动框架总结" class="headerlink" title="运动框架总结"></a>运动框架总结</h2>
+      <ul>
 <li>运动框架演变过程</li>
 </ul>
-<table>
+<div class="table-container"><table>
 <thead>
 <tr>
 <th>框架</th>
@@ -242,5 +292,295 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <td>startMove(element,json,func)</td>
 <td>多值(同时)–&gt;完美运动框架</td>
 </tr>
-</tbody></table>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2015/12/21/JS-Animated-Frames/">http://guowenfh.github.io/2015/12/21/JS-Animated-Frames/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/JS/">JS</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2015/12/24/task0002-Exercises/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">task0002（四）- 练习：数据处理、轮播及交互</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2015/12/19/task0002-BOM&amp;&amp;AJAX/"><span class="paginator-prev__text">task0002（三）- BOM + AJAX</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text">运动框架的实现思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E5%8C%80%E9%80%9F%E8%BF%90%E5%8A%A8"><span class="toc-number">2.</span> <span class="toc-text">（一）匀速运动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9F%E5%BA%A6%E5%8A%A8%E7%94%BB"><span class="toc-number">2.1.</span> <span class="toc-text">速度动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E5%9F%BA%E7%A1%80"><span class="toc-number">2.1.1.</span> <span class="toc-text">运动基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E4%B8%AD%E7%9A%84Bug"><span class="toc-number">2.1.2.</span> <span class="toc-text">运动中的Bug</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3BUG"><span class="toc-number">2.1.3.</span> <span class="toc-text">解决BUG</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E5%BA%A6%E5%8A%A8%E7%94%BB"><span class="toc-number">2.2.</span> <span class="toc-text">透明度动画</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%93%E5%86%B2%E5%8A%A8%E7%94%BB"><span class="toc-number">3.</span> <span class="toc-text">（二）缓冲动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E5%A4%9A%E7%89%A9%E4%BD%93%E8%BF%90%E5%8A%A8"><span class="toc-number">4.</span> <span class="toc-text">（三）多物体运动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E4%BB%BB%E6%84%8F%E5%80%BC%E5%8F%98%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text">（四）任意值变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E8%8E%B7%E5%8F%96%E5%AE%9E%E9%99%85%E6%A0%B7%E5%BC%8F"><span class="toc-number">5.1.</span> <span class="toc-text">第一步：获取实际样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%94%B9%E9%80%A0%E5%8E%9F%E5%87%BD%E6%95%B0"><span class="toc-number">5.2.</span> <span class="toc-text">第二步：改造原函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E9%80%8F%E6%98%8E%E5%BA%A6%E5%85%BC%E5%AE%B9%E5%A4%84%E7%90%86"><span class="toc-number">5.3.</span> <span class="toc-text">第三步：透明度兼容处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E4%BA%94%EF%BC%89%E9%93%BE%E5%BC%8F%E5%8A%A8%E7%94%BB"><span class="toc-number">6.</span> <span class="toc-text">（五）链式动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E5%85%AD%EF%BC%89%E5%90%8C%E6%97%B6%E8%BF%90%E5%8A%A8"><span class="toc-number">7.</span> <span class="toc-text">（六）同时运动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E7%BE%8E%E8%BF%90%E5%8A%A8%E6%A1%86%E6%9E%B6"><span class="toc-number">8.</span> <span class="toc-text">完美运动框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E6%A1%86%E6%9E%B6%E6%80%BB%E7%BB%93"><span class="toc-number">9.</span> <span class="toc-text">运动框架总结</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+</tbody></table></div>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2015/12/21/JS-Animated-Frames/">http://guowenfh.github.io/2015/12/21/JS-Animated-Frames/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/JS/">JS</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2015/12/24/task0002-Exercises/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">task0002（四）- 练习：数据处理、轮播及交互</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2015/12/19/task0002-BOM&amp;&amp;AJAX/"><span class="paginator-prev__text">task0002（三）- BOM + AJAX</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text">
+          运动框架的实现思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E5%8C%80%E9%80%9F%E8%BF%90%E5%8A%A8"><span class="toc-number">2.</span> <span class="toc-text">
+          （一）匀速运动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9F%E5%BA%A6%E5%8A%A8%E7%94%BB"><span class="toc-number">2.1.</span> <span class="toc-text">
+          速度动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E5%9F%BA%E7%A1%80"><span class="toc-number">2.1.1.</span> <span class="toc-text">
+          运动基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E4%B8%AD%E7%9A%84Bug"><span class="toc-number">2.1.2.</span> <span class="toc-text">
+          运动中的Bug</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3BUG"><span class="toc-number">2.1.3.</span> <span class="toc-text">
+          解决BUG</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E5%BA%A6%E5%8A%A8%E7%94%BB"><span class="toc-number">2.2.</span> <span class="toc-text">
+          透明度动画</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%93%E5%86%B2%E5%8A%A8%E7%94%BB"><span class="toc-number">3.</span> <span class="toc-text">
+          （二）缓冲动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E5%A4%9A%E7%89%A9%E4%BD%93%E8%BF%90%E5%8A%A8"><span class="toc-number">4.</span> <span class="toc-text">
+          （三）多物体运动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E4%BB%BB%E6%84%8F%E5%80%BC%E5%8F%98%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text">
+          （四）任意值变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E8%8E%B7%E5%8F%96%E5%AE%9E%E9%99%85%E6%A0%B7%E5%BC%8F"><span class="toc-number">5.1.</span> <span class="toc-text">
+          第一步：获取实际样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%94%B9%E9%80%A0%E5%8E%9F%E5%87%BD%E6%95%B0"><span class="toc-number">5.2.</span> <span class="toc-text">
+          第二步：改造原函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E9%80%8F%E6%98%8E%E5%BA%A6%E5%85%BC%E5%AE%B9%E5%A4%84%E7%90%86"><span class="toc-number">5.3.</span> <span class="toc-text">
+          第三步：透明度兼容处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E4%BA%94%EF%BC%89%E9%93%BE%E5%BC%8F%E5%8A%A8%E7%94%BB"><span class="toc-number">6.</span> <span class="toc-text">
+          （五）链式动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%88%E5%85%AD%EF%BC%89%E5%90%8C%E6%97%B6%E8%BF%90%E5%8A%A8"><span class="toc-number">7.</span> <span class="toc-text">
+          （六）同时运动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E7%BE%8E%E8%BF%90%E5%8A%A8%E6%A1%86%E6%9E%B6"><span class="toc-number">8.</span> <span class="toc-text">
+          完美运动框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E6%A1%86%E6%9E%B6%E6%80%BB%E7%BB%93"><span class="toc-number">9.</span> <span class="toc-text">
+          运动框架总结</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://ws1.sinaimg.cn/large/82d12951gy1fewv9toa2xj206y06ygnp.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">芝兰生于深林，不以无人而不芳。</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/guowenfh" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2194745681" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/guowenfh" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="mailto:guowen921@gmail.com" target="_blank" rel="noopener" data-popover="social.Gmail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">Gmail</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">19</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span><span class="footer__devider">|</span><span>浙ICP备17036927号-1</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>

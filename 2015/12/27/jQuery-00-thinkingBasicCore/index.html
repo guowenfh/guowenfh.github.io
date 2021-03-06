@@ -1,22 +1,22 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="思考篇一. 什么是 jQuery? jQuery是一个JavaScript库，它通过封装原生的JavaScript函数得到一整套定义好的方法。它的作者是JohnResig，于2006年创建的一个开源项目，随着越来越多开发者的加入，jQuery已经集成了JavaScript、CSS、DOM和Ajax于一体的强大功能。它可以用最少的代码，完成更多复杂而困难的功能，从而得到了开发者的青睐。  jQuer">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/favicon.ico?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="思考篇                           一. 什么是 jQuery?        jQuery是一个JavaScript库，它通过封装原生的JavaScript函数得到一整套定义好的方法。它的作者是JohnResig，于2006年创建的一个开源项目，随着越来越多开发者的加入，jQuery已经集成了JavaScript、CSS、DOM和A">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jQuery入门笔记之（零）思考与基础核心">
 <meta property="og:url" content="http://guowenfh.github.io/2015/12/27/jQuery-00-thinkingBasicCore/index.html">
 <meta property="og:site_name" content="三省吾身丶丶">
-<meta property="og:description" content="思考篇一. 什么是 jQuery? jQuery是一个JavaScript库，它通过封装原生的JavaScript函数得到一整套定义好的方法。它的作者是JohnResig，于2006年创建的一个开源项目，随着越来越多开发者的加入，jQuery已经集成了JavaScript、CSS、DOM和Ajax于一体的强大功能。它可以用最少的代码，完成更多复杂而困难的功能，从而得到了开发者的青睐。  jQuer">
-<meta property="og:locale">
+<meta property="og:description" content="思考篇                           一. 什么是 jQuery?        jQuery是一个JavaScript库，它通过封装原生的JavaScript函数得到一整套定义好的方法。它的作者是JohnResig，于2006年创建的一个开源项目，随着越来越多开发者的加入，jQuery已经集成了JavaScript、CSS、DOM和A">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2015-12-27T12:50:40.000Z">
 <meta property="article:modified_time" content="2020-03-12T04:04:13.287Z">
 <meta property="article:author" content="guowenfh">
 <meta property="article:tag" content="jQuery">
-<meta name="twitter:card" content="summary"><title>jQuery入门笔记之（零）思考与基础核心 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2015/12/27/jQuery-00-thinkingBasicCore/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:card" content="summary"><title>jQuery入门笔记之（零）思考与基础核心 | 三省吾身丶丶</title><link ref="canonical" href="http://guowenfh.github.io/2015/12/27/jQuery-00-thinkingBasicCore/"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
-  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":true},
   postWidget: {"endText":true},
   nightMode: {"enable":true},
   back2top: {"enable":true},
@@ -29,15 +29,23 @@ var CONFIG = {
   pjax: undefined,
   externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
   shortcuts: undefined,
-  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="三省吾身丶丶" type="application/atom+xml">
-</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">三省吾身丶丶</div><div class="header-banner-info__subtitle">兴趣遍地都是，专注和持之以恒才是真正稀缺的。</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">jQuery入门笔记之（零）思考与基础核心</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2015-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2020-03-12</span></span></div></header><div class="post-body"><h2 id="思考篇"><a href="#思考篇" class="headerlink" title="思考篇"></a>思考篇</h2><h3 id="一-什么是-jQuery"><a href="#一-什么是-jQuery" class="headerlink" title="一. 什么是 jQuery?"></a>一. 什么是 jQuery?</h3><blockquote>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">jQuery入门笔记之（零）思考与基础核心</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2015-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2020-03-12</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">3.6k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">20分</span></span></div></header><div class="post-body">
+        <h2 id="思考篇"   >
+          <a href="#思考篇" class="heading-link"><i class="fas fa-link"></i></a><a href="#思考篇" class="headerlink" title="思考篇"></a>思考篇</h2>
+      
+        <h3 id="一-什么是-jQuery"   >
+          <a href="#一-什么是-jQuery" class="heading-link"><i class="fas fa-link"></i></a><a href="#一-什么是-jQuery" class="headerlink" title="一. 什么是 jQuery?"></a>一. 什么是 jQuery?</h3>
+      <blockquote>
 <p>jQuery是一个JavaScript库，它通过封装原生的JavaScript函数得到一整套定义好的方<br>法。<br>它的作者是JohnResig，于2006年创建的一个开源项目，随着越来越多开发者的加入，jQuery已经集成了JavaScript、CSS、DOM和Ajax于一体的强大功能。<br>它可以用最少的代码，完成更多复杂而困难的功能，从而得到了开发者的青睐。</p>
 </blockquote>
-<h4 id="jQuery的版本"><a href="#jQuery的版本" class="headerlink" title="jQuery的版本"></a>jQuery的版本</h4><blockquote>
+
+        <h4 id="jQuery的版本"   >
+          <a href="#jQuery的版本" class="heading-link"><i class="fas fa-link"></i></a><a href="#jQuery的版本" class="headerlink" title="jQuery的版本"></a>jQuery的版本</h4>
+      <blockquote>
 <p>随着jQuery的不断进化，发展也变成了两条进化线：</p>
 </blockquote>
 <p>2006 年 8 月发布了 jQuery1.0，第一个稳定版本，具有对 CSS 选择符、事件处理和<br>Ajax 交互的支持。</p>
@@ -49,7 +57,10 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <p>目前最新版本分别是jQuery 2.1.4 和jQuery 1.11.3 。</p>
 <p>现在两条线同时发展，可供大家选择。</p>
 <p><strong>根据项目要求来选择版本，下面有介绍</strong></p>
-<h4 id="关于版本学习的问题："><a href="#关于版本学习的问题：" class="headerlink" title="关于版本学习的问题："></a>关于版本学习的问题：</h4><p>版本的版本号升级主要有三种：</p>
+
+        <h4 id="关于版本学习的问题："   >
+          <a href="#关于版本学习的问题：" class="heading-link"><i class="fas fa-link"></i></a><a href="#关于版本学习的问题：" class="headerlink" title="关于版本学习的问题："></a>关于版本学习的问题：</h4>
+      <p>版本的版本号升级主要有三种：</p>
 <ul>
 <li>第一种是大版本升级，比如1.x.x升级到2.x.x，这种升级规模是最大的，改动的地方是最多的，周期也是最长的，jQuery从1.x.x到 2.x.x用了7年。</li>
 <li>第二种是小版本更新，比如1.7升级到1.8，改动适中，增加或减少了一些功能一般周期半年到一年左右。</li>
@@ -63,7 +74,10 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 </ul>
 <p>所以综上所述：<br>有一半左右的升级都是内部优化，升级到新版本并不需要任何学习成本。就算在新的版本增加了一些功能，只需要几分钟了解一下即可使用，无需清零之前的知识，只需后续累加。<br>当然，在早期的 jQuery 版本都创建了最常用的功能，而新版本中增加的功能，也不是最常用的，无需立即学习，立马用起。</p>
 <p><strong>选择一个版本开始学习吧！</strong></p>
-<h3 id="二-jQuery-的功能和优势"><a href="#二-jQuery-的功能和优势" class="headerlink" title="二. jQuery  的功能和优势"></a>二. jQuery  的功能和优势</h3><p>jQuery 作为 JavaScript 封装的库，他的目的就是为了简化开发者使用 JavaScript。主要<br>功能有以下几点：</p>
+
+        <h3 id="二-jQuery-的功能和优势"   >
+          <a href="#二-jQuery-的功能和优势" class="heading-link"><i class="fas fa-link"></i></a><a href="#二-jQuery-的功能和优势" class="headerlink" title="二. jQuery  的功能和优势"></a>二. jQuery  的功能和优势</h3>
+      <p>jQuery 作为 JavaScript 封装的库，他的目的就是为了简化开发者使用 JavaScript。主要<br>功能有以下几点：</p>
 <ol>
 <li>像 CSS 那样访问和操作 DOM</li>
 <li>修改 CSS 控制页面外观</li>
@@ -79,13 +93,22 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <p>其次像《编写高质量代码–web前端开发修炼之道》作者曹刘阳在微博上说的jq的强大真的只在那个$选择器吗?太小看jq了，私以为jq真正强大和坚挺的原因有3：<br>1、工业标准，我不知道未来还有谁能像jq一样，api上犀牛书。总之是前无古人，后面恐怕也难有来者。<br>工业标准有多可怕和难以撼动，会超出你想像。看看php就知道了。<br>2、jq的api设计对于原生js的改良。<br>3、jq丰富的插件积累。</p>
 </blockquote>
 <p>我也疑惑过，随着现在前端框架<code>angular</code>和<code>react</code>的流行，乱花渐欲迷人。微博上神仙打架，疑惑的是我们这些前端初学者，不过我是这样认为的：<br>与其把时间花在前端框架的选择上。不如先把花在这个已经成为工业标准的库上，万物殊途同归 ，最终还是在JS做文章不是吗？</p>
-<h3 id="三-是否兼容IE低版本"><a href="#三-是否兼容IE低版本" class="headerlink" title="三. 是否兼容IE低版本"></a>三. 是否兼容IE低版本</h3><p>主要是从下面几个方面考虑：</p>
-<h4 id="1-成本控制"><a href="#1-成本控制" class="headerlink" title="1. 成本控制"></a>1. 成本控制</h4><ul>
+
+        <h3 id="三-是否兼容IE低版本"   >
+          <a href="#三-是否兼容IE低版本" class="heading-link"><i class="fas fa-link"></i></a><a href="#三-是否兼容IE低版本" class="headerlink" title="三. 是否兼容IE低版本"></a>三. 是否兼容IE低版本</h3>
+      <p>主要是从下面几个方面考虑：</p>
+
+        <h4 id="1-成本控制"   >
+          <a href="#1-成本控制" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-成本控制" class="headerlink" title="1. 成本控制"></a>1. 成本控制</h4>
+      <ul>
 <li>项目如果不是老站升级，也不是大门户的新闻站，成本控制和尽快<br>上线测试才是最重要的。</li>
 <li>而如果新站一味要求全面兼容，会导致成本加剧（随着功能多少，<br>成本倍率增加）。</li>
 <li>为了锁紧时间，就不停的加班再加班，又导致员工抵触，工作效率降低，这样成本不停的再累加。最终很多项<br>目，根本没上线就失败了。</li>
 </ul>
-<h4 id="2-用户选择"><a href="#2-用户选择" class="headerlink" title="2. 用户选择"></a>2. 用户选择</h4><blockquote>
+
+        <h4 id="2-用户选择"   >
+          <a href="#2-用户选择" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-用户选择" class="headerlink" title="2. 用户选择"></a>2. 用户选择</h4>
+      <blockquote>
 <p>高质量用户和低质量用户</p>
 </blockquote>
 <ul>
@@ -93,10 +116,16 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>所以，你的应用核心是哪方面？兼容的成本有多大？会不会导致成本控制问题？用户选<br>择尤为重要，放弃低质量用户也是一种成本控制。</li>
 <li>在用户基数庞大的项目上，放弃低质量用户就有点愚笨，而你的用户基数只有 1000 人，而低质<br>量用户有 50 人，那么为了这 50 人去做兼容，那么 3 倍的成本就变得非常的昂贵。</li>
 </ul>
-<h4 id="3-项目侧重点"><a href="#3-项目侧重点" class="headerlink" title="3. 项目侧重点"></a>3. 项目侧重点</h4><p>你的项目重点在哪里？是为了看新闻？是为了宣传线下产品？</p>
+
+        <h4 id="3-项目侧重点"   >
+          <a href="#3-项目侧重点" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-项目侧重点" class="headerlink" title="3. 项目侧重点"></a>3. 项目侧重点</h4>
+      <p>你的项目重点在哪里？是为了看新闻？是为了宣传线下产品？</p>
 <p>那么你其实有必要兼容低版本浏览器。<br>首先这种类型的站不需要太好的用户体验，不需要太多的交互操作，只是看，<br>而兼容的成本比较低，并且核心在新闻或产品！</p>
 <p>但如果你的项目有大量的交互、大量的操作，兼容成本较高，比如全球最大的社交网已经不兼容 IE6/7，就是这个原因。所以，项目并不是一味的全面兼容，或者全面不兼容，主要看你的项目侧重点在哪里！</p>
-<h4 id="4-用户体验"><a href="#4-用户体验" class="headerlink" title="4. 用户体验"></a>4. 用户体验</h4><blockquote>
+
+        <h4 id="4-用户体验"   >
+          <a href="#4-用户体验" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-用户体验" class="headerlink" title="4. 用户体验"></a>4. 用户体验</h4>
+      <blockquote>
 <p>如果你的项目在兼容低版本浏览器成本巨大，比如社交网，有大量的 JS 和 AJAX 操作。<br>那么兼容 IE6/7 的成本确实很高，如果兼容，用户体验就会很差。</p>
 </blockquote>
 <p>兼容有两种：</p>
@@ -105,41 +134,62 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>第二种就是，不管高版本或低版本都用统一的兼容模式。</li>
 </ul>
 <p>这两种成本都很高。用户体验好的模式，能增加用户粘度，增加付费潜在用户，而用户体验差的总是被用户归纳为心目中的备胎（所谓备胎就是实在没有了才去访问，如果有，很容易被抛弃）。</p>
-<h4 id="5-数据支持"><a href="#5-数据支持" class="headerlink" title="5. 数据支持"></a>5. 数据支持</h4><p>如果对某一种类型的网站项目有一定的研究，那么手头必须有支持的数据分析。<br>有数据分析可以更好的进行成本控制，更有魄力的解决高低质量用户的取舍。</p>
-<h4 id="6-教育用户"><a href="#6-教育用户" class="headerlink" title="6. 教育用户"></a>6. 教育用户</h4><p>很多项目可能是有固定客户群，或者使用该项目人员质量普遍较高。那么，面对零星一<br>点的低质量用户，我们不能再去迎合他。因为迎合他，就无法用高质量的用户体验去粘住忠实用户，又不能获取到低质量用户的芳心。<br>所以，我们应有的策略是：</p>
+
+        <h4 id="5-数据支持"   >
+          <a href="#5-数据支持" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-数据支持" class="headerlink" title="5. 数据支持"></a>5. 数据支持</h4>
+      <p>如果对某一种类型的网站项目有一定的研究，那么手头必须有支持的数据分析。<br>有数据分析可以更好的进行成本控制，更有魄力的解决高低质量用户的取舍。</p>
+
+        <h4 id="6-教育用户"   >
+          <a href="#6-教育用户" class="heading-link"><i class="fas fa-link"></i></a><a href="#6-教育用户" class="headerlink" title="6. 教育用户"></a>6. 教育用户</h4>
+      <p>很多项目可能是有固定客户群，或者使用该项目人员质量普遍较高。那么，面对零星一<br>点的低质量用户，我们不能再去迎合他。因为迎合他，就无法用高质量的用户体验去粘住忠实用户，又不能获取到低质量用户的芳心。<br>所以，我们应有的策略是：</p>
 <ul>
 <li>牢牢把握住高质量的忠诚用户，做到他们心目中的第一；</li>
 <li>教育那部分低质量用户（比如企业级开发项目，可以直接做企业培训，安装高版本浏览器等等。互联网项目，就给出提示安装高版本浏览器即可）。</li>
 <li>那么一部分低质量用户被拉拢过来，还有一小撮死性不改的就只有放弃。切不可捡了芝麻丢了西瓜，不要贪大求全。</li>
 </ul>
 <p>结论就是：结论就是必须根据实际情况，你项目的成本情况、人员情况、用户情况和项目本身类型情况而制定，没有一刀切的<br>兼容或不兼容。</p>
-<h3 id="四-下载及运行"><a href="#四-下载及运行" class="headerlink" title="四. 下载及运行"></a>四. 下载及运行</h3><blockquote>
+
+        <h3 id="四-下载及运行"   >
+          <a href="#四-下载及运行" class="heading-link"><i class="fas fa-link"></i></a><a href="#四-下载及运行" class="headerlink" title="四. 下载及运行"></a>四. 下载及运行</h3>
+      <blockquote>
 <p>目前最新版本分别是jQuery 2.1.4 和jQuery 1.11.3 。下载开发版，可以顺便读一读源代码。</p>
 </blockquote>
 <p>下载jQuery：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="http://code.jquery.com/">官网地址</a></li>
-<li><a target="_blank" rel="noopener" href="http://cdn.code.baidu.com/">百度静态资源共享库 CDN</a>，直接部署网上的地址</li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://code.jquery.com/" >官网地址</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://cdn.code.baidu.com/" >百度静态资源共享库 CDN</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，直接部署网上的地址</li>
 <li>当然你要是看了我写的<a href="https://guowenfh.github.io/2015/12/26/SublimeText/">一个前端程序猿的Sublime Text3的自我修养</a>的话就更加简单了，直接就可以用编辑器下载</li>
 </ul>
 <p>参考手册：</p>
 <ul>
-<li>中文在线手册<a target="_blank" rel="noopener" href="http://www.css88.com/jqapi-1.9/">CSS88:jQuery快速API参考</a></li>
-<li>官方英文文档<a target="_blank" rel="noopener" href="http://api.jquery.com/">jQuery API</a>，可配合浏览器翻译插件</li>
+<li>中文在线手册<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.css88.com/jqapi-1.9/" >CSS88:jQuery快速API参考</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>官方英文文档<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://api.jquery.com/" >jQuery API</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，可配合浏览器翻译插件</li>
 </ul>
-<h4 id="第一个jQuery程序"><a href="#第一个jQuery程序" class="headerlink" title="第一个jQuery程序"></a>第一个jQuery程序</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//已经引入jQ，在body内写入如下代码</span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&quot;button&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            alert(<span class="string">&quot;hello jQuery!&quot;</span>);</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+        <h4 id="第一个jQuery程序"   >
+          <a href="#第一个jQuery程序" class="heading-link"><i class="fas fa-link"></i></a><a href="#第一个jQuery程序" class="headerlink" title="第一个jQuery程序"></a>第一个jQuery程序</h4>
+      <figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//已经引入jQ，在body内写入如下代码</span><br><span class="line"><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">&quot;button&quot;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            alert(<span class="string">&quot;hello jQuery!&quot;</span>);</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
 
 
-<h2 id="基础核心"><a href="#基础核心" class="headerlink" title="基础核心"></a>基础核心</h2><h3 id="一-代码风格"><a href="#一-代码风格" class="headerlink" title="一. 代码风格"></a>一. 代码风格</h3><p>在jQuery程序中，不管是页面元素的选择、内置的功能函数，都是美元符号“$”来起<br>始的。而这个“$”就是jQuery当中最重要且独有的对象：jQuery对象，所以我们在页面元素选择或执行功能函数的时候可以这么写：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;); <span class="comment">//执行一个匿名函数</span></span><br><span class="line">$(‘#box’); <span class="comment">//进行执行的ID元素选择</span></span><br><span class="line">$(‘#box’).css(‘color’, ‘red’); <span class="comment">//执行功能函数</span></span><br></pre></td></tr></table></figure>
+
+        <h2 id="基础核心"   >
+          <a href="#基础核心" class="heading-link"><i class="fas fa-link"></i></a><a href="#基础核心" class="headerlink" title="基础核心"></a>基础核心</h2>
+      
+        <h3 id="一-代码风格"   >
+          <a href="#一-代码风格" class="heading-link"><i class="fas fa-link"></i></a><a href="#一-代码风格" class="headerlink" title="一. 代码风格"></a>一. 代码风格</h3>
+      <p>在jQuery程序中，不管是页面元素的选择、内置的功能函数，都是美元符号“$”来起<br>始的。而这个“$”就是jQuery当中最重要且独有的对象：jQuery对象，所以我们在页面元素选择或执行功能函数的时候可以这么写：</p>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;); <span class="comment">//执行一个匿名函数</span></span><br><span class="line">$(‘#box’); <span class="comment">//进行执行的ID元素选择</span></span><br><span class="line">$(‘#box’).css(‘color’, ‘red’); <span class="comment">//执行功能函数</span></span><br></pre></td></tr></table></div></figure>
 
 <p>由于$本身就是jQuery对象的缩写形式，那么也就是说上面的三段代码也可以写成如下形式：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jQuery(‘#box’).css(‘color’, ‘red’);</span><br><span class="line"><span class="comment">//jQuery恒等于$</span></span><br><span class="line"><span class="comment">// console.log(jQuery===$);//true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jQuery(‘#box’).css(‘color’, ‘red’);</span><br><span class="line"><span class="comment">//jQuery恒等于$</span></span><br><span class="line"><span class="comment">// console.log(jQuery===$);//true</span></span><br></pre></td></tr></table></div></figure>
 
 <p>且，每一次执行函数后，都会返回一个jQuery对象。如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;red&#x27;</span>).css(<span class="string">&#x27;font-size&#x27;</span>, <span class="string">&#x27;50px&#x27;</span>); <span class="comment">//连缀</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#box&#x27;</span>).css(<span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;red&#x27;</span>).css(<span class="string">&#x27;font-size&#x27;</span>, <span class="string">&#x27;50px&#x27;</span>); <span class="comment">//连缀</span></span><br></pre></td></tr></table></div></figure>
 
-<h3 id="二-加载模式"><a href="#二-加载模式" class="headerlink" title="二. 加载模式"></a>二. 加载模式</h3><blockquote>
+
+        <h3 id="二-加载模式"   >
+          <a href="#二-加载模式" class="heading-link"><i class="fas fa-link"></i></a><a href="#二-加载模式" class="headerlink" title="二. 加载模式"></a>二. 加载模式</h3>
+      <blockquote>
 <p>我们在之前的代码一直在使用<code>$(function () &#123;&#125;);</code>这段代码进行首尾包裹，那么为什么必须<br>要包裹这段代码呢？</p>
 </blockquote>
 <ul>
@@ -147,7 +197,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <li>我们的原生Javascript也有一个延迟加载的方法<code>onload</code>，当网页内容全部加载完成后执行（例如图片等大文件未加载完成之前，JS功能处于假死状态）。</li>
 <li>下面来看看它们<code>load</code>和<code>ready</code>区别到底在什么地方：</li>
 </ul>
-<table>
+<div class="table-container"><table>
 <thead>
 <tr>
 <th>区别</th>
@@ -170,19 +220,321 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"><lin
 <td>无</td>
 <td><code>$(function () &#123;&#125;);</code></td>
 </tr>
-</tbody></table>
-<p>慕课网的<a target="_blank" rel="noopener" href="http://www.imooc.com/learn/488">DOM探索之基础详解篇</a> 有对DOM Ready的一些介绍。</p>
-<h3 id="三-对象互换及处理多个库之间的冲突"><a href="#三-对象互换及处理多个库之间的冲突" class="headerlink" title="三. 对象互换及处理多个库之间的冲突"></a>三. 对象互换及处理多个库之间的冲突</h3><h4 id="1-对象互换。"><a href="#1-对象互换。" class="headerlink" title="1. 对象互换。"></a>1. 对象互换。</h4><p>首先我们来看一下这段代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert($);<span class="comment">//返回jQuery对象方法内部函数</span></span><br><span class="line">alert($());<span class="comment">//[object object]，返回jQuery对象</span></span><br><span class="line">alert($(<span class="string">&quot;#box&quot;</span>));<span class="comment">//[object object]，返回jQuery对象</span></span><br><span class="line">alert(<span class="built_in">document</span>.getElementById(<span class="string">&quot;box&quot;</span>)); <span class="comment">//[object HTMLDivElement]，返回原生DOM对象</span></span><br></pre></td></tr></table></figure>
+</tbody></table></div>
+<p>慕课网的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.imooc.com/learn/488" >DOM探索之基础详解篇</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 有对DOM Ready的一些介绍。</p>
+
+        <h3 id="三-对象互换及处理多个库之间的冲突"   >
+          <a href="#三-对象互换及处理多个库之间的冲突" class="heading-link"><i class="fas fa-link"></i></a><a href="#三-对象互换及处理多个库之间的冲突" class="headerlink" title="三. 对象互换及处理多个库之间的冲突"></a>三. 对象互换及处理多个库之间的冲突</h3>
+      
+        <h4 id="1-对象互换。"   >
+          <a href="#1-对象互换。" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-对象互换。" class="headerlink" title="1. 对象互换。"></a>1. 对象互换。</h4>
+      <p>首先我们来看一下这段代码：</p>
+<figure class="highlight javascript"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert($);<span class="comment">//返回jQuery对象方法内部函数</span></span><br><span class="line">alert($());<span class="comment">//[object object]，返回jQuery对象</span></span><br><span class="line">alert($(<span class="string">&quot;#box&quot;</span>));<span class="comment">//[object object]，返回jQuery对象</span></span><br><span class="line">alert(<span class="built_in">document</span>.getElementById(<span class="string">&quot;box&quot;</span>)); <span class="comment">//[object HTMLDivElement]，返回原生DOM对象</span></span><br></pre></td></tr></table></div></figure>
 
 <p>如何进行转换呢？<br>jQuery 想要达到获取原生的 DOM 对象，可以这么处理：<br><code>alert($(&#39;#box&#39;).get(0)); //ID 元素的第一个原生 DOM</code></p>
 <p>从上面 get(0)，这里的索引看出，jQuery 是可以进行批量处理 DOM 的，这样可以在很<br>多需要循环遍历的处理上更加得心应手。</p>
 <p>当然要重新转化成jQuery对象的话，只需要使用$()包裹原生对象就可以了。</p>
-<h4 id="2-多个库之间的冲突"><a href="#2-多个库之间的冲突" class="headerlink" title="2. 多个库之间的冲突"></a>2. 多个库之间的冲突</h4><p>当一个项目中引入多个第三方库的时候，由于没有命名空间的约束（命名空间就好比同<br>一个目录下的文件夹一样，名字相同就会产生冲突），库与库之间发生冲突在所难免。</p>
+
+        <h4 id="2-多个库之间的冲突"   >
+          <a href="#2-多个库之间的冲突" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-多个库之间的冲突" class="headerlink" title="2. 多个库之间的冲突"></a>2. 多个库之间的冲突</h4>
+      <p>当一个项目中引入多个第三方库的时候，由于没有命名空间的约束（命名空间就好比同<br>一个目录下的文件夹一样，名字相同就会产生冲突），库与库之间发生冲突在所难免。</p>
 <p> jQuery 只不过是 DOM 操作为主的库，方便我们日常 Web 开发。但有时，我们的项目有更多特殊的功能需要引入其他的库，比如用户界面 UI 方面的库，游戏引擎方面的库等等一系列。</p>
 <p>所以jQuery提供了一个方法：<code>jQuery.noConflict();</code>：将$符所有权剔除。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;other_lib.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;jquery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">  jQuery.noConflict();</span><br><span class="line"><span class="javascript">  <span class="comment">// 现在就$所有权就不归jQuery了。</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;other_lib.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;jquery.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">  jQuery.noConflict();</span><br><span class="line"><span class="javascript">  <span class="comment">// 现在就$所有权就不归jQuery了。</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></div></figure>
 
 <p>同时还可以使用</p>
 <p><code>var $$ = jQuery;</code>：这样<code>$$</code>，就完全实现了原来$函数的功能。</p>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2015/12/27/jQuery-00-thinkingBasicCore/">http://guowenfh.github.io/2015/12/27/jQuery-00-thinkingBasicCore/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/jQuery/">jQuery</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2015/12/31/jQuery-01-Sizzle/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">jQuery入门笔记之（一）选择器引擎</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2015/12/26/SublimeText/"><span class="paginator-prev__text">一个前端程序猿的Sublime Text3的自我修养</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E7%AF%87"><span class="toc-number">1.</span> <span class="toc-text">思考篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E4%BB%80%E4%B9%88%E6%98%AF-jQuery"><span class="toc-number">1.1.</span> <span class="toc-text">一. 什么是 jQuery?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#jQuery%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">1.1.1.</span> <span class="toc-text">jQuery的版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.2.</span> <span class="toc-text">关于版本学习的问题：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-jQuery-%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E4%BC%98%E5%8A%BF"><span class="toc-number">1.2.</span> <span class="toc-text">二. jQuery  的功能和优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E6%98%AF%E5%90%A6%E5%85%BC%E5%AE%B9IE%E4%BD%8E%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.</span> <span class="toc-text">三. 是否兼容IE低版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%88%90%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 成本控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%94%A8%E6%88%B7%E9%80%89%E6%8B%A9"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 用户选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%A1%B9%E7%9B%AE%E4%BE%A7%E9%87%8D%E7%82%B9"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. 项目侧重点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C"><span class="toc-number">1.3.4.</span> <span class="toc-text">4. 用户体验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%95%B0%E6%8D%AE%E6%94%AF%E6%8C%81"><span class="toc-number">1.3.5.</span> <span class="toc-text">5. 数据支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%95%99%E8%82%B2%E7%94%A8%E6%88%B7"><span class="toc-number">1.3.6.</span> <span class="toc-text">6. 教育用户</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-%E4%B8%8B%E8%BD%BD%E5%8F%8A%E8%BF%90%E8%A1%8C"><span class="toc-number">1.4.</span> <span class="toc-text">四. 下载及运行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AAjQuery%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.4.1.</span> <span class="toc-text">第一个jQuery程序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A0%B8%E5%BF%83"><span class="toc-number">2.</span> <span class="toc-text">基础核心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="toc-number">2.1.</span> <span class="toc-text">一. 代码风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">二. 加载模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E5%AF%B9%E8%B1%A1%E4%BA%92%E6%8D%A2%E5%8F%8A%E5%A4%84%E7%90%86%E5%A4%9A%E4%B8%AA%E5%BA%93%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%B2%E7%AA%81"><span class="toc-number">2.3.</span> <span class="toc-text">三. 对象互换及处理多个库之间的冲突</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AF%B9%E8%B1%A1%E4%BA%92%E6%8D%A2%E3%80%82"><span class="toc-number">2.3.1.</span> <span class="toc-text">1. 对象互换。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%A4%9A%E4%B8%AA%E5%BA%93%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%B2%E7%AA%81"><span class="toc-number">2.3.2.</span> <span class="toc-text">2. 多个库之间的冲突</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://guowenfh.github.io">guowenfh</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://guowenfh.github.io/2015/12/27/jQuery-00-thinkingBasicCore/">http://guowenfh.github.io/2015/12/27/jQuery-00-thinkingBasicCore/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://guowenfh.github.io/tags/jQuery/">jQuery</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2015/12/31/jQuery-01-Sizzle/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">jQuery入门笔记之（一）选择器引擎</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2015/12/26/SublimeText/"><span class="paginator-prev__text">一个前端程序猿的Sublime Text3的自我修养</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E7%AF%87"><span class="toc-number">1.</span> <span class="toc-text">
+          思考篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E4%BB%80%E4%B9%88%E6%98%AF-jQuery"><span class="toc-number">1.1.</span> <span class="toc-text">
+          一. 什么是 jQuery?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#jQuery%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-number">1.1.1.</span> <span class="toc-text">
+          jQuery的版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E5%AD%A6%E4%B9%A0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.1.2.</span> <span class="toc-text">
+          关于版本学习的问题：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-jQuery-%E7%9A%84%E5%8A%9F%E8%83%BD%E5%92%8C%E4%BC%98%E5%8A%BF"><span class="toc-number">1.2.</span> <span class="toc-text">
+          二. jQuery  的功能和优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E6%98%AF%E5%90%A6%E5%85%BC%E5%AE%B9IE%E4%BD%8E%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.</span> <span class="toc-text">
+          三. 是否兼容IE低版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%88%90%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.1.</span> <span class="toc-text">
+          1. 成本控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%94%A8%E6%88%B7%E9%80%89%E6%8B%A9"><span class="toc-number">1.3.2.</span> <span class="toc-text">
+          2. 用户选择</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%A1%B9%E7%9B%AE%E4%BE%A7%E9%87%8D%E7%82%B9"><span class="toc-number">1.3.3.</span> <span class="toc-text">
+          3. 项目侧重点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C"><span class="toc-number">1.3.4.</span> <span class="toc-text">
+          4. 用户体验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%95%B0%E6%8D%AE%E6%94%AF%E6%8C%81"><span class="toc-number">1.3.5.</span> <span class="toc-text">
+          5. 数据支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%95%99%E8%82%B2%E7%94%A8%E6%88%B7"><span class="toc-number">1.3.6.</span> <span class="toc-text">
+          6. 教育用户</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B-%E4%B8%8B%E8%BD%BD%E5%8F%8A%E8%BF%90%E8%A1%8C"><span class="toc-number">1.4.</span> <span class="toc-text">
+          四. 下载及运行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AAjQuery%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.4.1.</span> <span class="toc-text">
+          第一个jQuery程序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A0%B8%E5%BF%83"><span class="toc-number">2.</span> <span class="toc-text">
+          基础核心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80-%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="toc-number">2.1.</span> <span class="toc-text">
+          一. 代码风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C-%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">
+          二. 加载模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89-%E5%AF%B9%E8%B1%A1%E4%BA%92%E6%8D%A2%E5%8F%8A%E5%A4%84%E7%90%86%E5%A4%9A%E4%B8%AA%E5%BA%93%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%B2%E7%AA%81"><span class="toc-number">2.3.</span> <span class="toc-text">
+          三. 对象互换及处理多个库之间的冲突</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AF%B9%E8%B1%A1%E4%BA%92%E6%8D%A2%E3%80%82"><span class="toc-number">2.3.1.</span> <span class="toc-text">
+          1. 对象互换。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%A4%9A%E4%B8%AA%E5%BA%93%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%B2%E7%AA%81"><span class="toc-number">2.3.2.</span> <span class="toc-text">
+          2. 多个库之间的冲突</span></a></li></ol></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://ws1.sinaimg.cn/large/82d12951gy1fewv9toa2xj206y06ygnp.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">芝兰生于深林，不以无人而不芳。</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/guowenfh" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2194745681" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/guowenfh" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="mailto:guowen921@gmail.com" target="_blank" rel="noopener" data-popover="social.Gmail" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">Gmail</span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">70</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">19</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>guowenfh</span><span class="footer__devider">|</span><span>浙ICP备17036927号-1</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.4.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
